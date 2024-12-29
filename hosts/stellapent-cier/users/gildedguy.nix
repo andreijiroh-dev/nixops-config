@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  vscExts = (import ../../../shared/vscode-extensions.nix) {
+  vscExts = (import ../../../shared/vscode/extensions.nix) {
     pkgs = pkgs;
     lib = lib;
   };
