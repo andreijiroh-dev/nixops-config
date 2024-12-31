@@ -95,6 +95,7 @@
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
   home-manager.users.gildedguy = (import ./users/gildedguy.nix);
+  programs.home-manager.enable = true; # allow home-manager to manage itself
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -109,11 +110,14 @@
     btop
     htop
     google-chrome
+    direnv
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
+
+  # enable gpg-agent with SSH support
   programs.gnupg.agent = {
      enable = true;
      enableSSHSupport = true;
