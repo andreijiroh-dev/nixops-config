@@ -94,8 +94,8 @@
   # home-manager specifics
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
-  home-manager.users.gildedguy = (import ./users/gildedguy.nix);
-  programs.home-manager.enable = true; # allow home-manager to manage itself
+  home-manager.users.gildedguy = import ./users/gildedguy.nix;
+  #programs.home-manager.enable = true; # allow home-manager to manage itself
 
   # Install firefox.
   programs.firefox.enable = true;

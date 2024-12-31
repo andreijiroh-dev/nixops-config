@@ -19,11 +19,12 @@
       experimental-features = [
         "nix-command"
         "flakes"
+        "repl-flake"
         "ca-derivations"
-        "nix-daemon"
         "cgroups"
         "impure-derivations"
-        "nix-remote"
+        #"daemon-trust-override"
+        #"auto-allocate-uids"
       ];
 
       trusted-users = [

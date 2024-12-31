@@ -5,6 +5,8 @@
     ../../../shared/home-manager/main.nix
   ];
 
-  home.username = "gildedguy";
-  home.homeDirectory = "/home/gildedguy";
+  config = {
+    home.username = "gildedguy";
+    home.homeDirectory = "/home/gildedguy";
+  };
 }
