@@ -3,21 +3,11 @@
 
   # try to be in-sync with the nix-channels
   inputs = {
-    nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-unstable";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
-    };
-    nixos-hardware = {
-      url = "github:NixOS/nixos-hardware/master";
-    };
-    determinate = {
-      url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
-    };
-    vscode-server = {
-      url = "github:nix-community/nixos-vscode-server";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager/master";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
   outputs = {
@@ -32,10 +22,12 @@
       stellapent-cier = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          ./hosts/stellapent-cier/configuration.nix
+
+          # load Determinate Nix and the rest
           determinate.nixosModules.default
           vscode-server.nixosModules.default
           home-manager.nixosModules.home-manager
-          ./hosts/stellapent-cier/configuration.nix
         ];
       };
     };
