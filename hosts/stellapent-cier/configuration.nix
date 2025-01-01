@@ -9,6 +9,7 @@
     [
       ./hardware-configuration.nix
       ../../shared/meta-configs.nix
+      ../../shared/systemd.nix
       ../../shared/networking.nix
       ../../shared/locale.nix
       ../../shared/server/tailscale.nix

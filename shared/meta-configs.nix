@@ -16,15 +16,20 @@
 
   nix = {
     settings = {
+      # See https://nix.dev/manual/nix/latest/development/experimental-features
+      # for latest supported feature flags.
       experimental-features = [
         "nix-command"
         "flakes"
-        "repl-flake"
         "ca-derivations"
         "cgroups"
         "impure-derivations"
-        #"daemon-trust-override"
-        #"auto-allocate-uids"
+        "git-hashing"
+        "fetch-tree"
+        "fetch-closure"
+        "local-overlay-store"
+        "mounted-ssh-store"
+        # "verified-fetches"
       ];
 
       trusted-users = [
