@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  update-lockfile:
     permissions:
       contents: write
       actions: write
@@ -33,3 +33,21 @@ jobs:
           git add flake.lock
           git commit -m "Update flake.lock" || echo "No changes to commit"
           git push
+  build:
+    needs: [update-lockfile]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Nix
+        uses: cachix/install-nix-action@v14
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+      - run: nix flake metadata
+      - run: |
+          echo working on it soon!
+          
