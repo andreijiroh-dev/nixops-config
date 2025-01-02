@@ -1,4 +1,4 @@
-name: nix flake update
+name: Nix Flake Builds
 on:
   schedule:
     - cron: "30 */6 * * *"
@@ -23,7 +23,9 @@ jobs:
 
       - name: Update flake
         run: |
+          echo ::addgroup:
           nix flake update
+          echo ::endgroup
           nix flake metadata
 
       - name: Commit and push changes
