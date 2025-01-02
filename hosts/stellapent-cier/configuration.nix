@@ -81,15 +81,23 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  # Might be obvious to some since I'm technically roleplaying as 
+  # Might be obvious to some since I'm technically roleplaying on my
+  # old HP laptop my overseas Filipino dad gave me in 2024.
   users.users.gildedguy = {
     isNormalUser = true;
-    description = "Gildedguy (Michael Moy)";
+    description = "Gildedguy (Michael Moy)"; # We're not impersonating the animatior here.
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-      thunderbird
-    ];
+    #packages = with pkgs; [
+    #  kdePackages.kate
+    #  thunderbird
+    #];
+    openssh = {
+      authorizedKeys.keys = with import ../../shared/ssh-keys.nix; [
+        personal.y2022
+        personal.passwordless
+        rp.gildedguy
+      ];
+    };
   };
 
   # home-manager specifics
