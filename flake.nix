@@ -17,6 +17,11 @@
     # Community Extras
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
+
+    # nix-ld
+    inputs.nix-ld.url = "github:Mic92/nix-ld";
+    # this line assume that you also have nixpkgs as an input
+    inputs.nix-ld.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -45,6 +50,10 @@
           determinate.nixosModules.default
           home-manager.nixosModules.home-manager
           vscode-server.nixosModules.default
+          nix-ld.nixosModules.nix-ld
+
+          # one-liners?
+          { programs.nix-ld.dev.enable = true; }
         ];
       };
     };
