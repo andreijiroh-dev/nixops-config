@@ -19,9 +19,9 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
     # nix-ld
-    inputs.nix-ld.url = "github:Mic92/nix-ld";
+    nix-ld.url = "github:Mic92/nix-ld";
     # this line assume that you also have nixpkgs as an input
-    inputs.nix-ld.inputs.nixpkgs.follows = "nixpkgs";
+    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
