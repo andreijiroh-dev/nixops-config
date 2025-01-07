@@ -1,5 +1,5 @@
 {
-  description = "Andrei Jiroh's NixOS and home-manager configurations";
+  description = "Andrei Jiroh's NixOS and home-manager configurations in one place, seperate from the dotfiles repo";
 
   # try to be in-sync with the nix-channels
   inputs = {
@@ -30,7 +30,8 @@
     home-manager,
     nixos-hardware,
     determinate,
-    vscode-server
+    vscode-server,
+    nix-ld
   }: {
     nixosConfigurations = {
       recoverykit-amd64 = nixpkgs.lib.nixosSystem {

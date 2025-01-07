@@ -2,6 +2,7 @@
 
 This is @ajhalili2006's NixOS + Home Manager configuration for his laptop
 and homelabs, in sync with the [nixpkgs-specific dotfiles repository].
+Also planned to be used in Hack Club Nest soon.
 
 [nixpkgs-specific dotfiles repository]: https://github.com/andreijiroh-dev/dotfiles/tree/nixpkgs
 
