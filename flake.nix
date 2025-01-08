@@ -7,9 +7,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # home-manager
-    home-manager.url = "github:nix-community/home-manager/master";
-    # make sure to be in sync with our nixpkgs itself.
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Determinate Nix
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
@@ -19,9 +20,10 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
     # nix-ld
-    nix-ld.url = "github:Mic92/nix-ld";
-    # this line assume that you also have nixpkgs as an input
-    nix-ld.inputs.nixpkgs.follows = "nixpkgs";
+    nix-ld = {
+      url = "github:Mic92/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -56,6 +58,26 @@
           # one-liners?
           { programs.nix-ld.dev.enable = true; }
         ];
+      };
+    };
+    homeConfigurations = {
+      gildedguy = home-manager.lib.homeManagerConfiguration {
+        inherit (nixpkgs.legacyPackages.x86_64-linux) pkgs;
+
+        modules = [
+          ./shared/home-manager/main.nix
+          {
+            home.username = "gildedguy";
+            home.homeDirectory = "/home/gildedguy";
+          }
+        ];
+
+        extraSpecialArgs = {
+          home = {
+            useUserPackages = true;
+            useGlobalPkgs = true;
+          };
+        };
       };
     };
   };
