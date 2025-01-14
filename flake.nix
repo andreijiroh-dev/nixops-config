@@ -62,13 +62,28 @@
     };
     homeConfigurations = {
       gildedguy = home-manager.lib.homeManagerConfiguration {
-        inherit (nixpkgs.legacyPackages.x86_64-linux) pkgs;
-
         modules = [
           ./shared/home-manager/main.nix
           {
             home.username = "gildedguy";
             home.homeDirectory = "/home/gildedguy";
+          }
+        ];
+
+        extraSpecialArgs = {
+          home = {
+            useUserPackages = true;
+            useGlobalPkgs = true;
+          };
+        };
+      };
+
+      ajhalili2006 = home-manager.lib.homeManagerConfiguration {
+        modules = [
+          ./shared/home-manager/main.nix
+          {
+            home.username = "ajhalili2006";
+            home.homeDirectory = "/home/ajhalili2006";
           }
         ];
 

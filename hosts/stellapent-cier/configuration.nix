@@ -8,15 +8,18 @@
   imports =
     [
       ./hardware-configuration.nix
-      ../../shared/meta-configs.nix
-      ../../shared/systemd.nix
-      ../../shared/networking.nix
-      ../../shared/locale.nix
-      ../../shared/server/tailscale.nix
-      ../../shared/server/ssh.nix
-      ../../shared/desktop/kde-plasma.nix
       ../../shared/desktop/bluetooth.nix
       ../../shared/desktop/firewall.nix
+      ../../shared/desktop/kde-plasma.nix
+      ../../shared/flatpak.nix
+      ../../shared/gnupg.nix
+      ../../shared/locale.nix
+      ../../shared/meta-configs.nix
+      ../../shared/networking.nix
+      ../../shared/server/ssh.nix
+      ../../shared/server/tailscale.nix
+      ../../shared/systemd.nix
+      ../../shared/yubikey.nix
     ];
 
   # Bootloader.
@@ -118,20 +121,19 @@
     broadcom-bt-firmware
     btop
     htop
-    google-chrome
     direnv
     cachix
+    icu
+    devbox
+    thunderbird
+    google-chrome
+    firefox
+    kdePackages.kate
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
-
-  # enable gpg-agent with SSH support
-  programs.gnupg.agent = {
-     enable = true;
-     enableSSHSupport = true;
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

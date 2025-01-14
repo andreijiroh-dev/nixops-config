@@ -75,7 +75,7 @@
   ];
 
   home.sessionPath = [
-    "${config.home.homeDirectory}/bin"
+    "$HOME/bin"
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -117,6 +117,28 @@
     DOCKER_BUILDKIT = "1";
   };
 
+  # taken from https://github.com/andreijiroh-dev/dotfiles/blob/main/.config/aliases
+  home.shellAliases = {
+    signoff = "git commit --signoff";
+    status = "git status";
+    stats = "git status";
+    clone = "git clone";
+    stage = "git add";
+    unstage = "git restore --staged";
+    nuke-from-index = "git rm";
+    rename-branch = "git branch -m";
+    set-upstream = "git branch -u";
+    stash = "git stash push --keep-index";
+    apply-stash = "git stash apply";
+    pop-stash = "git stash pop";
+    drop-stash = "git stash drop";
+    yeet-stash = "git stash drop";
+    push = "git push";
+    fetch = "git fetch";
+    submodules = "git submdoule";
+    submodule = "git submodule";
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -129,6 +151,10 @@
     };
     userName = "Andrei Jiroh Halili";
     userEmail = "ajhalili2006@andreijiroh.dev";
+    signing = {
+      key = "4D5E631758CB9CC45941B1CE67BFC91B3DA12BE8";
+      signByDefault = true;
+    };
     aliases = {
       signoff = "commit --signoff";
       amend = "commit -a --amend";
@@ -158,8 +184,6 @@
       push = {
         autoSetupRemote = true;
       };
-
-
     };
   };
 
