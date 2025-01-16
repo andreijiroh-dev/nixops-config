@@ -20,6 +20,7 @@
       ../../shared/server/tailscale.nix
       ../../shared/systemd.nix
       ../../shared/yubikey.nix
+      ../../shared/server/devenv.nix
     ];
 
   # Bootloader.
@@ -83,17 +84,17 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # home-manager specifics
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # Might be obvious to some since I'm technically roleplaying on my
   # old HP laptop my overseas Filipino dad gave me in 2024.
   users.users.gildedguy = {
     isNormalUser = true;
     description = "Gildedguy (Michael Moy)"; # We're not impersonating the animatior here.
-    extraGroups = [ "networkmanager" "wheel" ];
-    #packages = with pkgs; [
-    #  kdePackages.kate
-    #  thunderbird
-    #];
+    extraGroups = [ "networkmanager" "wheel" "docker"];
     openssh = {
       authorizedKeys.keys = with import ../../shared/ssh-keys.nix; [
         personal.y2022
@@ -102,10 +103,6 @@
       ];
     };
   };
-
-  # home-manager specifics
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
   home-manager.users.gildedguy = import ./users/gildedguy.nix;
   #programs.home-manager.enable = true; # allow home-manager to manage itself
 
@@ -118,17 +115,16 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     dig
-    broadcom-bt-firmware
     btop
     htop
-    direnv
-    cachix
     icu
-    devbox
     thunderbird
     google-chrome
     firefox
     kdePackages.kate
+    libreoffice-qt6-fresh
+    hunspell
+    hunspellDicts.en_US
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

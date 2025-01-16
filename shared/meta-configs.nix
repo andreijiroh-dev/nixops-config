@@ -15,33 +15,48 @@
   };
 
   nix = {
+    gc = {
+      automatic = true;
+      randomizedDelaySec = "69min";
+    };
     settings = {
       # See https://nix.dev/manual/nix/latest/development/experimental-features
       # for latest supported feature flags.
       experimental-features = [
-        "nix-command"
-        "flakes"
+        "auto-allocate-uids"
         "ca-derivations"
         "cgroups"
-        "impure-derivations"
-        "git-hashing"
-        "fetch-tree"
+        "configurable-impure-env"
+        "daemon-trust-override"
+        "dynamic-derivations"
         "fetch-closure"
+        "fetch-tree"
+        "flakes"
+        "git-hashing"
+        "impure-derivations"
         "local-overlay-store"
         "mounted-ssh-store"
-        # "verified-fetches"
+        "nix-command"
+        "no-url-literals"
+        "parse-toml-timestamps"
+        "pipe-operators"
+        "read-only-local-store"
+        "recursive-nix"
+        "verified-fetches"
       ];
 
       trusted-users = [
         "root"
         "gildedguy"
         "ajhalili2006"
+        "nixos"
       ];
 
       # just sync with trusted-users, but w/o root
       allowed-users = [
         "gildedguy"
         "ajhalili2006"
+        "nixos"
       ];
 
       trusted-public-keys = [

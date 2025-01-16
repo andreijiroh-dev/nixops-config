@@ -7,6 +7,8 @@
   imports = [
     ../../shared/systemd.nix
     ../../shared/server/ssh.nix
+    ../../shared/meta-configs.nix
+    ../../shared/systemd.nix
   ];
 
   # Import my SSH keys to the nixos user for remote access.
