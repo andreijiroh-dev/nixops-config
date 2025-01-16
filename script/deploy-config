@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 set -xe
-NIXOS_HOSTNAME=${1:HOSTNAME}
+NIXOS_HOSTNAME=${2:HOSTNAME}
 SUDO=${SUDO:"sudo"}
 
 if [[ $EUID != "0" ]]; then
@@ -18,5 +18,6 @@ elif [[ $1 == "boot" ]]; then
     nixos-rebuild --verbose --show-trace --flake ".#${NIXOS_HOSTNAME}" boot
 else
     echo "Unsupport command"
+    echo "Usage: $0 <switch|boot> [hostname]"
     exit 1
 fi
