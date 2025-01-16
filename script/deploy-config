@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# This is a utility wrapper script around nixos-rebuild, intended for use
+# within the root directory of the repository as a local copy/clone.
+# SPDX-License-Identifier: MPL-2.0
+
+set -xe
+NIXOS_HOSTNAME=${1:HOSTNAME}
+SUDO=${SUDO:"sudo"}
+
+if [[ $EUID != "0" ]]; then
+    echo "Execing as root instead"
+    exec $SUDO "$0"
+fi
+
+if [[ $1 == "switch" ]]; then
+    nixos-rebuild --verbose --show-trace --flake ".#${NIXOS_HOSTNAME}" switch
+elif [[ $1 == "boot" ]]; then
+    nixos-rebuild --verbose --show-trace --flake ".#${NIXOS_HOSTNAME}" boot
+fi

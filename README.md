@@ -22,17 +22,65 @@ installer or manually through the `nixos-install` utility, especially
 when you have consider partitioning on your drive to ensure that you can roll back
 safely in case things go wrong.
 
-After installation, proceed with the steps in updating configuration below.
+After installation, copy the generated NixOS configuration files from `/etc/nixos`
+into a new directory named `hosts/<host-name>`. Note that on the rest of
+the README, the placeholder `<host-name>` is used to denote the hostname of a new
+or existing machine under Nix flake-based setup.
+
+```bash
+cp -rv /etc/nixos/ hosts/<host-name>/
+```
+
+On the `flake.nix` file, under the `nixosConfigurations` block, add the new host using the template below
+
+```nix
+<host-name> = nixpkgs.lib.nixosSystem {
+  system = "x86_64-linux";
+  modules = [
+    ./hosts/<host-name>/configuration.nix
+
+    # load Determinate Nix and the rest
+    determinate.nixosModules.default
+    home-manager.nixosModules.home-manager
+    vscode-server.nixosModules.default
+    nix-ld.nixosModules.nix-ld
+
+    # one-liners?
+    { programs.nix-ld.dev.enable = true; }
+  ];
+};
+```
+
+Then on your `hosts/<host-name>/configuration.nix`, add the needed imports
+as needed:
+
+```nix
+imports = [
+  ./hardware-configuration.nix
+  ../../shared/gnupg.nix
+  ../../shared/meta-configs.nix
+  ../../shared/server/ssh.nix
+  ../../shared/server/tailscale.nix
+  ../../shared/systemd.nix
+  ../../shared/yubikey.nix
+  # add more imports here
+]
+```
+
+Adjust as needed before running a `nixos-rebuild switch`
 
 ### Updating configuration or upgrading NixOS system
 
 ```bash
 EDITOR="nano" # or code if you do
 $EDITOR <path/to/nixfile.nix>
+git stage <path/to/nixfile.nix>
+git commit --signoff
 
 # update the flake.lock file manually
 nix flake update
 
+# on the another machine...
 # change {hostname} to something like stellapent-cier
 sudo nixos-rebuild --flake github:andreijiroh-dev/nixops-config#{hostname} <switch|boot|build>
 ```
