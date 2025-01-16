@@ -8,12 +8,15 @@ NIXOS_HOSTNAME=${1:HOSTNAME}
 SUDO=${SUDO:"sudo"}
 
 if [[ $EUID != "0" ]]; then
-    echo "Execing as root instead"
-    exec $SUDO "$0"
+    echo "Run me as root user again in order to deploy config changes."
+    exit 1
 fi
 
 if [[ $1 == "switch" ]]; then
     nixos-rebuild --verbose --show-trace --flake ".#${NIXOS_HOSTNAME}" switch
 elif [[ $1 == "boot" ]]; then
     nixos-rebuild --verbose --show-trace --flake ".#${NIXOS_HOSTNAME}" boot
+else
+    echo "Unsupport command"
+    exit 1
 fi
