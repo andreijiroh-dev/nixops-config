@@ -12,8 +12,8 @@
       PasswordAuthentication = "no";
 
       # Allow port and X11 forwarding
-      AllowTcpForwarding = "yes";
-      X11Forwarding = "yes";
+      AllowTcpForwarding = true;
+      X11Forwarding = true;
     };
   };
 
