@@ -95,9 +95,45 @@ nix flake update
 sudo nixos-rebuild --flake .#{hostname} <switch|boot|build>
 ```
 
+### As an external flake module
+
+You can easily use this flake as an external module in your own flake-based NixOS configuration
+if you want to reuse some of my configurations.
+
+```nix
+{
+  description = "My NixOS configuration";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/24.11";
+  inputs.andreijiroh-dev.url = "github:andreijiroh-dev/nixops-config";
+  # needed if you use stable instead of unstable
+  inputs.andreijiroh-dev.inputs.nixpkgs.follows = "nixpkgs";
+
+  outputs = { self, andreijiroh-dev, nixpkgs }: {
+    let
+      # change {hostname} to something like stellapent-cier
+      # if you like to reuse my configs
+      system = nixops-config.nixosConfigurations.{hostname};
+    in
+    {
+      nixosConfigurations.{hostname} = system {
+        # your customizations here
+      };
+
+      nixosConfigurations.your-mom = nixpkgs.lib.nixosSystem {
+         system = "x86_64-linux";
+         modules = [
+          andreijiroh-dev.nixosModules.networking # or any other modules
+         ];
+      };
+    };
+}
+```
+
 ### Building a minimial ISO for recovery
 
-Currently available as `amd64` (`x86-64`) Linux ISO only for now.
+Currently available as `amd64` (`x86-64`) Linux ISO only for now, but you can copy
+the `recoverykit-amd64` NixOS configuration and change `system` to any supported CPU
+architectures by NixOS.
 
 ```bash
 # Build using the sources as remote
@@ -106,6 +142,17 @@ nix build github:andreijiroh-dev/nixops-config/main#nixosConfigurations.recovery
 # ...or via a local clone
 nix build .#nixosConfigurations.recoverykit-amd64.config.system.build.isoImage
 ```
+
+## Availabled shared configs
+
+- [`flatpak.nix`](./shared/flatpak.nix): NixOS for enabling Flatpaks
+- [`gnupg.nix`](./shared/gnupg.nix): GnuPG configuration
+- [`locale.nix`](./shared/locale.nix): Locale configuration
+- [`meta-configs.nix`](./shared/meta-configs.nix): Meta configurations for the system, mostly related to Nix and nixpkgs.
+- [`networking.nix`](./shared/networking.nix): Networking configuration, currently DNS resolver settings for `systemd-resolved`
+- [`ssh-keys.nix`](./shared/ssh-keys.nix): SSH keys configuration as NixOS module, intended to be in sync with my keys on git forges
+- [`server/devenv.nix`](./shared/server/devenv.nix): Development environment configuration, plus Docker and VM configurations.
+- [`server/ssh.nix`](./shared/server/ssh.nix): SSH server configuration
 
 ## License
 

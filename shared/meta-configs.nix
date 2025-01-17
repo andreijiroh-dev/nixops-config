@@ -85,7 +85,7 @@
 
   # Needed since Determinate Nix manages the main config file for system.
   environment.etc."nix/nix.custom.conf" = {
-    source = ./misc/nix/nix.custom.conf;
+    source = ../misc/nix/nix.custom.conf;
     mode = "0644";
   };
 }
