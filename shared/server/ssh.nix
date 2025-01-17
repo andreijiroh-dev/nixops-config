@@ -7,7 +7,13 @@
   services.openssh = {
     enable = true;
     settings = {
+      # Disable password authentication over SSH and require SSH keys
       PermitRootLogin = "prohibit-password";
+      PasswordAuthentication no
+
+      # Allow port and X11 forwarding
+      AllowTcpForwarding yes
+      X11Forwarding yes
     };
   };
 
