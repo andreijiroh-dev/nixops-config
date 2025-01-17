@@ -9,7 +9,7 @@
     settings = {
       # Disable password authentication over SSH and require SSH keys
       PermitRootLogin = "prohibit-password";
-      PasswordAuthentication = "no";
+      PasswordAuthentication = false;
 
       # Allow port and X11 forwarding
       AllowTcpForwarding = true;
