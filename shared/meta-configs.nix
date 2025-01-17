@@ -3,6 +3,9 @@
 
 { config, pkgs, lib, ... }:
 
+let
+  flake = builtins.getFlake (toString ./.);
+in
 {
   # Adopted from https://fnordig.de/til/nix/home-manager-allow-unfree.html,
   # but we'll also enable it system-wide too.
@@ -81,5 +84,11 @@
         "https://recaptime-dev.cachix.org"
       ];
     };
+  };
+
+  # Needed since Determinate Nix manages the main config file for system.
+  environment.etc."nix/nix.custom.conf" = {
+    source = "${flake}/misc/nix/nix.custom.conf";
+    mode = "0644";
   };
 }
