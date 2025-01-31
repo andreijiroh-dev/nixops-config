@@ -21,6 +21,7 @@
       ../../shared/systemd.nix
       ../../shared/yubikey.nix
       ../../shared/server/devenv.nix
+      ../../shared/1password.nix
     ];
 
   # Bootloader.

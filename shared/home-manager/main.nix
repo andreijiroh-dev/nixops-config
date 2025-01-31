@@ -39,7 +39,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     ## desktop apps ##
-    
+    _1password-gui
 
     ## devtools ##
     # https://httpie.io
@@ -59,6 +59,7 @@
     direnv
     shellcheck
     hadolint
+    _1password
 
     ## programming languages
     deno
