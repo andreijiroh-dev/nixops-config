@@ -18,6 +18,7 @@
     # Community Extras
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
+    vscode-server.inputs.nixpkgs.follows = "nixpkgs";
 
     # nix-ld
     nix-ld = {
