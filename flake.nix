@@ -4,7 +4,7 @@
   # try to be in-sync with the nix-channels
   inputs = {
     # nixpkgs itself
-    nixpkgs.url = "https://flakehub.com/f/DeterminateSystems/nixpkgs-weekly/*.tar.gz";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.0.tar.gz";
 
     # home-manager
     home-manager = {
