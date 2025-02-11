@@ -22,6 +22,7 @@
       ../../shared/yubikey.nix
       ../../shared/server/devenv.nix
       ../../shared/1password.nix
+      ../../shared/desktop/firefox.nix
     ];
 
   # Bootloader.
@@ -107,9 +108,6 @@
   home-manager.users.gildedguy = import ./users/gildedguy.nix;
   #programs.home-manager.enable = true; # allow home-manager to manage itself
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -121,7 +119,6 @@
     icu
     thunderbird
     google-chrome
-    firefox
     kdePackages.kate
     libreoffice-qt6-fresh
     hunspell
