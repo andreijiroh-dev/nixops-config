@@ -5,5 +5,5 @@
         enable = true;
         nativeMessagingHosts.packages = with pkgs; [ firefoxpwa ];
         package = pkgs.firefox;
-    }
+    };
 }
