@@ -13,7 +13,10 @@
     };
 
     # Determinate Nix
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
+    determinate = {
+      url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Community Extras
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
