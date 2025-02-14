@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# This is a utility wrapper script around nixos-rebuild, intended for use
-# within the root directory of the repository as a local copy/clone.
+# This is a utility wrapper script around nixos-rebuild, intended for use within the root directory of the repository
+# as a local copy/clone. Might implement remote setups soon
 # SPDX-License-Identifier: MPL-2.0
 
 set -xe
 HOSTNAME=$(hostname)
-NIXOS_HOSTNAME=${2:HOSTNAME}
+NIXOS_HOSTNAME=${2:-"$HOSTNAME"}
 SUDO=${SUDO:"sudo"}
 
 if [[ $EUID != "0" ]]; then
@@ -18,7 +18,7 @@ if [[ $1 == "switch" ]]; then
 elif [[ $1 == "boot" ]]; then
     nixos-rebuild --verbose --show-trace --flake ".#${NIXOS_HOSTNAME}" boot
 else
-    echo "Unsupport command"
+    echo "Unsupport command for this deployment wrapper"
     echo "Usage: $0 <switch|boot> [hostname]"
     exit 1
 fi
