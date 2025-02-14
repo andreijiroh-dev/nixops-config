@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 set -xe
+HOSTNAME=$(hostname)
 NIXOS_HOSTNAME=${2:HOSTNAME}
 SUDO=${SUDO:"sudo"}
 
