@@ -22,6 +22,9 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
+    
+    # flake utils
+    flake-utils.url = "github:numtide/flake-utils";
 
     # nix-ld
     nix-ld = {
@@ -38,7 +41,11 @@
     determinate,
     vscode-server,
     nix-ld
-  }: {
+  }:
+    let
+      system = "x86_64-linux";
+    in
+  {
     nixosConfigurations = {
       recoverykit-amd64 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -66,6 +73,7 @@
     };
     homeConfigurations = {
       gildedguy = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
         modules = [
           ./shared/home-manager/main.nix
           {
