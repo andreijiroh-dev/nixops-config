@@ -40,6 +40,7 @@
     # '')
     ## desktop apps ##
     _1password-gui
+    firefoxpwa
 
     ## devtools ##
     # https://httpie.io
@@ -48,6 +49,9 @@
     devenv
     # https://cli.github.com
     gh
+    glab
+    gitlab-ci-ls
+    fjo
     # bet we'll going to have a field day since Copilot is now available for free
     # (this is seperate from the gh copilot extension for those asking)
     # context: https://github.blog/news-insights/product-news/github-copilot-in-vscode-free/
@@ -57,9 +61,10 @@
     # https://doppler.com
     doppler
     direnv
-    shellcheck
+    shellcheck # https://funtoo.org
     hadolint
     _1password
+    keychain
 
     ## programming languages
     deno

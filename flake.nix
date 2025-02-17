@@ -40,7 +40,9 @@
     nixos-hardware,
     determinate,
     vscode-server,
-    nix-ld
+    nix-ld,
+    flake-utils,
+    systems
   }:
     let
       system = "x86_64-linux";
