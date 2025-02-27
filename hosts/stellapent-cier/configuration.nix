@@ -23,6 +23,7 @@
       ../../shared/server/devenv.nix
       ../../shared/1password.nix
       ../../shared/desktop/firefox.nix
+      ../../shared/shells/bash.nix
     ];
 
   # Bootloader.
@@ -93,8 +94,12 @@
       authorizedKeys.keys = with import ../../shared/ssh-keys.nix; [
         personal.y2022
         personal.passwordless
+        work.recaptime-dev.crew
         rp.gildedguy
       ];
+    };
+    home-manager = {
+      enable = true;
     };
   };
   home-manager.users.gildedguy = import ./users/gildedguy.nix;
@@ -109,11 +114,15 @@
     htop
     icu
     thunderbird
+    firefox
     google-chrome
+    microsoft-edge
     kdePackages.kate
     libreoffice-qt6-fresh
     hunspell
     hunspellDicts.en_US
+    gnupg
+    gpg-tui
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -65,6 +65,8 @@
     hadolint
     _1password
     keychain
+    gnupg
+    gpg-tui
 
     ## programming languages
     deno
@@ -191,6 +193,13 @@
         autoSetupRemote = true;
       };
     };
+  };
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+  };
+  programs.zsh = {
+    enable = true;
   };
 
   programs.vscode = {

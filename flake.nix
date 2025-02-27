@@ -44,9 +44,6 @@
     flake-utils,
     systems
   }:
-    let
-      system = "x86_64-linux";
-    in
   {
     nixosConfigurations = {
       recoverykit-amd64 = nixpkgs.lib.nixosSystem {
@@ -75,21 +72,16 @@
     };
     homeConfigurations = {
       gildedguy = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [
           ./shared/home-manager/main.nix
           {
             home.username = "gildedguy";
             home.homeDirectory = "/home/gildedguy";
+            home.useUserPackages = true;
+            home.useGlobalPkgs = true;
           }
         ];
-
-        extraSpecialArgs = {
-          home = {
-            useUserPackages = true;
-            useGlobalPkgs = true;
-          };
-        };
       };
 
       ajhalili2006 = home-manager.lib.homeManagerConfiguration {
@@ -98,17 +90,15 @@
           {
             home.username = "ajhalili2006";
             home.homeDirectory = "/home/ajhalili2006";
+            home.useUserPackages = true;
+            home.useGlobalPkgs = true;
           }
         ];
-
-        extraSpecialArgs = {
-          home = {
-            useUserPackages = true;
-            useGlobalPkgs = true;
-          };
-        };
       };
     };
+
+    # this is for external users who want to reproduce my configs
+    # as needed
     nixosModules = {
       flatpak = ./shared/flatpak.nix;
       gnupg = ./shared/gnupg.nix;
