@@ -2,16 +2,15 @@
 
 {
   programs.bash = {
-    enable = true;
+    #enable = true;
     completion = {
       enable = true;
-      package = with pkgs; [
-        _1password-cli
-        gh
-        glab
-        firefoxpwa
-        doppler
-      ];
+      package = pkgs.bash-completion;
+    };
+    undistractMe = {
+      enable = true;
+      playSound = true;
+      timeout = 15;
     };
   };
 }
