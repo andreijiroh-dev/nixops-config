@@ -3,7 +3,7 @@
 This is @ajhalili2006's NixOS + Home Manager configuration for his laptop and homelabs, in sync with the
 [nixpkgs-specific dotfiles repository]. Also planned to be used in Hack Club Nest soon.
 
-[nixpkgs-specific dotfiles repository]: https://github.com/andreijiroh-dev/dotfiles/tree/nixpkgs
+[nixpkgs-specific dotfiles repository]: https://gitlab.com/andreijiroh-dev/dotfiles/tree/nixpkgs
 
 ## CI Status
 
@@ -107,14 +107,15 @@ if you want to reuse some of my configurations.
   # needed if you use stable instead of unstable
   inputs.andreijiroh-dev.inputs.nixpkgs.follows = "nixpkgs";
 
+  # TODO: fix this soon
   outputs = { self, andreijiroh-dev, nixpkgs }: {
     let
       # change {hostname} to something like stellapent-cier
       # if you like to reuse my configs
-      system = nixops-config.nixosConfigurations.{hostname};
+      reusableConfig = andreijiroh-dev.nixosConfigurations.{hostname};
     in
     {
-      nixosConfigurations.{hostname} = system {
+      nixosConfigurations.{hostname} = reusableConfig {
         # your customizations here
       };
 

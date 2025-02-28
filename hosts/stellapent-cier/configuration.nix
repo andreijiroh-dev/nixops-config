@@ -7,7 +7,6 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
       ../../shared/desktop/bluetooth.nix
       ../../shared/desktop/firewall.nix
       ../../shared/desktop/kde-plasma.nix
@@ -98,9 +97,9 @@
         rp.gildedguy
       ];
     };
-    home-manager = {
-      enable = true;
-    };
+    #home-manager = {
+    #  enable = true;
+    #};
   };
   home-manager.users.gildedguy = import ./users/gildedguy.nix;
   #programs.home-manager.enable = true; # allow home-manager to manage itself
