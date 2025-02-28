@@ -113,7 +113,6 @@
     htop
     icu
     thunderbird
-    firefox
     google-chrome
     microsoft-edge
     kdePackages.kate
