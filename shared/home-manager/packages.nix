@@ -62,5 +62,9 @@
     nil
     # https://github.com/alesbrelih/gitlab-ci-ls
     gitlab-ci-ls
+
+    # did we forget these?
+    byobu
+    tmux
   ];
 }

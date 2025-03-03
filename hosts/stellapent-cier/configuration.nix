@@ -124,6 +124,8 @@
     gpgme
     figma-linux
     figma-agent
+    byobu
+    tmux
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
