@@ -63,7 +63,7 @@
     direnv
     shellcheck # https://funtoo.org
     hadolint
-    _1password
+    _1password-cli
     keychain
     gnupg
     gpg-tui

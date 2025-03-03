@@ -121,6 +121,9 @@
     hunspellDicts.en_US
     gnupg
     gpg-tui
+    gpgme
+    figma-linux
+    figma-agent
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
