@@ -14,6 +14,11 @@
     };
   };
 
+  imports = [
+    ./packages.nix
+    ./git.nix
+  ];
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -22,65 +27,6 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
-
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = with pkgs; [
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-    ## desktop apps ##
-    _1password-gui
-    firefoxpwa
-
-    ## devtools ##
-    # https://httpie.io
-    httpie
-    # https://devenv.sh
-    devenv
-    # https://cli.github.com
-    gh
-    glab
-    gitlab-ci-ls
-    fjo
-    # bet we'll going to have a field day since Copilot is now available for free
-    # (this is seperate from the gh copilot extension for those asking)
-    # context: https://github.blog/news-insights/product-news/github-copilot-in-vscode-free/
-    github-copilot-cli
-    # markdownlint
-    markdownlint-cli
-    # https://doppler.com
-    doppler
-    direnv
-    shellcheck # https://funtoo.org
-    hadolint
-    _1password-cli
-    keychain
-    gnupg
-    gpg-tui
-
-    ## programming languages
-    deno
-    nodejs_22
-    python313
-    pipx
-    pipenv
-
-    ## language servers ##
-    # nix language server - https://github.com/oxalica/nil
-    nil
-    # https://github.com/alesbrelih/gitlab-ci-ls
-    gitlab-ci-ls
-  ];
 
   home.sessionPath = [
     "$HOME/bin"
@@ -149,51 +95,7 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  # let me cook with the configs, starting with git
-  programs.git = {
-    enable = true;
-    package = pkgs.gitAndTools.gitFull;
-    lfs = {
-      enable = true;
-    };
-    userName = "Andrei Jiroh Halili";
-    userEmail = "ajhalili2006@andreijiroh.dev";
-    signing = {
-      key = "4D5E631758CB9CC45941B1CE67BFC91B3DA12BE8";
-      signByDefault = true;
-    };
-    aliases = {
-      signoff = "commit --signoff";
-      amend = "commit -a --amend";
-      remotes = "remote -v";
-      root = "rev-parse --show-toplevel";
-      unstage = "restore --staged";
-      stats = "status";
-    };
-    extraConfig = {
-      format = {
-        signOff = true;
-      };
-      init = {
-        defaultBranch = "main";
-      };
-
-      # https://groups.google.com/g/binary-transparency/c/f-BI4o8HZW0
-      transfer = {
-        fsckobjects = true;
-      };
-      fetch = {
-        fsckobjects = true;
-      };
-      receive = {
-        fsckobjects = true;
-      };
-      push = {
-        autoSetupRemote = true;
-      };
-    };
-  };
+ 
   programs.bash = {
     enable = true;
     enableCompletion = true;

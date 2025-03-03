@@ -1,15 +1,12 @@
 { pkgs, ... }:
 
 {
-  # TBD
+  imports = [
+    ./git.nix
+    ./packages.nix
+  ];
 
   home.stateVersion = "24.11";
-
-  home.packages = with pkgs; [
-    _1password-cli
-    gh
-    glab
-  ];
 
   home.shellAliases = {
     signoff = "git commit --signoff";

@@ -72,7 +72,12 @@
       };
     };
     homeConfigurations = {
-      gildedguy = home-manager.lib.homeManagerConfiguration {
+      # Usage
+      # - From GitHub:
+      #  nix run home-manager/master -- switch --flake github:andreijiroh-dev/nixops-config#stellapent-cier
+      # - Locally:
+      #  nix run home-manager/master -- switch --flake .#stellapent-cier
+      stellapent-cier = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [
           ./shared/home-manager/main.nix
@@ -85,7 +90,12 @@
         ];
       };
 
-      ajhalili2006 = home-manager.lib.homeManagerConfiguration {
+      # Usage
+      # - From GitHub:
+      #  nix run home-manager/master -- switch --flake github:andreijiroh-dev/nixops-config#plain
+      # - Locally:
+      #  nix run home-manager/master -- switch --flake .#plain
+      plain = home-manager.lib.homeManagerConfiguration {
         modules = [
           ./shared/home-manager/main.nix
           {
@@ -98,8 +108,7 @@
       };
     };
 
-    # this is for external users who want to reproduce my configs
-    # as needed
+    # This is for external users who want to reproduce my configs as needed
     nixosModules = {
       flatpak = ./shared/flatpak.nix;
       gnupg = ./shared/gnupg.nix;
