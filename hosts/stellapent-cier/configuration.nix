@@ -122,8 +122,8 @@
     gnupg
     gpg-tui
     gpgme
-    figma-linux
-    figma-agent
+    #figma-linux
+    #figma-agent
     byobu
     tmux
   ];
