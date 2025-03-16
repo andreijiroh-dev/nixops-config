@@ -7,10 +7,10 @@
       enable = true;
       package = pkgs.bash-completion;
     };
-    undistractMe = {
-      enable = true;
-      playSound = true;
-      timeout = 15;
-    };
+    #undistractMe = {
+    #  enable = true;
+    #  playSound = true;
+    #  timeout = 15;
+    #};
   };
 }

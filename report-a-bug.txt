@@ -1,0 +1,197 @@
+Running phase: unpackPhase
+@nix { "action": "setPhase", "phase": "unpackPhase" }
+unpacking source archive /nix/store/ikxl6vjw4slb9d5braxw08z3l54cs4y9-source
+source root is source
+Executing cargoSetupPostUnpackHook
+Finished cargoSetupPostUnpackHook
+Running phase: patchPhase
+@nix { "action": "setPhase", "phase": "patchPhase" }
+applying patch /nix/store/7j48z630bbkldlczm80k1ba6nhap1ylp-0001-update-time.patch
+patching file Cargo.lock
+Executing cargoSetupPostPatchHook
+Validating consistency between /build/source/Cargo.lock and /build/figma-agent-0.3.2-vendor/Cargo.lock
+Finished cargoSetupPostPatchHook
+Running phase: updateAutotoolsGnuConfigScriptsPhase
+@nix { "action": "setPhase", "phase": "updateAutotoolsGnuConfigScriptsPhase" }
+Running phase: configurePhase
+@nix { "action": "setPhase", "phase": "configurePhase" }
+Running phase: buildPhase
+@nix { "action": "setPhase", "phase": "buildPhase" }
+Executing cargoBuildHook
+cargoBuildHook flags: -j 4 --target x86_64-unknown-linux-gnu --offline --profile release
+[1m[32m   Compiling[0m libc v0.2.152
+[1m[32m   Compiling[0m proc-macro2 v1.0.76
+[1m[32m   Compiling[0m unicode-ident v1.0.12
+[1m[32m   Compiling[0m version_check v0.9.4
+[1m[32m   Compiling[0m cfg-if v1.0.0
+[1m[32m   Compiling[0m memchr v2.7.1
+[1m[32m   Compiling[0m autocfg v1.1.0
+[1m[32m   Compiling[0m quote v1.0.35
+[1m[32m   Compiling[0m pkg-config v0.3.28
+[1m[32m   Compiling[0m aho-corasick v1.1.2
+[1m[32m   Compiling[0m syn v2.0.48
+[1m[32m   Compiling[0m regex-syntax v0.8.2
+[1m[32m   Compiling[0m log v0.4.20
+[1m[32m   Compiling[0m pin-project-lite v0.2.13
+[1m[32m   Compiling[0m lock_api v0.4.11
+[1m[32m   Compiling[0m glob v0.3.1
+[1m[32m   Compiling[0m parking_lot_core v0.9.9
+[1m[32m   Compiling[0m bytes v1.5.0
+[1m[32m   Compiling[0m clang-sys v1.7.0
+[1m[32m   Compiling[0m regex-automata v0.4.3
+[1m[32m   Compiling[0m smallvec v1.11.2
+[1m[32m   Compiling[0m scopeguard v1.2.0
+[1m[32m   Compiling[0m prettyplease v0.2.16
+[1m[32m   Compiling[0m futures-core v0.3.30
+[1m[32m   Compiling[0m once_cell v1.19.0
+[1m[32m   Compiling[0m rustix v0.38.28
+[1m[32m   Compiling[0m jobserver v0.1.27
+[1m[32m   Compiling[0m linux-raw-sys v0.4.12
+[1m[32m   Compiling[0m typenum v1.17.0
+[1m[32m   Compiling[0m itoa v1.0.10
+[1m[32m   Compiling[0m bitflags v2.4.1
+[1m[32m   Compiling[0m minimal-lexical v0.2.1
+[1m[32m   Compiling[0m libloading v0.8.1
+[1m[32m   Compiling[0m nom v7.1.3
+[1m[32m   Compiling[0m regex v1.10.2
+[1m[32m   Compiling[0m cc v1.0.83
+[1m[32m   Compiling[0m parking_lot v0.12.1
+[1m[32m   Compiling[0m tracing-core v0.1.32
+[1m[32m   Compiling[0m mio v0.8.10
+[1m[32m   Compiling[0m signal-hook-registry v1.4.1
+[1m[32m   Compiling[0m socket2 v0.5.5
+[1m[32m   Compiling[0m generic-array v0.14.7
+[1m[32m   Compiling[0m home v0.5.9
+[1m[32m   Compiling[0m bindgen v0.69.2
+[1m[32m   Compiling[0m either v1.9.0
+[1m[32m   Compiling[0m which v4.4.2
+[1m[32m   Compiling[0m tokio v1.35.1
+[1m[32m   Compiling[0m zstd-sys v2.0.9+zstd.1.5.5
+[1m[32m   Compiling[0m tracing v0.1.40
+[1m[32m   Compiling[0m cexpr v0.6.0
+[1m[32m   Compiling[0m slab v0.4.9
+[1m[32m   Compiling[0m lazy_static v1.4.0
+[1m[32m   Compiling[0m peeking_take_while v0.1.2
+[1m[32m   Compiling[0m lazycell v1.3.0
+[1m[32m   Compiling[0m shlex v1.2.0
+[1m[32m   Compiling[0m rustc-hash v1.1.0
+[1m[32m   Compiling[0m getrandom v0.2.11
+[1m[32m   Compiling[0m unicase v2.7.0
+[1m[32m   Compiling[0m paste v1.0.14
+[1m[32m   Compiling[0m percent-encoding v2.3.1
+[1m[32m   Compiling[0m serde v1.0.195
+[1m[32m   Compiling[0m futures-sink v0.3.30
+[1m[32m   Compiling[0m serde_derive v1.0.195
+[1m[32m   Compiling[0m syn v1.0.109
+[1m[32m   Compiling[0m fnv v1.0.7
+[1m[32m   Compiling[0m crc32fast v1.3.2
+[1m[32m   Compiling[0m tinyvec_macros v0.1.1
+[1m[32m   Compiling[0m local-waker v0.1.4
+[1m[32m   Compiling[0m alloc-no-stdlib v2.0.4
+[1m[32m   Compiling[0m pin-utils v0.1.0
+[1m[32m   Compiling[0m zstd-safe v7.0.0
+[1m[32m   Compiling[0m futures-task v0.3.30
+[1m[32m   Compiling[0m futures-util v0.3.30
+[1m[32m   Compiling[0m alloc-stdlib v0.2.2
+[1m[32m   Compiling[0m tinyvec v1.6.0
+[1m[32m   Compiling[0m http v0.2.11
+[1m[32m   Compiling[0m tokio-util v0.7.10
+[1m[32m   Compiling[0m rand_core v0.6.4
+[1m[32m   Compiling[0m crypto-common v0.1.6
+[1m[32m   Compiling[0m block-buffer v0.10.4
+[1m[32m   Compiling[0m ahash v0.8.7
+[1m[32m   Compiling[0m powerfmt v0.2.0
+[1m[32m   Compiling[0m httparse v1.8.0
+[1m[32m   Compiling[0m num-conv v0.1.0
+[1m[32m   Compiling[0m equivalent v1.0.1
+[1m[32m   Compiling[0m hashbrown v0.14.3
+[1m[32m   Compiling[0m time-core v0.1.2
+[1m[32m   Compiling[0m adler v1.0.2
+[1m[32m   Compiling[0m ppv-lite86 v0.2.17
+[1m[32m   Compiling[0m indexmap v2.1.0
+[1m[32m   Compiling[0m miniz_oxide v0.7.1
+[1m[32m   Compiling[0m rand_chacha v0.3.1
+[1m[32m   Compiling[0m time-macros v0.2.18
+[1m[32m   Compiling[0m deranged v0.3.11
+[1m[32m   Compiling[0m digest v0.10.7
+[1m[32m   Compiling[0m actix-service v2.0.2
+[1m[32m   Compiling[0m unicode-normalization v0.1.22
+[1m[32m   Compiling[0m figma-agent-freetype-sys v0.3.2 (/build/source/crates/freetype-sys)
+[1m[32m   Compiling[0m brotli-decompressor v2.5.1
+[1m[32m   Compiling[0m actix-utils v3.0.1
+[1m[32m   Compiling[0m bytestring v1.3.1
+[1m[32m   Compiling[0m actix-rt v2.9.0
+[1m[32m   Compiling[0m form_urlencoded v1.2.1
+[1m[32m   Compiling[0m cookie v0.16.2
+[1m[32m   Compiling[0m cpufeatures v0.2.12
+[1m[32m   Compiling[0m zerocopy v0.7.32
+[1m[32m   Compiling[0m unicode-bidi v0.3.14
+[1m[32m   Compiling[0m mime v0.3.17
+[1m[32m   Compiling[0m ryu v1.0.16
+[1m[32m   Compiling[0m convert_case v0.4.0
+[1m[32m   Compiling[0m serde_json v1.0.111
+[1m[32m   Compiling[0m bitflags v1.3.2
+[1m[32m   Compiling[0m time v0.3.36
+[1m[32m   Compiling[0m derive_more v0.99.17
+[1m[32m   Compiling[0m actix-codec v0.5.1
+[1m[32m   Compiling[0m idna v0.5.0
+[1m[32m   Compiling[0m sha1 v0.10.6
+[1m[32m   Compiling[0m actix-router v0.5.2
+[1m[32m   Compiling[0m brotli v3.4.0
+[1m[32m   Compiling[0m flate2 v1.0.28
+[1m[32m   Compiling[0m h2 v0.3.22
+[1m[32m   Compiling[0m rand v0.8.5
+[1m[32m   Compiling[0m local-channel v0.1.5
+[1m[32m   Compiling[0m encoding_rs v0.8.33
+[1m[32m   Compiling[0m httpdate v1.0.3
+[1m[32m   Compiling[0m base64 v0.21.5
+[1m[32m   Compiling[0m language-tags v0.3.2
+[1m[32m   Compiling[0m actix-web-codegen v4.2.2
+[1m[32m   Compiling[0m mime_guess v2.0.4
+[1m[32m   Compiling[0m url v2.5.0
+[1m[32m   Compiling[0m serde_urlencoded v0.7.1
+[1m[32m   Compiling[0m actix-server v2.3.0
+[1m[32m   Compiling[0m figma-agent-fontconfig-sys v0.3.2 (/build/source/crates/fontconfig-sys)
+[1m[32m   Compiling[0m actix-macros v0.2.4
+[1m[32m   Compiling[0m v_htmlescape v0.15.8
+[1m[32m   Compiling[0m is-terminal v0.4.10
+[1m[32m   Compiling[0m figma-agent-freetype v0.3.2 (/build/source/crates/freetype)
+[0m[1m[38;5;9merror[E0432][0m[0m[1m: unresolved import `freetype_sys::FT_Err_Ok`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/freetype/src/face.rs:9:19[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m9[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m    FT_Done_Face, FT_Err_Ok, FT_Face, FT_Get_Postscript_Name, FT_Get_Sfnt_Name,[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                   [0m[0m[1m[38;5;9m^^^^^^^^^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                   [0m[0m[1m[38;5;9m|[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                   [0m[0m[1m[38;5;9mno `FT_Err_Ok` in the root[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                   [0m[0m[1m[38;5;9mhelp: a similar name exists in the module: `FT_Error`[0m
+
+[0m[1m[38;5;9merror[E0432][0m[0m[1m: unresolved import `freetype_sys::FT_Err_Ok`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/freetype/src/library.rs:5:37[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m5[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse freetype_sys::{FT_Done_Library, FT_Err_Ok, FT_Library, FT_New_Library};[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                                     [0m[0m[1m[38;5;9m^^^^^^^^^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                                     [0m[0m[1m[38;5;9m|[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                                     [0m[0m[1m[38;5;9mno `FT_Err_Ok` in the root[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                                     [0m[0m[1m[38;5;9mhelp: a similar name exists in the module: `FT_Error`[0m
+
+[0m[1m[38;5;9merror[E0432][0m[0m[1m: unresolved import `freetype_sys::FT_Err_Ok`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/freetype/src/mm_var.rs:5:36[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m5[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse freetype_sys::{FT_Done_MM_Var, FT_Err_Ok, FT_Get_MM_Var, FT_MM_Var};[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                                    [0m[0m[1m[38;5;9m^^^^^^^^^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                                    [0m[0m[1m[38;5;9m|[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                                    [0m[0m[1m[38;5;9mno `FT_Err_Ok` in the root[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                                    [0m[0m[1m[38;5;9mhelp: a similar name exists in the module: `FT_Error`[0m
+
+[0m[1m[38;5;9merror[E0432][0m[0m[1m: unresolved import `freetype_sys::FT_Err_Ok`[0m
+[0m [0m[0m[1m[38;5;12m--> [0m[0mcrates/freetype/src/var_axis.rs:1:20[0m
+[0m  [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m1[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0muse freetype_sys::{FT_Err_Ok, FT_Get_Var_Axis_Flags, FT_Var_Axis, FT_VAR_AXIS_FLAG_HIDDEN};[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                    [0m[0m[1m[38;5;9m^^^^^^^^^[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                    [0m[0m[1m[38;5;9m|[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                    [0m[0m[1m[38;5;9mno `FT_Err_Ok` in the root[0m
+[0m  [0m[0m[1m[38;5;12m|[0m[0m                    [0m[0m[1m[38;5;9mhelp: a similar name exists in the module: `FT_Error`[0m
+
+[0m[1mFor more information about this error, try `rustc --explain E0432`.[0m
+[1m[31merror[0m[1m:[0m could not compile `figma-agent-freetype` (lib) due to 4 previous errors
+[1m[33mwarning[0m[1m:[0m build failed, waiting for other jobs to finish...

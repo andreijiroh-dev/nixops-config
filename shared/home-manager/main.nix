@@ -6,13 +6,13 @@
 
 {
   # https://fnordig.de/til/nix/home-manager-allow-unfree.html
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      # https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = (_: true);
-    };
-  };
+  #nixpkgs = {
+  #  config = {
+  #    allowUnfree = true;
+  #    # https://github.com/nix-community/home-manager/issues/2942
+  #    allowUnfreePredicate = (_: true);
+  #  };
+  #};
 
   imports = [
     ./packages.nix
