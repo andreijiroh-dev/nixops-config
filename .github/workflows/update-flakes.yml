@@ -71,10 +71,10 @@ jobs:
         with:
           name: nixos-recoverykit-iso
           path: dist
-  build-raspi-sdim:
+  build-raspi-sdimg:
     concurrency:
       cancel-in-progress: false
-      group: recoverykit-iso-builds
+      group: raspi-sd-img-builds
     needs: [update-lockfile]
     name: Build custom Raspberry Pi SD image
     runs-on: ubuntu-latest
