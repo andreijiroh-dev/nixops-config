@@ -14,7 +14,7 @@ jobs:
   update-lockfile:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: Setup Deterinate Nix
         uses: DeterminateSystems/nix-installer-action@main
@@ -46,7 +46,7 @@ jobs:
     name: Build recovery ISO
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: main
@@ -71,3 +71,48 @@ jobs:
         with:
           name: nixos-recoverykit-iso
           path: dist
+  build-raspi-sdim:
+    concurrency:
+      cancel-in-progress: false
+      group: recoverykit-iso-builds
+    needs: [update-lockfile]
+    name: Build custom Raspberry Pi SD image
+    runs-on: ubuntu-latest
+    env:
+      PREBUILD_TAG: build-1743086698
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Setup Deterinate Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          determinate: true
+
+      - name: Show flake metadata
+        run: nix flake metadata
+
+      # https://github.com/docker/setup-qemu-action
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      # https://github.com/docker/setup-buildx-action
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Prepare build environment
+        run: |
+          docker pull ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:${{env.PREBUILD_TAG}}
+          docker tag ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:${{env.PREBUILD_TAG}} ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:dev
+      
+      - name: Build the SD image
+        run: cd hosts/raspi-base && docker compose up
+      
+      - name: Upload as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nixos-raspi-sd-img
+          path: hosts/raspi-base/output

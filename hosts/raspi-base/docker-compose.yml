@@ -1,0 +1,9 @@
+services:
+  nixos-rpi-sd-image:
+    image: ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:dev
+    build:
+      context: .
+      dockerfile: ./builder/Dockerfile
+    volumes:
+      - ./:/build/src
+      - ./output:/build/out
