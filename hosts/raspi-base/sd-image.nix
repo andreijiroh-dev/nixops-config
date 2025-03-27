@@ -5,15 +5,17 @@
     <nixpkgs/nixos/modules/installer/cd-dvd/sd-image-aarch64.nix>
     ./sd-image-init.nix
   ];
+  system.stateVersion = "24.11";
 
   # bzip2 compression takes loads of time with emulation, skip it. Enable
   # this if you're low on space.
   sdImage.compressImage = false;
 
   sdImage.populateRootCommands = ''
+    pwd # just in case
     mkdir -p ./files/etc/sd-image-metadata/
-    cp ./configuration.nix ./files/etc/sd-image-metadata/configuration.nix
-    cp ./sd-image-init.nix ./files/etc/sd-image-metadata/sd-image-init.nix
+    cp /build/src/configuration.nix ./files/etc/sd-image-metadata/configuration.nix
+    cp /build/src/sd-image-init.nix ./files/etc/sd-image-metadata/sd-image-init.nix
   '';
 
   # OpenSSH is forced to have an empty `wantedBy` on the installer system[1], this won't allow it

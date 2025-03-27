@@ -22,6 +22,12 @@ else
   IMG=$ARTIFACT
 fi
 
+# bail out if we failed to build the thing
+if [ $IMG = "" ]; then
+  echo "error: Something went wrong while building the SD image, check logs"
+  exit 1
+fi
+
 echo "Found img file: $IMG"
 
 mkdir -pv /build/out || true

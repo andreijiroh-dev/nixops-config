@@ -79,7 +79,7 @@ jobs:
     name: Build custom Raspberry Pi SD image
     runs-on: ubuntu-latest
     env:
-      PREBUILD_TAG: build-1743086698
+      PREBUILD_TAG: build-1743088286
     steps:
       - uses: actions/checkout@v4
         with:
