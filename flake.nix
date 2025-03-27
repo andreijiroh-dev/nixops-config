@@ -31,6 +31,12 @@
       url = "github:Mic92/nix-ld";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    # nixos-generators
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -42,7 +48,8 @@
     vscode-server,
     nix-ld,
     flake-utils,
-    systems
+    systems,
+    nixos-generators
   }:
   {
     nixosConfigurations = {

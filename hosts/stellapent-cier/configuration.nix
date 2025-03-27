@@ -28,6 +28,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ]; # for raspi builds I guess
 
   networking.hostName = "stellapent-cier"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -126,6 +127,7 @@
     #figma-agent
     byobu
     tmux
+    rpi-imager
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -7,4 +7,8 @@
 
   # Also enable KDE Connect
   programs.kdeconnect.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    krfb
+  ]
 }
