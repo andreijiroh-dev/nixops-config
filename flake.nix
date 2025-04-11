@@ -61,6 +61,22 @@
         ];
       };
 
+      portable-amd64-256gb = {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/portable/amd64/configuration.nix
+
+          # load Determinate Nix and the rest
+          determinate.nixosModules.default
+          home-manager.nixosModules.home-manager
+          vscode-server.nixosModules.default
+          nix-ld.nixosModules.nix-ld
+
+          # one-liners?
+          { programs.nix-ld.dev.enable = true; }
+        ];
+      };
+
       stellapent-cier = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
