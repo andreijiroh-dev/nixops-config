@@ -45,6 +45,8 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    #".local/lib/bash/ssh-agent-loader".source = ../../misc/bash/lib/ssh-agent-loader;
   };
 
   # Home Manager can also manage your environment variables through
@@ -63,46 +65,9 @@
   #
   #  /etc/profiles/per-user/gildedguy/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    EDITOR = "nano";
-    NIXOS_ALLOW_UNFREE = "1"; # for impure builds
-    GIT_EDITOR = "code --wait";
-    VISUAL = "code --wait";
-    DOCKER_BUILDKIT = "1";
-  };
-
-  # taken from https://github.com/andreijiroh-dev/dotfiles/blob/main/.config/aliases
-  home.shellAliases = {
-    signoff = "git commit --signoff";
-    status = "git status";
-    stats = "git status";
-    clone = "git clone";
-    stage = "git add";
-    unstage = "git restore --staged";
-    nuke-from-index = "git rm";
-    rename-branch = "git branch -m";
-    set-upstream = "git branch -u";
-    stash = "git stash push --keep-index";
-    apply-stash = "git stash apply";
-    pop-stash = "git stash pop";
-    drop-stash = "git stash drop";
-    yeet-stash = "git stash drop";
-    push = "git push";
-    fetch = "git fetch";
-    submodules = "git submdoule";
-    submodule = "git submodule";
-  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
- 
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-  };
-  programs.zsh = {
-    enable = true;
-  };
 
   programs.vscode = {
     enable = true;

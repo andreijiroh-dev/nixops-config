@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+try_keychain_ssh_agent() {
+  if command -v keychain >> /dev/null; then
+    echo "[ssh-agent-loader::keychain] attempting to use keychain for SSH agents"
+    eval "$(keychain --eval --agents ssh,gpg)"
+  else
+    echo "[ssh-agent-loader::keychain] keychain is not in PATH yet"
+    return 1
+  fi
+}
+
+try_1password_ssh_agent() {
+  export OP_SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
+  if [[ ! -S "$OP_SSH_AUTH_SOCK" ]]; then
+    echo "[ssh-agent-loader::1password] 1Password SSH agent isn't enabled or desktop app isn't installed yet"
+    return 1
+  fi
+
+  echo "[ssh-agent-loader::1password] attempting to use 1Password SSH agent"
+  if ! SSH_AUTH_SOCK=$OP_SSH_AUTH_SOCK ssh-add -l >> /dev/null 2>&1; then
+    echo "[ssh-agent-loader::1password] something went wrong while checking for 1Password SSH agent availability"
+    echo "[ssh-agent-loader::1password] unlock the desktop app first or enable SSH agent from settings"
+    return 1
+  fi
+  export SSH_AUTH_SOCK=$OP_SSH_AUTH_SOCK
+  unset OP_SSH_AUTH_SOCK
+}
+
+ssh-agent-loader() {
+  if [[ $1 == "" || $1 == "auto" ]]; then
+    if [[ $SSH_CONNECTION != "" ]] && [[ $VSCODE_IPC_HOOK_CLI != "" ]]; then
+      echo "[ssh-agent-loader] automatic detection is disabled while you're in a VS Code Remote SSH session"
+      return
+    fi
+
+    export OLD_SSH_AUTH_SOCK="$SSH_AUTH_SOCK"
+
+    unset SSH_AGENT_PID SSH_AUTH_SOCK
+    if try_1password_ssh_agent; then
+      return
+    elif try_keychain_ssh_agent; then
+      return
+    else
+      echo "[ssh-agent-loader] SSH agent seems to be failed to load at the moment"
+      echo "[ssh-agent-loader] try again later by manually invoking the shell function"
+      return 1
+    fi
+  elif [[ $1 == "1passowrd" || $1 == "op" ]]; then
+    unset SSH_AGENT_PID SSH_AUTH_SOCK
+    try_1password_ssh_agent
+  elif [[ $1 == "keychain" ]]; then
+    try_keychain_ssh_agent
+  else
+    echo "ssh-agent-loader [auto|[1password|op|1p]|keychain]"
+    return 1
+  fi
+}
+
+ssh-agent-loader auto

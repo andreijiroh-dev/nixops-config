@@ -50,6 +50,7 @@
     deno
     nodejs_22
     python313
+    python312
     pipx
     pipenv
 
