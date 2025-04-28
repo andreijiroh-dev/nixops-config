@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# Workaround in cases where XDG_RUNTIME_DIR is undefined on login
+if [[ ! -n "${XDG_RUNTIME_DIR}" ]]; then
+  echo "warning: XDG_RUNTIME_DIR is possibly undefined, see https://github.com/swaywm/sway/issues/7202"
+  echo "warning: for context and https://wiki.archlinux.org/title/XDG_Base_Directory for docs"
+  echo "warning: setting it up for you using the default '/run/user/$(id -u)' value in 3s..."
+  sleep 3
+  export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+fi
+
 # do feature detection if keychain is installed
 if command -v keychain >> /dev/null; then
   FF_KEYCHAIN=1
@@ -14,6 +23,14 @@ try_keychain_ssh_agent() {
   else
     echo "[ssh-agent-loader::keychain] keychain is not in PATH yet"
     return 1
+  fi
+}
+
+# Ripped off NixOS-generated set-environment on my laptop for yubikey-agent setup
+try_yubikey_agent() {
+  if [[ -f "${XDG_RUNTIME_DIR}/yubikey-agent/yubikey-agent.sock" ]]; then
+    echo "[ssh-agent-loader::yubikey-agent] using YubiKey SSH Agent"
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
   fi
 }
 
@@ -48,6 +65,8 @@ ssh-agent-loader() {
       return
     elif try_keychain_ssh_agent; then
       return
+    elif try_yubikey_agent; then
+      return
     else
       echo "[ssh-agent-loader] SSH agent seems to be failed to load at the moment"
       echo "[ssh-agent-loader] try again later by manually invoking the shell function"
@@ -58,10 +77,13 @@ ssh-agent-loader() {
     try_1password_ssh_agent
   elif [[ $1 == "keychain" ]]; then
     try_keychain_ssh_agent
+  elif [[ $1 == "yubikey" ]]; then
+    try_yubikey_agent
   else
-    echo "ssh-agent-loader [auto|[1password|op|1p]|keychain]"
+    echo "ssh-agent-loader [auto|[1password|op|1p]|keychain|yubikey]"
     return 1
   fi
 }
 
+# automatically detect things as we source this
 ssh-agent-loader auto
