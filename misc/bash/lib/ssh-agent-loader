@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034
+# SPDX-License-Identifier: MPL-2.0
 
 # Workaround in cases where XDG_RUNTIME_DIR is undefined on login
-if [[ ! -n "${XDG_RUNTIME_DIR}" ]]; then
+if [[ -z "${XDG_RUNTIME_DIR}" ]]; then
   echo "warning: XDG_RUNTIME_DIR is possibly undefined, see https://github.com/swaywm/sway/issues/7202"
   echo "warning: for context and https://wiki.archlinux.org/title/XDG_Base_Directory for docs"
   echo "warning: setting it up for you using the default '/run/user/$(id -u)' value in 3s..."
   sleep 3
-  export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+  XDG_RUNTIME_DIR="/run/user/$(id -u)"
+  export XDG_RUNTIME_DIR
 fi
 
 # do feature detection if keychain is installed
@@ -17,7 +20,7 @@ else
 fi
 
 try_keychain_ssh_agent() {
-  if [[ FF_KEYCHAIN == "1" ]]; then
+  if [[ $FF_KEYCHAIN == "1" ]]; then
     echo "[ssh-agent-loader::keychain] attempting to use keychain for SSH agents"
     eval "$(keychain --eval --agents ssh,gpg)"
   else
