@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
+
+# do feature detection if keychain is installed
+if command -v keychain >> /dev/null; then
+  FF_KEYCHAIN=1
+else
+  FF_KEYCHAIN=0
+fi
+
 try_keychain_ssh_agent() {
-  if command -v keychain >> /dev/null; then
+  if [[ FF_KEYCHAIN == "1" ]]; then
     echo "[ssh-agent-loader::keychain] attempting to use keychain for SSH agents"
     eval "$(keychain --eval --agents ssh,gpg)"
   else

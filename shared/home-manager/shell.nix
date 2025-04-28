@@ -39,7 +39,11 @@
       "ignorespace"
     ];
     initExtra = ''
+      # source our ssh-agent-loader first
       source ${../../misc/bash/lib/ssh-agent-loader}
+
+      # hook in direnv and friends
+      eval $(direnv hook bash)
     '';
   };
 
