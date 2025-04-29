@@ -1,4 +1,9 @@
 {
     "git.alwaysSignOff": true,
-    "scm.alwaysShowActions": true
+    "scm.alwaysShowActions": true,
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+      {
+        "text": "Use Conventional Commits format with a subject line under 50 characters (hard limit: 72) and a detailed body with lines under 72 characters."
+      }
+    ]
 }

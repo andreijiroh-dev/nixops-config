@@ -2,22 +2,23 @@
 # some home.{username,userDirectory} configs to ensure portability between
 # hosts
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, home-manager, ... }:
 
 {
-  # https://fnordig.de/til/nix/home-manager-allow-unfree.html
-  #nixpkgs = {
-  #  config = {
-  #    allowUnfree = true;
-  #    # https://github.com/nix-community/home-manager/issues/2942
-  #    allowUnfreePredicate = (_: true);
-  #  };
-  #};
-
   imports = [
     ./packages.nix
     ./git.nix
+    ./shell.nix
   ];
+
+  # https://fnordig.de/til/nix/home-manager-allow-unfree.html
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      # https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = (_: true);
+    };
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -68,7 +69,7 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
+  
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;

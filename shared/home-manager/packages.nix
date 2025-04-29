@@ -19,16 +19,20 @@
     ## desktop apps ##
     _1password-gui
     firefoxpwa
+    # imported from my nix profile list to avoid conflicts #
+    kdePackages.krfb
+    mysql-workbench
+    remmina
+    rpi-imager
 
     ## devtools ##
-    # https://httpie.io
-    httpie
     # https://devenv.sh
     devenv
+    # needed for devenv
+    direnv
     # https://cli.github.com
     gh
     glab
-    gitlab-ci-ls
     fjo
     # bet we'll going to have a field day since Copilot is now available for free
     # (this is seperate from the gh copilot extension for those asking)
@@ -38,21 +42,26 @@
     markdownlint-cli
     # https://doppler.com
     doppler
-    # needed for devenv
-    direnv
     # https://developers.1password.com
     _1password-cli
     keychain # https://funtoo.org
     gnupg
     gpg-tui
+    # imported from my nix profile list to avoid conflicts #
+    gpgme 
+    jq
 
     ## programming languages
+    # js
     deno
     nodejs_22
+    # python
     python313
-    #python312
     pipx
     pipenv
+    # go + rust
+    go
+    rustup
 
     # linters
     shellcheck
@@ -64,8 +73,12 @@
     # https://github.com/alesbrelih/gitlab-ci-ls
     gitlab-ci-ls
 
-    # did we forget these?
+    ## misc system utils and friends
+    # https://httpie.io
+    httpie
     byobu
     tmux
+    openssl
+    unrar-wrapper
   ];
 }

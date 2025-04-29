@@ -1,10 +1,10 @@
 {
-  description = "Andrei Jiroh's NixOS and home-manager configurations in one place, seperate from the dotfiles repo";
+  description = "Andrei Jiroh's NixOS and home-manager configurations (AKA declarative dotfiles) in one place";
 
   # try to be in-sync with the nix-channels
   inputs = {
     # nixpkgs itself
-    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.0.tar.gz";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # home-manager
     home-manager = {
@@ -20,8 +20,10 @@
 
     # Community Extras
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    vscode-server.url = "github:nix-community/nixos-vscode-server";
-    vscode-server.inputs.nixpkgs.follows = "nixpkgs";
+    vscode-server = {
+      url = "github:nix-community/nixos-vscode-server";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     
     # flake utils
     flake-utils.url = "github:numtide/flake-utils";
@@ -105,10 +107,11 @@
         modules = [
           ./shared/home-manager/main.nix
           {
-            home.username = "gildedguy";
-            home.homeDirectory = "/home/gildedguy";
-            home.useUserPackages = true;
-            home.useGlobalPkgs = true;
+            home = {
+              username = "gildedguy";
+              homeDirectory = "/home/gildedguy";
+              useGlobalPkgs = true;
+            };
           }
         ];
       };
