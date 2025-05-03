@@ -50,7 +50,7 @@ try_1password_ssh_agent() {
     echo "[ssh-agent-loader::1password] unlock the desktop app first or enable SSH agent from settings"
     return 1
   fi
-  export SSH_AUTH_SOCK=$OP_SSH_AUTH_SOCK
+  export SSH_AUTH_SOCK=$OP_SSH_AUTH_SOCK FF_USE_OP_CLI_PLUGINS=true
   unset OP_SSH_AUTH_SOCK
 }
 

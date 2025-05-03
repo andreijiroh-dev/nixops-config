@@ -63,9 +63,10 @@
     go
     rustup
 
-    # linters
+    # linters and formatters
     shellcheck
     hadolint
+    shfmt
 
     ## language servers ##
     # nix language server - https://github.com/oxalica/nil

@@ -42,9 +42,15 @@
       # source our ssh-agent-loader first
       source ${../../misc/bash/lib/ssh-agent-loader}
 
+      # hack around for 1Password CLI when 1Password desktop app is up
+      if [[ $$FF_USE_OP_CLI_PLUGINS == "true" ]]; then
+        test -f "$HOME/.config/op/plugins.sh" && source "$HOME/.config/op/plugins.sh"
+      fi
+
       # hook in direnv and friends
-      eval $(direnv hook bash)
+      eval "$(direnv hook bash)"
     '';
+    #enableLsColors = true;
   };
 
   programs.zsh = {

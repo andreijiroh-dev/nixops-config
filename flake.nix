@@ -110,7 +110,6 @@
             home = {
               username = "gildedguy";
               homeDirectory = "/home/gildedguy";
-              useGlobalPkgs = true;
             };
           }
         ];
@@ -127,8 +126,6 @@
           {
             home.username = "ajhalili2006";
             home.homeDirectory = "/home/ajhalili2006";
-            home.useUserPackages = true;
-            home.useGlobalPkgs = true;
           }
         ];
       };
