@@ -30,15 +30,29 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ]; # for raspi builds I guess
 
-  networking.hostName = "stellapent-cier"; # Define your hostname.
-  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking via networkmanager
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "stellapent-cier";
+    hosts = {
+      "127.0.0.1" = [
+        "localhost"
+        "stellapent-cier"
+        "stellapent-cier.local"
+        "localdev.andreijiroh.dev"
+        "localdev.andreijiroh.eu.org"
+      ];
+      "100.87.227.94" = [
+        "stellapent-cier.tailnet"
+        "stellapent-cier.fawn-cod.ts.net"
+        "stellapent-cier.fawn-cod.tailnet"
+        "stellapent.tailnet"
+        "stellapent.tailnet.andreijiroh.dev"
+        "stellapent.tailnet.andreijiroh.eu.org"
+      ];
+    };
+    networkmanager = {
+      enable = true;
+    };
+  };
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
@@ -123,11 +137,10 @@
     gnupg
     gpg-tui
     gpgme
-    #figma-linux
-    #figma-agent
     byobu
     tmux
-    rpi-imager
+    android-tools
+    adbtuifm
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
