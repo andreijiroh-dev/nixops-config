@@ -22,11 +22,21 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
     };
     
     # flake utils
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs = {
+        systems = {
+          follows = "systems";
+        };
+      };
+    };
 
     # nix-ld
     nix-ld = {
@@ -38,6 +48,10 @@
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    systems = {
+      url = "github:nix-systems/default";
     };
   };
 
