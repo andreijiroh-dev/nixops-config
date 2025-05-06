@@ -38,8 +38,21 @@
       "ignoredups"
       "ignorespace"
     ];
+    enableVteIntegration = true;
+    profileExtra = ''
+      # source our ssh-agent-loader first
+      FF_SKIP_AUTO_SSH_AGENT_LOADER=true source ${../../misc/bash/lib/ssh-agent-loader}
+
+      # try to use keychain in this situation
+      ssh-agent-loader keychain
+    '';
+    bashrcExtra = ''
+      # detect if we are inside VS Code
+      source ${../../misc/bash/lib/detect-vscode-for-git}
+    '';
     initExtra = ''
       # source our ssh-agent-loader first
+      unset SSH_AGENT_LOADED
       source ${../../misc/bash/lib/ssh-agent-loader}
 
       # hack around for 1Password CLI when 1Password desktop app is up

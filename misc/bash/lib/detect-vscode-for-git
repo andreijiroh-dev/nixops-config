@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: MPL-2.0
+# Sets EDITOR and related variables to use VS Code instead of firing up nano (or worse vi),
+# based on env var detection of VSCODE_* vars.
+
+if [[ -n $VSCODE_IPC_HOOK_CLI && -n $VSCODE_GIT_IPC_HANDLE ]]; then
+  export GIT_EDITOR="code --wait" EDITOR="code --wait" VISUAL="code --wait"
+fi

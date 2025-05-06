@@ -48,7 +48,7 @@
     gnupg
     gpg-tui
     # imported from my nix profile list to avoid conflicts #
-    gpgme 
+    gpgme
     jq
 
     ## programming languages
@@ -81,5 +81,15 @@
     tmux
     openssl
     unrar-wrapper
+    storj-uplink
   ];
+
+  programs.bashmount = {
+    enable = true;
+  };
+
+  programs.bat = {
+    enable = true;
+    extraPackages = with pkgs.bat-extras; [ batdiff batman batgrep batwatch ];
+  };
 }

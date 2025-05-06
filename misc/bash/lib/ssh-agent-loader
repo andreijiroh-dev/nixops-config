@@ -88,5 +88,9 @@ ssh-agent-loader() {
   fi
 }
 
-# automatically detect things as we source this
-ssh-agent-loader auto
+# Avoid source loops on subsequent file resourcing.
+if [[ -z "$SSH_AGENT_LOADED" ]]; then
+  # automatically detect things as we source this
+  [[ "$FF_SKIP_AUTO_SSH_AGENT_LOADER" == "" ]] && ssh-agent-loader auto
+  export SSH_AGENT_LOADED=1
+fi
