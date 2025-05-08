@@ -135,8 +135,25 @@
       # - Locally:
       #  nix run home-manager/master -- switch --flake .#plain
       plain = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [
           ./shared/home-manager/main.nix
+          {
+            home.username = "ajhalili2006";
+            home.homeDirectory = "/home/ajhalili2006";
+          }
+        ];
+      };
+
+      # Usage
+      # - From GitHub:
+      #  nix run home-manager/master -- switch --flake github:andreijiroh-dev/nixops-config#arm64-plain
+      # - Locally:
+      #  nix run home-manager/master -- switch --flake .#arm64-plain
+      arm64-plain = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        modules = [
+          ./shared/home-manager/nogui.nix
           {
             home.username = "ajhalili2006";
             home.homeDirectory = "/home/ajhalili2006";

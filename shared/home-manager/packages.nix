@@ -16,13 +16,6 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    ## desktop apps ##
-    _1password-gui
-    firefoxpwa
-    # imported from my nix profile list to avoid conflicts #
-    kdePackages.krfb
-    mysql-workbench
-    remmina
     rpi-imager
 
     ## devtools ##

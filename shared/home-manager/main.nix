@@ -7,8 +7,10 @@
 {
   imports = [
     ./packages.nix
+    ./desktop.nix
     ./git.nix
     ./shell.nix
+    ./fonts.nix
   ];
 
   # https://fnordig.de/til/nix/home-manager-allow-unfree.html

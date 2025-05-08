@@ -40,6 +40,15 @@
         defaultBranch = "main";
       };
 
+      # credential helpers
+      credential = {
+        "https://github.com".helper = "!gh auth git-credential";
+        "https://gist.github.com".helper = "!gh auth git-credential";
+        "https://gitlab.com".helper = "!glab auth git-credential";
+        "https://mau.dev".helper = "!glab auth git-credential";
+        "https://gitlab.alpinelinux.org".helper = "!glab auth git-credential";
+      };
+
       # see https://groups.google.com/g/binary-transparency/c/f-BI4o8HZW0/m/MDmnWideAgAJ for
       # context behind these, may cause bugs per https://bugs.debian.org/743227 and
       # https://bugs.debian.org/813157 on cloning linux-hardware sources.
