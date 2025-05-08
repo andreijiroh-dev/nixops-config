@@ -33,6 +33,8 @@
 
   home.sessionPath = [
     "$HOME/bin"
+    "$HOME/.local/bin"
+    "$HOME/.nix-profile/bin"
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

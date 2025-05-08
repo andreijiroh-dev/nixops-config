@@ -75,6 +75,7 @@
     openssl
     unrar-wrapper
     storj-uplink
+    oh-my-posh
   ];
 
   programs.bashmount = {

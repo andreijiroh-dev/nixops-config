@@ -8,5 +8,6 @@
     kdePackages.krfb
     mysql-workbench
     remmina
+    gparted
   ];
 }
