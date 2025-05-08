@@ -36,7 +36,7 @@ jobs:
           git config --global user.name "RecapTimeBot"
           git config --global user.email "recaptimebot@gmail.com"
           git add flake.lock
-          git commit -m "Update flake.lock [skip-ci]" || echo "No changes to commit"
+          git commit -m "chore(flake): update lockfile [skip-ci]" || echo "No changes to commit"
           git push
   build-iso:
     concurrency:

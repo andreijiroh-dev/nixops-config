@@ -48,6 +48,25 @@
         "stellapent.tailnet.andreijiroh.dev"
         "stellapent.tailnet.andreijiroh.eu.org"
       ];
+      "100.120.57.47" = [
+        "rpi-aether"
+        "rpi-aether.tailnet"
+        "rpi-aether.tailnet.andreijiroh.dev"
+        "rpi-aether.tailnet.andreijiroh.eu.org"
+        "aether.tailnet"
+        "aether.tailnet.andreijiroh.dev"
+        "aether.tailnet.andreijiroh.eu.org"
+      ];
+      "100.102.205.81" = [
+        "go"
+        "go.tailnet"
+        "go.fawn-cod.ts.net"
+      ];
+      "100.126.238.86" = [
+        "paste"
+        "paste.tailnet"
+        "paste.fawn-cod.ts.net"
+      ];
     };
     networkmanager = {
       enable = true;
