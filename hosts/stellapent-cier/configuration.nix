@@ -33,7 +33,7 @@
 
   networking = {
     hostName = "stellapent-cier";
-    hosts = with import ../../shared/networking/hosts-file.nix; hosts.stellapent-cier;
+    hosts = with import ../../shared/hosts-file.nix; hosts.stellapent-cier;
     networkmanager = {
       enable = true;
     };
