@@ -27,8 +27,9 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.sessionPath = [
-    "$\{HOME\}/bin"
-    "$\{HOME\}/.local/bin"
-    "$\{HOME\}/.nix-profile/bin"
+    "$HOME/bin"
+    "$HOME/.local/bin"
+    "$HOME/.nix-profile/bin"
+    "$HOME/.local/share/go/bin"
   ];
 }

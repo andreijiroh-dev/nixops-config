@@ -19,6 +19,9 @@
     fetch = "git fetch";
     submodules = "git submdoule";
     submodule = "git submodule";
+    ll = "ls -l";
+    la = "ls -A";
+    l = "ls -CF";
   };
 
   home.sessionVariables = {
@@ -29,6 +32,11 @@
     VISUAL = "nano";
     # enable buildkit on `docker build` by default
     DOCKER_BUILDKIT = "1";
+    # Context: https://drewdevault.com/2021/08/06/goproxy-breaks-go.html
+    GOPROXY = "direct";
+    GOSUMDB = "off";
+    # set GOPATH to ~/.local/share/go
+    GOPATH = "$HOME/.local/share/go";
   };
 
   programs.bash = {
@@ -58,22 +66,23 @@
       FF_SKIP_AUTO_SSH_AGENT_LOADER=true . ${../../misc/bash/lib/ssh-agent-loader}
 
       # try to use keychain in this situation
-      ssh-agent-loader keychain
+      SSH_AGENT_LOADER_SLIENT=1 ssh-agent-loader keychain
 
       if [ -n $BASH_VERSION ]; then
         . $HOME/.bashrc
       fi
 
-      # hackaround for GPG on CLI mode
-      export GPG_TTY=$(tty)
+      unset SSH_AGENT_LOADED
     '';
     bashrcExtra = ''
       # detect if we are inside VS Code
       source ${../../misc/bash/lib/detect-vscode-for-git}
     '';
     initExtra = ''
+      # hackaround for GPG on CLI mode
+      export GPG_TTY=$(tty)
+      
       # source our ssh-agent-loader first
-      unset SSH_AGENT_LOADED
       source ${../../misc/bash/lib/ssh-agent-loader}
 
       # hack around for 1Password CLI when 1Password desktop app is up
@@ -83,6 +92,19 @@
 
       # hook in direnv and friends
       eval "$(direnv hook bash)"
+
+      if [ "$(command -v dircolors)" != "" ]; then
+        test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+        alias ls='ls --color=auto'
+        alias dir='dir --color=auto'
+        alias vdir='vdir --color=auto'
+
+        alias grep='grep --color=auto'
+        alias fgrep='fgrep --color=auto'
+        alias egrep='egrep --color=auto'
+      fi
+
+      export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
     '';
     #enableLsColors = true;
   };

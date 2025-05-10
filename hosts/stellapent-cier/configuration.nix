@@ -32,42 +32,7 @@
 
   networking = {
     hostName = "stellapent-cier";
-    hosts = {
-      "127.0.0.1" = [
-        "localhost"
-        "stellapent-cier"
-        "stellapent-cier.local"
-        "localdev.andreijiroh.dev"
-        "localdev.andreijiroh.eu.org"
-      ];
-      "100.87.227.94" = [
-        "stellapent-cier.tailnet"
-        "stellapent-cier.fawn-cod.ts.net"
-        "stellapent-cier.fawn-cod.tailnet"
-        "stellapent.tailnet"
-        "stellapent.tailnet.andreijiroh.dev"
-        "stellapent.tailnet.andreijiroh.eu.org"
-      ];
-      "100.120.57.47" = [
-        "rpi-aether"
-        "rpi-aether.tailnet"
-        "rpi-aether.tailnet.andreijiroh.dev"
-        "rpi-aether.tailnet.andreijiroh.eu.org"
-        "aether.tailnet"
-        "aether.tailnet.andreijiroh.dev"
-        "aether.tailnet.andreijiroh.eu.org"
-      ];
-      "100.102.205.81" = [
-        "go"
-        "go.tailnet"
-        "go.fawn-cod.ts.net"
-      ];
-      "100.126.238.86" = [
-        "paste"
-        "paste.tailnet"
-        "paste.fawn-cod.ts.net"
-      ];
-    };
+    hosts = with import ../../shared/networking/hosts-file.nix; hosts.stellapent-cier;
     networkmanager = {
       enable = true;
     };
@@ -161,6 +126,14 @@
     android-tools
     adbtuifm
   ];
+
+  # logind adjustments for this laptop to run as a headless server while
+  # the lid is closed.
+  services.logind = {
+    lidSwitchExternalPower = "ignore";
+    lidSwitchDocked = "ignore";
+    lidSwitch = "ignore";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
