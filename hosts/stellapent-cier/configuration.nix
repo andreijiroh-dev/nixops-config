@@ -23,6 +23,7 @@
       ../../shared/1password.nix
       ../../shared/desktop/firefox.nix
       ../../shared/shells/bash.nix
+      ../../shared/server/cockpit.nix
     ];
 
   # Bootloader.
