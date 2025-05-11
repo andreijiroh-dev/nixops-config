@@ -8,6 +8,12 @@
   ];
 
   virtualisation = {
+    podman = {
+      enable = true;
+      extraPackages = with pkgs; [
+        gvisor
+      ];
+    };
     docker = {
       enable = true;
       enableOnBoot = true;
@@ -29,4 +35,9 @@
   programs.virt-manager.enable = true;
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
+
+  boot.binfmt = {
+    preferStaticEmulators = true;
+    addEmulatedSystemsToNixSandbox = true;
+  };
 }

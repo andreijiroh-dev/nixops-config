@@ -2,8 +2,23 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ self, config, pkgs, lib, ... }:
 
+let
+  # localhost + local network in HaliliFam WiFi network
+  baseHostsFile = with import ../../shared/hosts-file.nix; {
+    "127.0.0.1" = localhost ++ [
+      "stellapent-cier.local"
+      "stellapent-cier.tailnet"
+      "stellapent-cier.fawn-cod.ts.net"
+    ];
+  } // localNetwork.halilifam;
+
+  # tailnet, blackholing to 0.0.0.0, etc.
+  extraHosts = with import ../../shared/hosts-file.nix;
+    tailnet;
+  hostsFile = baseHostsFile // extraHosts;
+in
 {
   imports =
     [
@@ -26,14 +41,25 @@
       ../../shared/server/cockpit.nix
     ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ]; # for raspi builds I guess
+  # Bootloader
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true;
+      };
+      efi = {
+        canTouchEfiVariables = true;
+      };
+    };
+    binfmt.emulatedSystems = [ 
+      "aarch64-linux"
+      "armv7l-linux"
+    ]; # for raspi builds I guess
+  };
 
   networking = {
     hostName = "stellapent-cier";
-    hosts = with (import ../../shared/hosts-file.nix {}); hosts.stellapent-cier;
+    hosts = hostsFile;
     networkmanager = {
       enable = true;
     };

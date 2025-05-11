@@ -4,22 +4,38 @@
 
 { config, pkgs, ... }:
 
+let
+  baseHmConfig = import ../../../shared/home-manager/main.nix {
+    inherit config pkgs;
+  };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      #../../../shared/desktop/bluetooth.nix
+      ../../../shared/desktop/firewall.nix
+      ../../../shared/desktop/kde-plasma.nix
+      ../../../shared/flatpak.nix
+      ../../../shared/gnupg.nix
+      ../../../shared/locale.nix
+      ../../../shared/meta-configs.nix
+      ../../../shared/networking.nix
+      #../../../shared/server/ssh.nix
+      ../../../shared/server/tailscale.nix
+      ../../../shared/systemd.nix
+      ../../../shared/yubikey.nix
+      ../../../shared/server/devenv.nix
+      ../../../shared/1password.nix
+      ../../../shared/desktop/firefox.nix
+      ../../../shared/shells/bash.nix
+      ../../../shared/server/cockpit.nix
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.hostName = "nixos-portable"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -45,10 +61,6 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -78,15 +90,21 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # prep for home-manager
+  home-manager = {
+    enable = true;
+    useGlobalPkgs = true;
+    users.ajhalili2006 = baseHmConfig // {
+      home.username = "ajhalili2006";
+      home.homeDirectory = "/home/ajhalili2006";
+    };
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ajhalili2006 = {
     isNormalUser = true;
     description = "Andrei Jiroh Halili";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
   };
 
   # Install firefox.
@@ -98,8 +116,25 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    wget
+    dig
+    btop
+    htop
+    icu
+    thunderbird
+    google-chrome
+    microsoft-edge
+    kdePackages.kate
+    libreoffice-qt6-fresh
+    hunspell
+    hunspellDicts.en_US
+    gnupg
+    gpg-tui
+    gpgme
+    byobu
+    tmux
+    android-tools
+    adbtuifm
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
