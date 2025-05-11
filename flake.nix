@@ -77,7 +77,7 @@
         ];
       };
 
-      portable-amd64-256gb = {
+      portable-amd64-256gb = nixpkgs.lib.nixosSystem{
         system = "x86_64-linux";
         modules = [
           ./hosts/portable/amd64/configuration.nix
