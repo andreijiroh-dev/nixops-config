@@ -2,11 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, home-manager, ... }:
 
 let
   baseHmConfig = import ../../../shared/home-manager/main.nix {
-    inherit config pkgs;
+    inherit config pkgs lib home-manager;
   };
 in
 {
