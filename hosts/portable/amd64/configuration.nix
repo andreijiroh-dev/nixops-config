@@ -29,6 +29,7 @@ in
       ../../../shared/desktop/firefox.nix
       ../../../shared/shells/bash.nix
       ../../../shared/server/cockpit.nix
+      ./hardware-configuration.nix
     ];
 
   # Bootloader.
@@ -92,11 +93,12 @@ in
 
   # prep for home-manager
   home-manager = {
-    enable = true;
+    #enable = true;
     useGlobalPkgs = true;
     users.ajhalili2006 = baseHmConfig // {
       home.username = "ajhalili2006";
       home.homeDirectory = "/home/ajhalili2006";
+      home.stateVersion = "25.05";
     };
   };
 
@@ -162,6 +164,6 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 
 }
