@@ -6,6 +6,7 @@
     ./firefox.nix
     ./firewall.nix
     ./fonts.nix
+    ./yubikey.nix
   ];
 
   # List packages installed in system profile. To search, run:
