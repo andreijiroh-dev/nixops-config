@@ -11,12 +11,21 @@
     # tmux and friendos
     byobu
     tmux
+    htop
+    btop
 
     # git tools
     gitFull
     gh
     glab
     fjo
+
+    # even more utils
+    curl
+    wget
+    nano
+    neovim
+    fastfetch
   ];
 
   virtualisation = {
