@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 # SPDX-License-Identifier: MPL-2.0
-set -euo pipefail
+#set -eo pipefail
 
-if [[ $DEBUG == "1" ]]; then
+if [[ $DEBUG != "" ]]; then
   set -x
 fi
 
@@ -55,7 +55,7 @@ try_keychain_ssh_agent() {
 # Ripped off NixOS-generated set-environment on my laptop for yubikey-agent setup
 try_yubikey_agent() {
   if [[ -f "${XDG_RUNTIME_DIR}/yubikey-agent/yubikey-agent.sock" ]]; then
-    logOps info "using YubiKey SSH Agent" yubikey-agent
+    logOps info "using YubiKey SSH Agent via socket at XDG_RUNTIME_DIR" yubikey-agent
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
   fi
 }

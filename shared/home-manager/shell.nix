@@ -52,7 +52,7 @@
       if [[ -f /etc/profile.d/nix.sh ]]; then
         . /etc/profile.d/nix.sh
       fi
-      export PATH=/nix/var/nix/profiles/default/bin:$HOME/.nix-profile/bin:$HOME/bin:$PATH
+      #export PATH=/nix/var/nix/profiles/default/bin:$HOME/.nix-profile/bin:$HOME/bin:$PATH
 
       # set PATH so it includes user's private bin if it exists
       if [ -d "$HOME/bin" ] ; then

@@ -1,3 +1,5 @@
+# Configs for KDE Plasma DE and friends
+
 { config, pkgs, lib, ... }:
 
 {
@@ -10,5 +12,7 @@
 
   environment.systemPackages = with pkgs; [
     kdePackages.krfb
+    pinentry-qt
+    kdePackages.kate
   ];
 }

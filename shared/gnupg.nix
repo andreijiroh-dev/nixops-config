@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   # enable gpg-agent with SSH support
   programs.gnupg.agent = {
@@ -5,4 +7,11 @@
      enableSSHSupport = true;
      enableBrowserSocket = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    gnupg
+    gpgme
+    pinentry-tty
+    gpgme
+  ];
 }

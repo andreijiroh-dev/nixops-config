@@ -1,5 +1,5 @@
 # This is the meta config file for nixpkgs and nix cli itself, including
-# trusted keys for cachnix caches
+# trusted keys for cachix caches.
 
 { config, pkgs, lib, ... }:
 
@@ -17,7 +17,7 @@
   nix = {
     gc = {
       automatic = true;
-      randomizedDelaySec = "69min";
+      randomizedDelaySec = "30min";
     };
     settings = {
       # See https://nix.dev/manual/nix/latest/development/experimental-features

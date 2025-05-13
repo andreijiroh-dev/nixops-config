@@ -22,8 +22,7 @@ in
 {
   imports =
     [
-      ../../shared/desktop/bluetooth.nix
-      ../../shared/desktop/firewall.nix
+      ../../shared/desktop/base.nix
       ../../shared/desktop/kde-plasma.nix
       ../../shared/flatpak.nix
       ../../shared/gnupg.nix
@@ -36,7 +35,6 @@ in
       ../../shared/yubikey.nix
       ../../shared/server/devenv.nix
       ../../shared/1password.nix
-      ../../shared/desktop/firefox.nix
       ../../shared/shells/bash.nix
       ../../shared/server/cockpit.nix
     ];
@@ -51,10 +49,6 @@ in
         canTouchEfiVariables = true;
       };
     };
-    binfmt.emulatedSystems = [ 
-      "aarch64-linux"
-      "armv7l-linux"
-    ]; # for raspi builds I guess
   };
 
   networking = {
@@ -129,30 +123,6 @@ in
   };
   home-manager.users.gildedguy = import ./users/gildedguy.nix;
   #programs.home-manager.enable = true; # allow home-manager to manage itself
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget
-    dig
-    btop
-    htop
-    icu
-    thunderbird
-    google-chrome
-    microsoft-edge
-    kdePackages.kate
-    libreoffice-qt6-fresh
-    hunspell
-    hunspellDicts.en_US
-    gnupg
-    gpg-tui
-    gpgme
-    byobu
-    tmux
-    android-tools
-    adbtuifm
-  ];
 
   # logind adjustments for this laptop to run as a headless server while
   # the lid is closed.
