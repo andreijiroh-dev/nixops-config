@@ -109,6 +109,7 @@
       },
       "locked": {
         "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
@@ -159,10 +160,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1747147271,
+        "lastModified": 1747155932,
+        "narHash": "sha256-NnPzzXEqfYjfrimLzK0JOBItfdEJdP/i6SNTuunCGgw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "df556f2a17b7b94148d0275c1a57fed20e62ad18",
+        "rev": "8d832ddfda9facf538f3dda9b6985fb0234f151c",
         "type": "github"
       },
       "original": {
@@ -201,6 +203,7 @@
       },
       "locked": {
         "lastModified": 1747037786,
+        "narHash": "sha256-nhOupZpHdrUYK2a2y1y238VEPVpUmJw/nEd212wyG0c=",
         "owner": "Mic92",
         "repo": "nix-ld",
         "rev": "90316ea7ffa3336547b85b3b2827d9d4552a4a79",
@@ -236,6 +239,7 @@
       },
       "locked": {
         "lastModified": 1742568034,
+        "narHash": "sha256-QaMEhcnscfF2MqB7flZr+sLJMMYZPnvqO4NYf9B4G38=",
         "owner": "nix-community",
         "repo": "nixos-generators",
         "rev": "42ee229088490e3777ed7d1162cb9e9d8c3dbb11",
@@ -250,6 +254,7 @@
     "nixos-hardware": {
       "locked": {
         "lastModified": 1747129300,
+        "narHash": "sha256-L3clA5YGeYCF47ghsI7Tcex+DnaaN/BbQ4dR2wzoiKg=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
         "rev": "e81fd167b33121269149c57806599045fd33eeed",
@@ -340,6 +345,7 @@
     "systems": {
       "locked": {
         "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
         "owner": "nix-systems",
         "repo": "default",
         "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
@@ -362,6 +368,7 @@
       },
       "locked": {
         "lastModified": 1729422940,
+        "narHash": "sha256-DlvJv33ml5UTKgu4b0HauOfFIoDx6QXtbqUF3vWeRCY=",
         "owner": "nix-community",
         "repo": "nixos-vscode-server",
         "rev": "8b6db451de46ecf9b4ab3d01ef76e59957ff549f",
