@@ -14,4 +14,6 @@
       "--verbose 3"
     ];
   };
+
+  system.nixos.tags = [ "with-tailscale" ];
 }

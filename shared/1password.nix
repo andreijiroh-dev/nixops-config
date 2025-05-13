@@ -7,4 +7,6 @@
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
     polkitPolicyOwners = [ "gildedguy" "ajhalili2006" ];
   };
+
+  system.nixos.tags = [ "with-1password" ];
 }

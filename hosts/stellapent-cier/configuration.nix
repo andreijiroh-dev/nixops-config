@@ -14,28 +14,22 @@ let
     ];
   } // localNetwork.halilifam;
 
-  # tailnet, blackholing to 0.0.0.0, etc.
+  # tailnet, blocking ads via blackholing to 0.0.0.0, etc.
   extraHosts = with import ../../shared/hosts-file.nix;
     tailnet;
+
+  # them merge them all together
   hostsFile = baseHostsFile // extraHosts;
 in
 {
   imports =
     [
+      ../../shared/meta.nix
       ../../shared/desktop/base.nix
       ../../shared/desktop/kde-plasma.nix
-      ../../shared/flatpak.nix
-      ../../shared/gnupg.nix
-      ../../shared/locale.nix
-      ../../shared/meta-configs.nix
-      ../../shared/networking.nix
       ../../shared/server/ssh.nix
       ../../shared/server/tailscale.nix
-      ../../shared/systemd.nix
-      ../../shared/yubikey.nix
       ../../shared/server/devenv.nix
-      ../../shared/1password.nix
-      ../../shared/shells/bash.nix
       ../../shared/server/cockpit.nix
     ];
 
@@ -107,7 +101,7 @@ in
   # old HP laptop my overseas Filipino dad gave me in 2024.
   users.users.gildedguy = {
     isNormalUser = true;
-    description = "Gildedguy (Michael Moy)"; # We're not impersonating the animatior here.
+    description = "Gildedguy (Michael Moy)"; # We're not impersonating the animatior here lol.
     extraGroups = [ "networkmanager" "wheel" "docker"];
     openssh = {
       authorizedKeys.keys = with import ../../shared/ssh-keys.nix; [
@@ -117,9 +111,8 @@ in
         rp.gildedguy
       ];
     };
-    #home-manager = {
-    #  enable = true;
-    #};
+    linger = true;
+    uid = 1000;
   };
   home-manager.users.gildedguy = import ./users/gildedguy.nix;
   #programs.home-manager.enable = true; # allow home-manager to manage itself
@@ -136,11 +129,5 @@ in
   # started in user sessions.
   programs.mtr.enable = true;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.nixos.tags = [ "laptop" "homelab" ];
 }

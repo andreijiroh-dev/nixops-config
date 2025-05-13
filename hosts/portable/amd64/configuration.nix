@@ -8,27 +8,33 @@ let
   baseHmConfig = import ../../../shared/home-manager/main.nix {
     inherit config pkgs lib home-manager;
   };
+
+    # localhost + local network in HaliliFam WiFi network
+  baseHostsFile = with import ../../shared/hosts-file.nix; {
+    "127.0.0.1" = localhost ++ [
+      "nixos-portable.local"
+      "nixos-portable.tailnet"
+      "nixos-portable.fawn-cod.ts.net"
+    ];
+  } // localNetwork.halilifam;
+
+  # tailnet, blocking ads via blackholing to 0.0.0.0, etc.
+  extraHosts = with import ../../shared/hosts-file.nix;
+    tailnet;
+
+  # them merge them all together
+  hostsFile = baseHostsFile // extraHosts;
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
-      #../../../shared/desktop/bluetooth.nix
-      ../../../shared/desktop/firewall.nix
+    [
+      ../../../shared/meta.nix
+      ../../../shared/desktop/base.nix
       ../../../shared/desktop/kde-plasma.nix
-      ../../../shared/flatpak.nix
-      ../../../shared/gnupg.nix
-      ../../../shared/locale.nix
-      ../../../shared/meta-configs.nix
-      ../../../shared/networking.nix
-      #../../../shared/server/ssh.nix
+      ../../../shared/server/ssh.nix
       ../../../shared/server/tailscale.nix
-      ../../../shared/systemd.nix
-      ../../../shared/yubikey.nix
       ../../../shared/server/devenv.nix
-      ../../../shared/1password.nix
-      ../../../shared/desktop/firefox.nix
-      ../../../shared/shells/bash.nix
-      ../../../shared/server/cockpit.nix
+      #../../../shared/server/cockpit.nix
       ./hardware-configuration.nix
     ];
 
@@ -36,27 +42,10 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos-portable"; # Define your hostname.
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Asia/Manila";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_PH.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_PH.UTF-8";
-    LC_IDENTIFICATION = "en_PH.UTF-8";
-    LC_MEASUREMENT = "en_PH.UTF-8";
-    LC_MONETARY = "en_PH.UTF-8";
-    LC_NAME = "en_PH.UTF-8";
-    LC_NUMERIC = "en_PH.UTF-8";
-    LC_PAPER = "en_PH.UTF-8";
-    LC_TELEPHONE = "en_PH.UTF-8";
-    LC_TIME = "en_PH.UTF-8";
+  networking = {
+    hostName = "nixos-portable"; # Define your hostname.
+    hosts = hostsFile;
+    networkmanager.enable = true; # manage networking via networkmanager
   };
 
   # Enable the X11 windowing system.
@@ -109,61 +98,5 @@ in
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget
-    dig
-    btop
-    htop
-    icu
-    thunderbird
-    google-chrome
-    microsoft-edge
-    kdePackages.kate
-    libreoffice-qt6-fresh
-    hunspell
-    hunspellDicts.en_US
-    gnupg
-    gpg-tui
-    gpgme
-    byobu
-    tmux
-    android-tools
-    adbtuifm
-  ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
-
+  system.nixos.tags = [ "portable-configs" "portable-amd64" ];
 }

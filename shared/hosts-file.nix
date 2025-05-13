@@ -1,4 +1,6 @@
 # An static list of host entries to be used in networking.hosts configuration.
+# You probably want to use this inside a let...in block, see the example
+# at ../hosts/stellapent-cier/configuration.nix for the hints.
 {
   localhost = [
     "localhost"
@@ -13,7 +15,6 @@
         "stellapent.local"
       ];
       "192.168.254.179" = [
-        "rpi-aether"
         "rpi-aether.local"
         "aether.local"
       ];

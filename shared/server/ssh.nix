@@ -18,4 +18,6 @@
   };
 
   programs.mosh.enable = true;
+
+  system.nixos.tags = [ "with-ssh" "with-mosh" ];
 }

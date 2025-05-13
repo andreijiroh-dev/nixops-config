@@ -6,4 +6,6 @@
     package = pkgs.cockpit;
     #allowed-origins = [];
   };
+
+  system.nixos.tags = [ "with-cockpit" ];
 }
