@@ -112,7 +112,7 @@ in
       ];
     };
     linger = true;
-    uid = 1000;
+    
   };
   home-manager.users.gildedguy = import ./users/gildedguy.nix;
   #programs.home-manager.enable = true; # allow home-manager to manage itself

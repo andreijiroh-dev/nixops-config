@@ -3,6 +3,9 @@
 
   # try to be in-sync with the nix-channels
   inputs = {
+    # nixpkgs stdlib
+    lib.url = "github:nix-community/nixpkgs.lib";
+
     # nixpkgs itself
     nixpkgs.url = "https://flakehub.com/f/DeterminateSystems/nixpkgs-weekly/*.tar.gz";
 
@@ -65,7 +68,8 @@
     nix-ld,
     flake-utils,
     systems,
-    nixos-generators
+    nixos-generators,
+    lib
   }:
   {
     nixosConfigurations = {
@@ -117,6 +121,7 @@
       # - Locally:
       #  nix run home-manager/master -- switch --flake .#stellapent-cier
       stellapent-cier = home-manager.lib.homeManagerConfiguration {
+        inherit lib;
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [
           ./shared/home-manager/main.nix

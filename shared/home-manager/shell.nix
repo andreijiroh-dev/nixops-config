@@ -1,4 +1,4 @@
-{ ... }: {
+{ lib, ... }: {
   # taken from https://github.com/andreijiroh-dev/dotfiles/blob/main/.config/aliases
   home.shellAliases = {
     signoff = "git commit --signoff";
@@ -111,5 +111,10 @@
 
   programs.zsh = {
     enable = true;
+  };
+
+  programs.starship = {
+    enable = true;
+    settings = lib.importTOML ../../misc/starship.toml;
   };
 }

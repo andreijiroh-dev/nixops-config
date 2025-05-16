@@ -20,12 +20,10 @@
     glab
     fjo
 
-    # even more utils
-    curl
-    wget
-    nano
-    neovim
-    fastfetch
+    # other utils
+    wakatime-cli
+    doppler
+    dotenvx
   ];
 
   virtualisation = {
@@ -59,5 +57,5 @@
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
 
-  system.nixos.tags = [ "with-containers" "with-qemu" "with-devtools-enabled"];
+  system.nixos.tags = [ "containers-and-vms" "devtools"];
 }

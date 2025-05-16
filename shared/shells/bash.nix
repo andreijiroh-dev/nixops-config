@@ -9,6 +9,7 @@
       };
     };
     starship = {
+      package = pkgs.starship;
       enable = true;
       presets = [
         "nerd-font-symbols"

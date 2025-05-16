@@ -75,6 +75,7 @@
     openssl
     unrar-wrapper
     storj-uplink
+    starship
     oh-my-posh
   ];
 

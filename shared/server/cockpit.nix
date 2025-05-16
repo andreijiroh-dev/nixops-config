@@ -7,5 +7,5 @@
     #allowed-origins = [];
   };
 
-  system.nixos.tags = [ "with-cockpit" ];
+  system.nixos.tags = [ "cockpit" ];
 }
