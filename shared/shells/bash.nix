@@ -1,16 +1,19 @@
 { pkgs, ... }:
 
 {
-  programs.bash = {
-    #enable = true;
-    completion = {
-      enable = true;
-      package = pkgs.bash-completion;
+  programs = {
+    bash = {
+      completion = {
+        enable = true;
+        package = pkgs.bash-completion;
+      };
     };
-    #undistractMe = {
-    #  enable = true;
-    #  playSound = true;
-    #  timeout = 15;
-    #};
+    starship = {
+      enable = true;
+      presets = [
+        "nerd-font-symbols"
+        "bracketed-segments"
+      ];
+    };
   };
 }

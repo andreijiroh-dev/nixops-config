@@ -164,23 +164,12 @@
 
     # This is for external users who want to reproduce my configs as needed
     nixosModules = {
-      flatpak = ./shared/flatpak.nix;
-      gnupg = ./shared/gnupg.nix;
-      locale = ./shared/locale.nix;
-      metaConfigs = ./shared/meta-configs.nix;
-      networking = ./shared/networking.nix;
-      sshKeys = ./shared/ssh-keys.nix;
-      devenv = ./shared/server/devenv.nix;
-      server = {
-        devenv = ./shared/server/devenv.nix;
-        firewall = ./shared/server/firewall.nix;
-        ssh = ./shared/server/ssh.nix;
-        tailscale = ./shared/server/tailscale.nix;
-      };
+      base = ./shared/meta.nix;
       desktop = {
-        bluetooth = ./shared/desktop/bluetooth.nix;
-        firewall = ./shared/desktop/firewall.nix;
         kdePlasma = ./shared/desktop/kde-plasma.nix;
+        base = ./shared/desktop/base.nix;
+      };
+      server = {
       };
     };
   };

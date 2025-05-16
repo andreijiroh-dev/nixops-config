@@ -15,5 +15,5 @@
     ];
   };
 
-  system.nixos.tags = [ "with-tailscale" ];
+  system.nixos.tags = [ "tailnet" ];
 }

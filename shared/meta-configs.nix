@@ -46,6 +46,7 @@
       ];
 
       trusted-users = [
+        "@wheel"
         "root"
         "gildedguy"
         "ajhalili2006"
@@ -54,6 +55,7 @@
 
       # just sync with trusted-users, but w/o root
       allowed-users = [
+        "@wheel"
         "gildedguy"
         "ajhalili2006"
         "nixos"
