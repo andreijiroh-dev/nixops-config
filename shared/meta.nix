@@ -5,6 +5,7 @@
 {
   # import configs first
   imports = [
+    ./1password.nix
     ./meta-configs.nix
     ./flatpak.nix
     ./gnupg.nix
