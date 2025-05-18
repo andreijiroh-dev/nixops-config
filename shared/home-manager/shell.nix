@@ -77,6 +77,10 @@
     bashrcExtra = ''
       # detect if we are inside VS Code
       source ${../../misc/bash/lib/detect-vscode-for-git}
+
+      # HACK: https://github.com/akinomyoga/ble.sh/wiki/Manual-A1-Installation#user-content-nixpkgs
+      export BLESH_PATH=$(blesh-share)
+      [[ $- == *i* ]] && source "$BLESH_PATH/ble.sh" --attach=none
     '';
     initExtra = ''
       # hackaround for GPG on CLI mode
@@ -105,6 +109,8 @@
       fi
 
       export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+      [[ ! ''${BLE_VERSION-} ]] || ble-attach
     '';
     #enableLsColors = true;
   };
@@ -113,8 +119,15 @@
     enable = true;
   };
 
-  programs.starship = {
-    enable = true;
-    settings = lib.importTOML ../../misc/starship.toml;
+  programs = {
+    starship = {
+      enable = true;
+      settings = lib.importTOML ../../misc/starship.toml;
+    };
+    direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
   };
 }

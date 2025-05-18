@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 # SPDX-License-Identifier: MPL-2.0
-#set -eo pipefail
 
 if [[ $DEBUG != "" ]]; then
   set -x
@@ -19,7 +18,9 @@ logOps() {
   if [[ $1 == "debug" ]]; then
     [[ $DEBUG != "" ]] && echo "[ssh-agent-loader] debug: $2"
   elif [[ $1 == "warn" ]]; then
-    [[ $SSH_AGENT_LOADER_SLIENT != "1" ]] && echo "$LOGOPS_PREFIX warning: $2"
+    echo "$LOGOPS_PREFIX warning: $2"
+  elif [[ $1 == "error" ]]; then
+    echo "$LOGOPS_PREFIX error: $2"
   else
     [[ $SSH_AGENT_LOADER_SLIENT != "1" ]] && echo "$LOGOPS_PREFIX $2"
   fi
@@ -45,7 +46,7 @@ fi
 try_keychain_ssh_agent() {
   if [[ $FF_KEYCHAIN == "1" ]]; then
     logOps info "attempting to use keychain for SSH agents" keychain
-    eval "$(keychain --eval --agents ssh,gpg)"
+    [[ "$SSH_AGENT_LOADER_SLIENT" == "" ]] && eval "$(keychain --eval --agents ssh,gpg)" || eval "$(keychain --eval --agents ssh,gpg --quiet)"
   else
     logOps warn "keychain is not in PATH yet" keychain
     return 1
@@ -80,7 +81,7 @@ try_1password_ssh_agent() {
 ssh-agent-loader() {
   if [[ $1 == "" || $1 == "auto" ]]; then
     if [[ $SSH_CONNECTION != "" ]] && [[ $VSCODE_IPC_HOOK_CLI != "" ]]; then
-      echo info "automatic detection is disabled while you're in a VS Code Remote SSH session"
+      logOps info "automatic detection is disabled while you're in a VS Code Remote SSH session"
       return
     fi
 

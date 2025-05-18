@@ -75,8 +75,11 @@
     openssl
     unrar-wrapper
     storj-uplink
+
+    # shell utils
     starship
     oh-my-posh
+    blesh
   ];
 
   programs.bashmount = {
