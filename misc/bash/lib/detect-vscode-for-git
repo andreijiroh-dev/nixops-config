@@ -3,18 +3,27 @@
 # Sets EDITOR and related variables to use VS Code instead of firing up nano (or worse vi),
 # based on env var detection of VSCODE_* vars.
 
-if [[ -n $VSCODE_IPC_HOOK_CLI && -n $VSCODE_GIT_ASKPASS_NODE ]]; then
+# Handle verbose logging
+if [[ -n $DEBUG ]]; then
+  set -x
+fi
+
+if [[ "$VSCODE_GIT_IPC_HANDLE" != "" && "$VSCODE_GIT_ASKPASS_NODE" != "" && "$TERM_PROGRAM" == "vscode" ]]; then
   __VSCODE_BASE_PATH="$(dirname "${VSCODE_GIT_ASKPASS_NODE}")"
 
   # Check if the path is in ~/.vscode/cli/servers (for Remote Tunnels), ~/.vscode-server/cli
   # (for Remote SSH) or not
-  if [[ $__VSCODE_BASE_PATH =~ ^/home/[^/]+/.vscode/cli/servers ]] || [[ $__VSCODE_BASE_PATH =~ ^/home/[^/]+/.vscode-server/cli ]]; then
+  if [[ $__VSCODE_BASE_PATH =~ ^"$HOME"/.vscode/cli/servers ]] || [[ $__VSCODE_BASE_PATH =~ ^"$HOME"/.vscode-server/cli ]]; then
     # If it is, set the path to the correct location
     VSCODE_CLI_PATH="${__VSCODE_BASE_PATH}/bin/remote-cli/code"
   else
-    # otherwise just use plain cli
+    # otherwise just use plain cli/desktop app CLI
     VSCODE_CLI_PATH="$(command -v code)"
   fi
 
   export GIT_EDITOR="${VSCODE_CLI_PATH} --wait" EDITOR="${VSCODE_CLI_PATH} --wait" VISUAL="${VSCODE_CLI_PATH} --wait" VSCODE_CLI_PATH
+fi
+
+if [[ -n $DEBUG ]]; then
+  set +x
 fi
