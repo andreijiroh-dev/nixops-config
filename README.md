@@ -1,9 +1,10 @@
 # `@andreijiroh-dev/nixops-config`
 
-This is @ajhalili2006's NixOS + Home Manager configuration for his laptop and homelabs, in sync with the
-[nixpkgs-specific dotfiles repository]. Also planned to be used in Hack Club Nest soon.
+This is @ajhalili2006's NixOS + Home Manager configuration for his laptop and homelabs,
+alongside in tildes with Nix installed and in sync with the [nixpkgs-specific branch][nix-dots]
+of my dotfiles repository.
 
-[nixpkgs-specific dotfiles repository]: https://gitlab.com/andreijiroh-dev/dotfiles/tree/nixpkgs
+[nix-dots]: https://gitlab.com/andreijiroh-dev/dotfiles/tree/nixpkgs
 
 ## CI Status
 
@@ -102,20 +103,14 @@ if you want to reuse some of my configurations.
 ```nix
 {
   description = "My NixOS configuration";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/24.11";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable"; # use nixos-unstable instead if preferred
   inputs.andreijiroh-dev.url = "github:andreijiroh-dev/nixops-config";
   # needed if you use stable instead of unstable
   inputs.andreijiroh-dev.inputs.nixpkgs.follows = "nixpkgs";
 
-  # TODO: fix this soon
   outputs = { self, andreijiroh-dev, nixpkgs }: {
-    let
-      # change {hostname} to something like stellapent-cier
-      # if you like to reuse my configs
-      reusableConfig = andreijiroh-dev.nixosConfigurations.{hostname};
-    in
     {
-      nixosConfigurations.{hostname} = reusableConfig {
+      nixosConfigurations.{hostname} = nixpkgs.lib.nixosSystem {
         # your customizations here
       };
 
@@ -145,14 +140,15 @@ nix build .#nixosConfigurations.recoverykit-amd64.config.system.build.isoImage
 
 ## Availabled shared configs
 
-- [`flatpak.nix`](./shared/flatpak.nix): NixOS for enabling Flatpaks
-- [`gnupg.nix`](./shared/gnupg.nix): GnuPG configuration
-- [`locale.nix`](./shared/locale.nix): Locale configuration
-- [`meta-configs.nix`](./shared/meta-configs.nix): Meta configurations for the system, mostly related to Nix and nixpkgs.
-- [`networking.nix`](./shared/networking.nix): Networking configuration, currently DNS resolver settings for `systemd-resolved`
-- [`ssh-keys.nix`](./shared/ssh-keys.nix): SSH keys configuration as NixOS module, intended to be in sync with my keys on git forges
-- [`server/devenv.nix`](./shared/server/devenv.nix): Development environment configuration, plus Docker and VM configurations.
-- [`server/ssh.nix`](./shared/server/ssh.nix): SSH server configuration
+- `base` - Individual base components' configuration (systemd, networking, etc.)
+  - [`sshKeys`](./shared/ssh-keys.nix) - My SSH public keys, declaratively managed.
+  = [`hostsFile`](./shared/hosts-file.nix) - Static list of host entries, used for merging with host-specific hosts file.
+  - [`systemd`](./shared/systemd.nix) - Systemd configurations and service units.
+  - [`networking`](./shared/networking.nix) - Networking configurations, mostly for configuring DNS resolvers via `systemd-resolved`.
+  - [`locale`](./shared/locale.nix) - Time and locale settings (e.g. timezone, i18n configs).
+  - [`gnupg`](./shared/gnupg.nix) - GPG Agent settings and packages related to GPG and friends
+  = [`metaConfigs`](./shared/meta-configs.nix) - Nixpkgs and Nix settings, also contains the `system.stateVersion` setting.
+- [`meta`](./shared/meta.nix) - same as `base`, but oneliner import.
 
 ## License
 

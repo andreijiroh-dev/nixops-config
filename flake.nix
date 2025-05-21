@@ -168,13 +168,29 @@
     };
 
     # This is for external users who want to reproduce my configs as needed
-    nixosModules = {
-      base = ./shared/meta.nix;
+    exportedConfigs = {
+      meta = ./shared/meta.nix;
+      base = {
+        sshKeys = ./shared/ssh-keys.nix;
+        hostsFile = ./shared/hosts-file.nix;
+        systemd = ./shared/systemd.nix;
+        networking = ./shared/networking.nix;
+        locale = ./shared/locale.nix;
+        gnupg = ./shared/gnupg.nix;
+        metaConfigs = ./shared/meta-configs.nix;
+      };
       desktop = {
         kdePlasma = ./shared/desktop/kde-plasma.nix;
         base = ./shared/desktop/base.nix;
+        flatpak = ./shared/desktop/flatpak.nix;
+        _1password = ./shared/desktop/1password.nix;
       };
       server = {
+        devenv = ./shared/server/devenv.nix;
+        ssh = ./shared/server/ssh.nix;
+        firewall = ./shared/server/firewall.nix;
+        tailscale = ./shared/server/tailscale.nix;
+        cockpit = ./shared/server/cockpit.nix;
       };
     };
   };
