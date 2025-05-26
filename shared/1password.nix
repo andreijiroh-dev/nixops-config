@@ -8,5 +8,5 @@
     polkitPolicyOwners = [ "gildedguy" "ajhalili2006" ];
   };
 
-  system.nixos.tags = [ "with-1password" ];
+  system.nixos.tags = [ "1password" ];
 }

@@ -15,5 +15,5 @@
     '';
   };
 
-  system.nixos.tags = [ "with-flatpak" ];
+  system.nixos.tags = [ "flatpak" ];
 }

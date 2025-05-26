@@ -178,6 +178,10 @@
         locale = ./shared/locale.nix;
         gnupg = ./shared/gnupg.nix;
         metaConfigs = ./shared/meta-configs.nix;
+        shells = {
+          bash = ./shared/shells/bash.nix;
+          customPrompts = ./shared/shells/custom-prompts.nix;
+        };
       };
       desktop = {
         kdePlasma = ./shared/desktop/kde-plasma.nix;

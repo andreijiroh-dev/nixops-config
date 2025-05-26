@@ -13,6 +13,7 @@
     ./networking.nix
     ./systemd.nix
     ./shells/bash.nix
+    ./shells/custom-prompts.nix
   ];
 
   # and then the base packages itself

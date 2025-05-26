@@ -27,6 +27,7 @@
   ];
 
   virtualisation = {
+    # containers
     podman = {
       enable = true;
       package = pkgs.podman;
@@ -48,6 +49,8 @@
         };
       };
     };
+
+    # libvirtd
     libvirtd = {
       enable = true;
     };
@@ -56,6 +59,9 @@
   programs.virt-manager.enable = true;
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
+
+  # enable direnv integration for shells
+  programs.direnv.enable = true;
 
   system.nixos.tags = [ "containers-and-vms" "devtools"];
 }

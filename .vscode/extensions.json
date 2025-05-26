@@ -2,6 +2,7 @@
     "recommendations": [
         "jnoortheen.nix-ide",
         "mads-hartmann.bash-ide-vscode",
-        "bbenoist.nix"
+        "bbenoist.nix",
+        "tamasfe.even-better-toml"
     ]
 }
