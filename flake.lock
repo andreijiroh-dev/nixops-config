@@ -15,12 +15,12 @@
         ]
       },
       "locked": {
-        "lastModified": 1748109099,
-        "narHash": "sha256-hq2ZkbZG80fVz21MsJjXUDngfrLKCCGQGkPZgmr4ZTY=",
-        "rev": "9963c48e716664abc6c11a8e39197117eb9917ab",
-        "revCount": 241,
+        "lastModified": 1748293489,
+        "narHash": "sha256-QUgKC+BCPMITjWuW+OjNZ0DwdDDyf01gDqoOCwAAkVE=",
+        "rev": "6184d2994ed96184ec03e28da83aec56fec23eef",
+        "revCount": 243,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/DeterminateSystems/determinate/0.1.241%2Brev-9963c48e716664abc6c11a8e39197117eb9917ab/0197036e-79c6-755d-9080-a0a73c0a5fe8/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/DeterminateSystems/determinate/0.1.243%2Brev-6184d2994ed96184ec03e28da83aec56fec23eef/01970e6c-3ebe-7e78-b4cd-8e806a5e49cd/source.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -160,11 +160,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1748227609,
-        "narHash": "sha256-SaSdslyo6UGDpPUlmrPA4dWOEuxCy2ihRN9K6BnqYsA=",
+        "lastModified": 1748570847,
+        "narHash": "sha256-XU1a6wFctd+s3ZvBIFB6s4GhPJ+Oc6pkeOrEsbA2fMo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "d23d20f55d49d8818ac1f1b2783671e8a6725022",
+        "rev": "4e9efaa68b0be7e19127dad4f0506a9b89e28ef4",
         "type": "github"
       },
       "original": {
@@ -332,12 +332,12 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1747533086,
-        "narHash": "sha256-+8goyptSXa7qV0k5uPKyky58jpBjI/qkzsbwCZFvhRY=",
-        "rev": "8406224e30c258025cb8b31704bdb977a8f1f009",
-        "revCount": 802343,
+        "lastModified": 1748217807,
+        "narHash": "sha256-P3u2PXxMlo49PutQLnk2PhI/imC69hFl1yY4aT5Nax8=",
+        "rev": "3108eaa516ae22c2360928589731a4f1581526ef",
+        "revCount": 806109,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/DeterminateSystems/nixpkgs-weekly/0.1.802343%2Brev-8406224e30c258025cb8b31704bdb977a8f1f009/0196ec33-1ffa-76fa-ad14-ac737caf6446/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/DeterminateSystems/nixpkgs-weekly/0.1.806109%2Brev-3108eaa516ae22c2360928589731a4f1581526ef/01971040-062f-7e68-83d1-5cd2af08d87e/source.tar.gz"
       },
       "original": {
         "type": "tarball",
