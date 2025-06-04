@@ -10,7 +10,7 @@
       "no-runtime-versions"
     ];
     settings = {
-      scan_timeout = 50;
+      scan_timeout = 500;
       command_timeout = 15000;
       directory = {
         truncation_length = 4;
@@ -22,7 +22,7 @@
         not_allowed_msg = "pending";
         denied_msg = "blocked";
         loaded_msg = "loaded";
-        not_loaded_msg = "unloaded";
+        #not_loaded_msg = "unloaded";
       };
     };
   };
