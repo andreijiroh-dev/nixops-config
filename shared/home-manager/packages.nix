@@ -30,7 +30,7 @@
     # bet we'll going to have a field day since Copilot is now available for free
     # (this is seperate from the gh copilot extension for those asking)
     # context: https://github.blog/news-insights/product-news/github-copilot-in-vscode-free/
-    github-copilot-cli
+    gh-copilot
     # markdownlint
     markdownlint-cli
     # https://doppler.com
