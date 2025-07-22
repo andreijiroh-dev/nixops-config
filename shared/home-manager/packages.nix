@@ -65,7 +65,7 @@
     # nix language server - https://github.com/oxalica/nil
     nil
     # https://github.com/alesbrelih/gitlab-ci-ls
-    gitlab-ci-ls
+    #gitlab-ci-ls
 
     ## misc system utils and friends
     # https://httpie.io
