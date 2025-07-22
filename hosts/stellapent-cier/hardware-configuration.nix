@@ -9,28 +9,23 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.initrd.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/e3397457-41d2-4bed-9689-27a9ff3ccb51";
+    { device = "/dev/disk/by-uuid/09170382-8b7e-47cc-8fde-d9035039b785";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/EC7C-6A58";
+    { device = "/dev/disk/by-uuid/F402-1004";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/22a6f5ea-79d1-4919-b165-50063fd782f5";
-      fsType = "ext4";
-    };
-
-  fileSystems."/var/lib/docker" =
-    { device = "/dev/disk/by-uuid/299133b8-2585-42a4-b7d1-c995d4fc9e19";
       fsType = "ext4";
     };
 
@@ -47,7 +42,7 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp2s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp0s20u3.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp0s20u1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

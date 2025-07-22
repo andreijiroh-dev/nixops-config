@@ -94,7 +94,7 @@ in
 
   # home-manager specifics
   home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
+  #home-manager.useGlobalPkgs = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # Might be obvious to some since I'm technically roleplaying on my
