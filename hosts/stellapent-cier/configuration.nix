@@ -44,6 +44,8 @@ in
       };
     };
   };
+  # Use latest kernel.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking = {
     hostName = "stellapent-cier";
