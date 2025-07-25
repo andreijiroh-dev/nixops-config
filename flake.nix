@@ -101,7 +101,6 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/stellapent-cier/configuration.nix
-          ./hosts/stellapent-cier/hardware-configuration.nix
 
           # load Determinate Nix and the rest
           determinate.nixosModules.default

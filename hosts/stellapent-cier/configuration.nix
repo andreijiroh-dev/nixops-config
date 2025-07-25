@@ -24,6 +24,8 @@ in
 {
   imports =
     [
+      ./hardware-configuration.nix
+      ./broadcom.nix
       ../../shared/meta.nix
       ../../shared/desktop/base.nix
       ../../shared/desktop/kde-plasma.nix
@@ -133,3 +135,4 @@ in
 
   system.nixos.tags = [ "laptop" "homelab" ];
 }
+
