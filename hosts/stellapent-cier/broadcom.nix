@@ -8,7 +8,7 @@
   # blacklist similar modules to avoid collision
   boot.blacklistedKernelModules = [ "b43" "bcma" ];
 
-  environment.systemPackages = with pkgs; [
+  hardware.firmware = with pkgs; [
     broadcom-bt-firmware
   ];
 
