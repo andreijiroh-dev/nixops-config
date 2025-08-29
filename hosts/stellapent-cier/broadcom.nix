@@ -15,5 +15,6 @@
   # required due to security warnings
   nixpkgs.config.permittedInsecurePackages = [
     "broadcom-sta-6.30.223.271-57-6.15.7"
+    "broadcom-sta-6.30.223.271-57-6.16.3"
   ];
 }
