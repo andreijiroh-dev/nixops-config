@@ -6,7 +6,7 @@
     _1password-gui
     firefoxpwa
     kdePackages.krfb
-    mysql-workbench
+    #mysql-workbench
     remmina
     gparted
   ];
