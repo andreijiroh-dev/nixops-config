@@ -13,6 +13,15 @@ of my dotfiles repository.
 | Nix Flake Builds (push) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/update-flakes.yml/badge.svg)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/update-flakes.yml) |
 | Nix Flake Builds (schedule, every 06:30 UTC Saturday) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/update-flakes.yml/badge.svg?event=schedule)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/update-flakes.yml) |
 
+## Mirrors
+
+Canonically published at [GitLab SaaS](https://gitlab.com/andreijiroh-dev/nixops-config),
+with push mirroring enabled to [GitHub](https://github.com/andreijiroh-dev/nixops-config).
+Along with the following mirrors:
+
+- [sourcehut hosted](https://sr.ht/~ajhalili2006/nixops-config)
+- [Manimun GitLab](https://mau.dev/andreijiroh-dev/nixops-config)
+
 ## Usage
 
 ### Installing NixOS
@@ -117,7 +126,7 @@ if you want to reuse some of my configurations.
       nixosConfigurations.your-mom = nixpkgs.lib.nixosSystem {
          system = "x86_64-linux";
          modules = [
-          andreijiroh-dev.nixosModules.networking # or any other modules
+          andreijiroh-dev.exportedConfigs.networking # or any other modules
          ];
       };
     };
@@ -138,7 +147,9 @@ nix build github:andreijiroh-dev/nixops-config/main#nixosConfigurations.recovery
 nix build .#nixosConfigurations.recoverykit-amd64.config.system.build.isoImage
 ```
 
-## Availabled shared configs
+## Available shared configs
+
+These are accessible via `exportedConfigs` object after importing this flake on your `flake.nix` file.
 
 - `base` - Individual base components' configuration (systemd, networking, etc.)
   - [`sshKeys`](./shared/ssh-keys.nix) - My SSH public keys, declaratively managed.
