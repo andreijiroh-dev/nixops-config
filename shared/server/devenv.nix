@@ -7,6 +7,8 @@
     cachix
     devbox
     nixfmt-rfc-style
+    nil
+    nixd
 
     # tmux and friendos
     byobu
@@ -63,5 +65,8 @@
   # enable direnv integration for shells
   programs.direnv.enable = true;
 
-  system.nixos.tags = [ "containers-and-vms" "devtools"];
+  system.nixos.tags = [
+    "containers-and-vms"
+    "devtools"
+  ];
 }

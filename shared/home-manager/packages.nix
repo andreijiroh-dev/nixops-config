@@ -64,6 +64,7 @@
     ## language servers ##
     # nix language server - https://github.com/oxalica/nil
     nil
+    nixd
     # https://github.com/alesbrelih/gitlab-ci-ls
     #gitlab-ci-ls
 
@@ -80,6 +81,11 @@
     starship
     oh-my-posh
     blesh
+
+    # archival tools
+    yt-dlp
+    twitch-dl
+    twitch-chat-downloader
   ];
 
   programs.bashmount = {
@@ -88,6 +94,11 @@
 
   programs.bat = {
     enable = true;
-    extraPackages = with pkgs.bat-extras; [ batdiff batman batgrep batwatch ];
+    extraPackages = with pkgs.bat-extras; [
+      batdiff
+      batman
+      batgrep
+      batwatch
+    ];
   };
 }
