@@ -19,8 +19,9 @@ Canonically published at [GitLab SaaS](https://gitlab.com/andreijiroh-dev/nixops
 with push mirroring enabled to [GitHub](https://github.com/andreijiroh-dev/nixops-config).
 Along with the following mirrors:
 
-- [sourcehut hosted](https://sr.ht/~ajhalili2006/nixops-config)
+- [sourcehut hosted](https://git.sr.ht/~ajhalili2006/nixops-config)
 - [Manimun GitLab](https://mau.dev/andreijiroh-dev/nixops-config)
+- [Hack Club Nest's Forgejo instance](https://git.hackclub.app/andreijiroh-dev/nixops-config)
 
 ## Usage
 
