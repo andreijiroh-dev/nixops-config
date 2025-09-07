@@ -1,0 +1,23 @@
+{
+  "languages": {
+    "Nix": {
+      "language_servers": ["nil", "!nixd"]
+    }
+  },
+  "lsp": {
+    "nil": {
+      "initialization_options": {
+        "formatting": {
+          "command": ["nixfmt"]
+        },
+        "nix": {
+          "flake": {
+            "autoArchive": true,
+            "autoEvalInputs": false,
+            "nixpkgsInputName": "nixpkgs"
+          }
+        }
+      }
+    }
+  }
+}
