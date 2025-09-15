@@ -2,38 +2,45 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ self, config, pkgs, lib, ... }:
+{
+  self,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   # localhost + local network in HaliliFam WiFi network
-  baseHostsFile = with import ../../shared/hosts-file.nix; {
-    "127.0.0.1" = localhost ++ [
-      "stellapent-cier.local"
-      "stellapent-cier.tailnet"
-      "stellapent-cier.fawn-cod.ts.net"
-    ];
-  } // localNetwork.halilifam;
+  baseHostsFile =
+    with import ../../shared/hosts-file.nix;
+    {
+      "127.0.0.1" = localhost ++ [
+        "stellapent-cier.local"
+        "stellapent-cier.tailnet"
+        "stellapent-cier.fawn-cod.ts.net"
+      ];
+    }
+    // localNetwork.halilifam;
 
   # tailnet, blocking ads via blackholing to 0.0.0.0, etc.
-  extraHosts = with import ../../shared/hosts-file.nix;
-    tailnet;
+  extraHosts = with import ../../shared/hosts-file.nix; tailnet;
 
   # them merge them all together
   hostsFile = baseHostsFile // extraHosts;
 in
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./broadcom.nix
-      ../../shared/meta.nix
-      ../../shared/desktop/base.nix
-      ../../shared/desktop/kde-plasma.nix
-      ../../shared/server/ssh.nix
-      ../../shared/server/tailscale.nix
-      ../../shared/server/devenv.nix
-      ../../shared/server/cockpit.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./broadcom.nix
+    ../../shared/meta.nix
+    ../../shared/desktop/base.nix
+    ../../shared/desktop/kde-plasma.nix
+    ../../shared/server/ssh.nix
+    ../../shared/server/tailscale.nix
+    ../../shared/server/devenv.nix
+    ../../shared/server/cockpit.nix
+  ];
 
   # Bootloader
   boot = {
@@ -106,7 +113,11 @@ in
   users.users.gildedguy = {
     isNormalUser = true;
     description = "Gildedguy (Michael Moy)"; # We're not impersonating the animatior here lol.
-    extraGroups = [ "networkmanager" "wheel" "docker"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     openssh = {
       authorizedKeys.keys = with import ../../shared/ssh-keys.nix; [
         personal.y2022
@@ -116,23 +127,25 @@ in
       ];
     };
     linger = true;
-    
+
   };
   home-manager.users.gildedguy = import ./users/gildedguy.nix;
   #programs.home-manager.enable = true; # allow home-manager to manage itself
 
   # logind adjustments for this laptop to run as a headless server while
   # the lid is closed.
-  services.logind = {
-    lidSwitchExternalPower = "ignore";
-    lidSwitchDocked = "ignore";
-    lidSwitch = "ignore";
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
 
-  system.nixos.tags = [ "laptop" "homelab" ];
+  system.nixos.tags = [
+    "laptop"
+    "homelab"
+  ];
 }
-

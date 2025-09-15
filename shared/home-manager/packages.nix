@@ -43,6 +43,7 @@
     # imported from my nix profile list to avoid conflicts #
     gpgme
     jq
+    termius
 
     ## programming languages
     # js

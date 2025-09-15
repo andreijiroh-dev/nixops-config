@@ -8,6 +8,7 @@
     ./1password.nix
     ./meta-configs.nix
     ./flatpak.nix
+    ./appimages.nix
     ./gnupg.nix
     ./locale.nix
     ./networking.nix

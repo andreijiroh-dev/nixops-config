@@ -12,9 +12,13 @@
     broadcom-bt-firmware
   ];
 
-  # required due to security warnings
+  # required due to security warnings, also maintained here for reproducibility instead of
+  # messing around --impure CLI flag + exporting NIXPKGS_ALLOW_INSECURE=1
   nixpkgs.config.permittedInsecurePackages = [
     "broadcom-sta-6.30.223.271-57-6.15.7"
     "broadcom-sta-6.30.223.271-57-6.16.3"
+    "broadcom-sta-6.30.223.271-57-6.16.4"
+    "broadcom-sta-6.30.223.271-57-6.16.5"
+    "broadcom-sta-6.30.223.271-57-6.16.6"
   ];
 }

@@ -3,7 +3,7 @@
 {
   imports = [
     ./bluetooth.nix
-    ./firefox.nix
+    ./browsers.nix
     ./firewall.nix
     ./fonts.nix
     ./yubikey.nix
@@ -14,22 +14,14 @@
   environment.systemPackages = with pkgs; [
     thunderbird
 
-    # browsers (firefox is in ./firefox.nix)
-    google-chrome
-    microsoft-edge
-
     libreoffice-qt6-fresh
     hunspell
     hunspellDicts.en_US
-    
+
     # android tools
     android-tools
     adbtuifm
-  ];
 
-  # AppImages supprot via binfmt_misc
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
-  };
+    termius
+  ];
 }

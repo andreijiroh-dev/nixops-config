@@ -58,7 +58,7 @@
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
       home-manager,
@@ -80,6 +80,10 @@
             ./hosts/recoverykit/configuration.nix
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ];
+
+          specialArgs = {
+            zen-browser = zen-browser;
+          };
         };
 
         portable-amd64-256gb = nixpkgs.lib.nixosSystem {
@@ -96,10 +100,13 @@
             # one-liners?
             { programs.nix-ld.dev.enable = true; }
           ];
+
+          specialArgs = {
+            zen-browser = zen-browser;
+          };
         };
 
         stellapent-cier = nixpkgs.lib.nixosSystem {
-          inherit zen-browser;
           # for some reason, zen-browser needs to be imported before nixos-hardware
           # otherwise, it fails to build with some missing dependencies
           system = "x86_64-linux";
@@ -115,6 +122,9 @@
             # one-liners?
             { programs.nix-ld.dev.enable = true; }
           ];
+          specialArgs = {
+            zen-browser = zen-browser;
+          };
         };
       };
       homeConfigurations = {
@@ -135,6 +145,9 @@
               };
             }
           ];
+          specialArgs = {
+            zen-browser = zen-browser;
+          };
         };
 
         # Usage
@@ -151,6 +164,9 @@
               home.homeDirectory = "/home/ajhalili2006";
             }
           ];
+          specialArgs = {
+            zen-browser = zen-browser;
+          };
         };
 
         # Usage
@@ -167,6 +183,9 @@
               home.homeDirectory = "/home/ajhalili2006";
             }
           ];
+          specialArgs = {
+            zen-browser = zen-browser;
+          };
         };
       };
 
