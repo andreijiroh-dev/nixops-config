@@ -22,6 +22,6 @@
     android-tools
     adbtuifm
 
-    termius
+    #termius
   ];
 }
