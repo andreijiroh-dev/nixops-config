@@ -15,5 +15,4 @@
     '';
   };
 
-  system.nixos.tags = [ "flatpak" ];
 }

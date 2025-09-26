@@ -66,7 +66,6 @@
   programs.direnv.enable = true;
 
   system.nixos.tags = [
-    "containers-and-vms"
     "devtools"
   ];
 }

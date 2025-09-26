@@ -19,5 +19,4 @@
 
   programs.mosh.enable = true;
 
-  system.nixos.tags = [ "ssh" "mosh" ];
 }

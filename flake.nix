@@ -106,6 +106,24 @@
           };
         };
 
+        lairland = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+                ./hosts/lairland/configuration.nix
+                # load Determinate Nix and the rest
+                determinate.nixosModules.default
+                home-manager.nixosModules.home-manager
+                vscode-server.nixosModules.default
+                nix-ld.nixosModules.nix-ld
+
+                # one-liners?
+                { programs.nix-ld.dev.enable = true; }
+          ];
+          specialArgs = {
+            zen-browser = zen-browser;
+          };
+        };
+
         stellapent-cier = nixpkgs.lib.nixosSystem {
           # for some reason, zen-browser needs to be imported before nixos-hardware
           # otherwise, it fails to build with some missing dependencies

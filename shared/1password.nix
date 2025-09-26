@@ -25,5 +25,4 @@
       mode = "0755";
     };
   };
-  system.nixos.tags = [ "1password" ];
 }
