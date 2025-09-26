@@ -10,15 +10,17 @@
   ...
 }:
 let
+  # localhost + local network in HaliliFam WiFi network
   baseHostsFile =
     with import ../../shared/hosts-file.nix;
     {
       "127.0.0.1" = localhost ++ [
         "lairland.local"
         "lairland.tailnet"
-      ]
-    }; // localNetwork.halilifam;
-  };
+        "lairland.fawn-cod.ts.net"
+      ];
+    }
+    // localNetwork.halilifam;
 
   # tailnet, blocking ads via blackholing to 0.0.0.0, etc.
   extraHosts = with import ../../shared/hosts-file.nix; tailnet;
@@ -88,20 +90,6 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ajhalili2006 = {
     isNormalUser = true;
@@ -121,7 +109,7 @@ in
   };
 
   # home-manager
-  home-manager.users.gildedguy = import ./users/ajhalili2006.nix;
+  home-manager.users.ajhalili2006 = import ./users/ajhalili2006.nix;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -131,5 +119,5 @@ in
   #   enableSSHSupport = true;
   # };
 
-  ervices.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 }
