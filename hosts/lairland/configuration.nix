@@ -15,9 +15,10 @@ let
     {
       "127.0.0.1" = localhost ++ [
         "lairland.local"
-        "lairland.tailnet
+        "lairland.tailnet"
       ]
-    } // localNetwork.halilifam;
+    }; // localNetwork.halilifam;
+  };
 
   # tailnet, blocking ads via blackholing to 0.0.0.0, etc.
   extraHosts = with import ../../shared/hosts-file.nix; tailnet;
