@@ -21,6 +21,7 @@
     "1password/custom_allowed_browsers" = {
       text = ''
         zen
+        vivaldi
       '';
       mode = "0755";
     };
