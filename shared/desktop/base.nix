@@ -22,6 +22,9 @@
     android-tools
     adbtuifm
 
-    #termius
+    # workaround: https://discourse.nixos.org/t/need-help-with-resolving-missing-dependencies-for-auto-patchelf-on-termius/69722/2?u=ajhalili2006
+    (pkgs.termius.overrideAttrs (oldAttrs: {
+       buildInputs = oldAttrs.buildInputs or [ ] ++ [ pkgs.sqlite ];
+    }))
   ];
 }
