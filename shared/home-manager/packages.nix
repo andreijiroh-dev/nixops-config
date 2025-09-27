@@ -81,6 +81,7 @@
     openssl
     unrar-wrapper
     storj-uplink
+    rclone
 
     # shell utils
     starship

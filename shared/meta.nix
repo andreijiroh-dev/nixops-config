@@ -35,6 +35,7 @@
     neovim
     fastfetch
     jq
+    rclone
 
     # shell prompt customizations
     starship
