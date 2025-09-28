@@ -13,14 +13,17 @@
     polkitPolicyOwners = [
       "gildedguy"
       "ajhalili2006"
+      "MFHellscapes"
+      "halilifam"
     ];
   };
 
-  # HACK: Allow zen-browser to be used with 1Password
+  # HACK: Allow zen-browser and vivaldi to be used with 1Password
   environment.etc = {
     "1password/custom_allowed_browsers" = {
       text = ''
         zen
+
         vivaldi
       '';
       mode = "0755";
