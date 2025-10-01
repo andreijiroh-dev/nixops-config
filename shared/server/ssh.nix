@@ -19,4 +19,8 @@
 
   programs.mosh.enable = true;
 
+  # disable hibernation and hybrid sleep
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
+
 }
