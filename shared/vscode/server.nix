@@ -1,4 +1,4 @@
-{ config, pkgs, ...  };
+{ config, pkgs, ...  }:
 
 {
   programs.vscode-server.enable = true;
