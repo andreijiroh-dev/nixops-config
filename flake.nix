@@ -138,7 +138,7 @@
             nix-ld.nixosModules.nix-ld
 
             # one-liners?
-            { programs.nix-ld.dev.enable = true; }
+            ./shared/vscode/server.nix
           ];
           specialArgs = {
             zen-browser = zen-browser;
@@ -163,9 +163,6 @@
               };
             }
           ];
-          specialArgs = {
-            zen-browser = zen-browser;
-          };
         };
 
         # Usage
@@ -182,9 +179,6 @@
               home.homeDirectory = "/home/ajhalili2006";
             }
           ];
-          specialArgs = {
-            zen-browser = zen-browser;
-          };
         };
 
         # Usage
