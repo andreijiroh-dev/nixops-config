@@ -118,6 +118,7 @@
 
                 # one-liners?
                 { programs.nix-ld.dev.enable = true; }
+                ./shared/vscode/server.nix
           ];
           specialArgs = {
             zen-browser = zen-browser;
