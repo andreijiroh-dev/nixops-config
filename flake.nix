@@ -118,14 +118,7 @@
 
             # one-liners?
             { programs.nix-ld.dev.enable = true; }
-            ({ config, pkg, ... }: {
-              programs.vscode-server.enable = true;
-              services.vscode-server.installPath = [
-                "$HOME/.vscode-server"
-                "$HOME/.vscode-server-oss"
-                "$HOME/.vscode-server-insiders"
-              ];
-            })
+            ./shared/vscode/server.nix
           ];
           specialArgs = {
             zen-browser = zen-browser;

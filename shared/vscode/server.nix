@@ -10,7 +10,7 @@
     vscode-server.nixosModules.default
   ];
 
-  programs.vscode-server.enable = true;
+  services.vscode-server.enable = true;
   services.vscode-server.installPath = [
     "$HOME/.vscode-server"
     "$HOME/.vscode-server-oss"
