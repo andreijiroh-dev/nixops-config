@@ -107,21 +107,29 @@
         };
 
         lairland = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-                ./hosts/lairland/configuration.nix
-                # load Determinate Nix and the rest
-                determinate.nixosModules.default
-                home-manager.nixosModules.home-manager
-                vscode-server.nixosModules.default
-                nix-ld.nixosModules.nix-ld
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/lairland/configuration.nix
+            # load Determinate Nix and the rest
+            determinate.nixosModules.default
+            home-manager.nixosModules.home-manager
+            vscode-server.nixosModules.default
+            nix-ld.nixosModules.nix-ld
 
-                # one-liners?
-                { programs.nix-ld.dev.enable = true; }
-                ./shared/vscode/server.nix
+            # one-liners?
+            { programs.nix-ld.dev.enable = true; }
+            ({ config, pkg, ... }: {
+              programs.vscode-server.enable = true;
+              services.vscode-server.installPath = [
+                "$HOME/.vscode-server"
+                "$HOME/.vscode-server-oss"
+                "$HOME/.vscode-server-insiders"
+              ];
+            })
           ];
           specialArgs = {
             zen-browser = zen-browser;
+            vscode-server = vscode-server;
           };
         };
 
