@@ -53,6 +53,8 @@
     # js
     deno
     nodejs_22
+    pnpm
+    yarn
     # python
     python313
     pipx
