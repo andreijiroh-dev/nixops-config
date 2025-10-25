@@ -1,15 +1,11 @@
 {
   config,
   pkgs,
-  vscode-server,
+  inputs,
   ...
 }:
 
 {
-  imports = [
-    vscode-server.nixosModules.default
-  ];
-
   services.vscode-server.enable = true;
   services.vscode-server.installPath = [
     "$HOME/.vscode-server"

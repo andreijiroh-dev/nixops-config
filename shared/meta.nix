@@ -36,6 +36,7 @@
     fastfetch
     jq
     rclone
+    ntfsprogs
 
     # shell prompt customizations
     starship

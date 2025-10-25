@@ -80,10 +80,6 @@
             ./hosts/recoverykit/configuration.nix
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ];
-
-          specialArgs = {
-            zen-browser = zen-browser;
-          };
         };
 
         portable-amd64-256gb = nixpkgs.lib.nixosSystem {
@@ -120,9 +116,9 @@
             { programs.nix-ld.dev.enable = true; }
             ./shared/vscode/server.nix
           ];
+
           specialArgs = {
-            zen-browser = zen-browser;
-            vscode-server = vscode-server;
+            inherit inputs;
           };
         };
 
