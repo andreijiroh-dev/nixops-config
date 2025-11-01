@@ -111,6 +111,15 @@
         lairland = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            # Override bat-extras with the patched version
+            {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
+                })
+              ];
+            }
+
             ./hosts/lairland/configuration.nix
             # load Determinate Nix and the rest
             determinate.nixosModules.default
@@ -121,15 +130,6 @@
             # one-liners?
             { programs.nix-ld.dev.enable = true; }
             ./shared/vscode/server.nix
-
-            # Override bat-extras with the patched version
-            {
-              nixpkgs.overlays = [
-                (final: prev: {
-                  bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
-                })
-              ];
-            }
           ];
 
           specialArgs = {
@@ -186,17 +186,19 @@
         plain = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           modules = [
-            ./shared/home-manager/main.nix
+            # Override bat-extras with the patched version
             {
-              home.username = "ajhalili2006";
-              home.homeDirectory = "/home/ajhalili2006";
-
-              # Apply the same overlay for standalone home-manager
               nixpkgs.overlays = [
                 (final: prev: {
                   bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
                 })
               ];
+            }
+
+            ./shared/home-manager/main.nix
+            {
+              home.username = "ajhalili2006";
+              home.homeDirectory = "/home/ajhalili2006";
             }
           ];
         };
