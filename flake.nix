@@ -55,6 +55,11 @@
       url = "github:Mic92/nix-ld";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # bat-extras patch - locked to specific commit hash
+    nixpkgs-bat-extras-pr = {
+      url = "github:PerchunPak/nixpkgs/46e297cf987ef4fb1eb3b4eac1f978a4c2b80316";
+    };
   };
 
   outputs =
@@ -71,6 +76,7 @@
       nixos-generators,
       lib,
       zen-browser,
+      nixpkgs-bat-extras-pr,
     }:
     {
       nixosConfigurations = {
@@ -115,6 +121,15 @@
             # one-liners?
             { programs.nix-ld.dev.enable = true; }
             ./shared/vscode/server.nix
+
+            # Override bat-extras with the patched version
+            {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
+                })
+              ];
+            }
           ];
 
           specialArgs = {
@@ -175,6 +190,13 @@
             {
               home.username = "ajhalili2006";
               home.homeDirectory = "/home/ajhalili2006";
+
+              # Apply the same overlay for standalone home-manager
+              nixpkgs.overlays = [
+                (final: prev: {
+                  bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
+                })
+              ];
             }
           ];
         };
