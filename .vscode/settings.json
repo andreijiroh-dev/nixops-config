@@ -8,5 +8,6 @@
     ],
     "nix.serverSettings": {
       "flake": {"autoArchive": true, "nixpkgsInputName": "nixpkgs"}
-    }
+    },
+    "markdown.validate.enabled": true
 }
