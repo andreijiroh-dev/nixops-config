@@ -58,51 +58,51 @@ in
 
   # portable setup
   boot.initrd.kernelModules = [ "usb_storage" ];
-  boot.initrd.preDeviceCommands = ''
-    check_root_device() {
-      ROOT_UUID="09170382-8b7e-47cc-8fde-d9035039b785"
-
-      # 'test -e' checks if the file/device node exists
-      if test -e "/dev/disk/by-uuid/$ROOT_UUID"; then
-        return 0 # Success
-      else
-        return 1 # Failure
-      fi
-    }
-
-    found() {
-      echo "Device found, continuing boot..."
-      exit 0
-    }
-
-    if ! check_root_device; then
-      echo "Root device not found, retrying in 5 seconds..."
-      sleep 5
-    else
-      found
-    fi
-
-    if ! check_root_device; then
-      echo "Root device not found, retrying in 10 seconds..."
-      sleep 10
-    else
-      found
-    fi
-
-    if ! check_root_device; then
-      echo "Root device not found, retrying for last time in 20 seconds..."
-      sleep 20
-    else
-      found
-    fi
-
-
-    if ! check_root_device; then
-      echo "WARNING: Boot device not found, proceeding with caution."
-    else
-      found
-    fi
-  '';
+  #boot.initrd.preDeviceCommands = ''
+  #  check_root_device() {
+  #    ROOT_UUID="09170382-8b7e-47cc-8fde-d9035039b785"
+  #
+  #    # 'test -e' checks if the file/device node exists
+  #    if test -e "/dev/disk/by-uuid/$ROOT_UUID"; then
+  #      return 0 # Success
+  #    else
+  #      return 1 # Failure
+  #    fi
+  #  }
+  #
+  #  found() {
+  #    echo "Device found, continuing boot..."
+  #    exit 0
+  #  }
+  #
+  #  if ! check_root_device; then
+  #    echo "Root device not found, retrying in 5 seconds..."
+  #    sleep 5
+  #  else
+  #    found
+  #  fi
+  #
+  #  if ! check_root_device; then
+  #    echo "Root device not found, retrying in 10 seconds..."
+  #    sleep 10
+  #  else
+  #    found
+  #  fi
+  #
+  #  if ! check_root_device; then
+  #    echo "Root device not found, retrying for last time in 20 seconds..."
+  #    sleep 20
+  #  else
+  #    found
+  #  fi
+  #
+  #
+  #  if ! check_root_device; then
+  #    echo "WARNING: Boot device not found, proceeding with caution."
+  #  else
+  #    found
+  #  fi
+  #'';
 
   networking = {
     hostName = "stellapent-cier";
