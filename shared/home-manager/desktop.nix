@@ -5,7 +5,7 @@
   home.packages = with pkgs; [
     _1password-gui
     firefoxpwa
-    rpi-imager
+    #rpi-imager
     kdePackages.krfb
     #mysql-workbench
     remmina
