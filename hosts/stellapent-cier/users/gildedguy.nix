@@ -1,11 +1,14 @@
-{ config, pkgs, lib, home-manager, ... }:
+{ config, pkgs, lib, zen-browser, ... }:
 
 {
-  imports = [
-    ../../../shared/home-manager/main.nix
-    zen-browser.homeModules.beta
-  ];
+  # This now configures the 'gildedguy' user within the NixOS module system
+  home-manager.users.gildedguy = {
+    imports = [
+      ../../../shared/home-manager/main.nix
+      zen-browser.homeModules.beta
+    ];
 
-  home.username = "gildedguy";
-  home.homeDirectory = "/home/gildedguy";
+    home.username = "gildedguy";
+    home.homeDirectory = "/home/gildedguy";
+  };
 }

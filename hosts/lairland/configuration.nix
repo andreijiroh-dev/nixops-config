@@ -39,6 +39,7 @@ in
       ../../shared/server/tailscale.nix
       ../../shared/server/devenv.nix
       ../../shared/server/cockpit.nix
+      ./users/ajhalili2006.nix
     ];
 
   # Bootloader.
@@ -107,9 +108,6 @@ in
       ];
     linger = true;
   };
-
-  # home-manager
-  home-manager.users.ajhalili2006 = import ./users/ajhalili2006.nix;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
