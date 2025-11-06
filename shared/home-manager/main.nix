@@ -7,6 +7,7 @@
   pkgs,
   lib,
   home-manager,
+  zen-browser
   ...
 }:
 
@@ -17,6 +18,7 @@
     ./git.nix
     ./shell.nix
     ./fonts.nix
+    zen-browser.homeModules.beta #iykyk
   ];
 
   # https://fnordig.de/til/nix/home-manager-allow-unfree.html
