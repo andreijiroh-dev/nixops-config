@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, zen-browser, ... }:
 
 {
   programs.firefox = {
@@ -12,6 +12,6 @@
   };
 
   environment.systemPackages = [
-    inputs.zen-browser.packages.${pkgs.system}.default
+    zen-browser.packages.${pkgs.system}.default
   ];
 }
