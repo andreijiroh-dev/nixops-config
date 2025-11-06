@@ -7,6 +7,7 @@
   config,
   pkgs,
   lib,
+  zen-browser,
   ...
 }:
 let
