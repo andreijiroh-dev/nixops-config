@@ -1,8 +1,9 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, zen-browser, ... }:
 
 {
   imports = [
     ../../../shared/home-manager/main.nix
+    zen-browser.homeModules.beta
   ];
 
   home.username = "ajhalili2006";
