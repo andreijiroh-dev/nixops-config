@@ -56,11 +56,6 @@
       url = "github:Mic92/nix-ld";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # bat-extras patch - locked to specific commit hash
-    nixpkgs-bat-extras-pr = {
-      url = "github:PerchunPak/nixpkgs/46e297cf987ef4fb1eb3b4eac1f978a4c2b80316";
-    };
   };
 
   outputs =
@@ -76,8 +71,7 @@
       systems,
       nixos-generators,
       lib,
-      zen-browser,
-      nixpkgs-bat-extras-pr,
+      zen-browser
     }:
     {
       nixosConfigurations = {
@@ -116,7 +110,7 @@
             {
               nixpkgs.overlays = [
                 (final: prev: {
-                  bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
+                  #bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
                 })
               ];
             }
@@ -191,7 +185,7 @@
             {
               nixpkgs.overlays = [
                 (final: prev: {
-                  bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
+                  #bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
                 })
               ];
             }
