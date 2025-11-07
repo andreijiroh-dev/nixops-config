@@ -128,7 +128,7 @@
           ];
 
           specialArgs = {
-            inherit inputs;
+            zen-browser = zen-browser;
           };
         };
 
