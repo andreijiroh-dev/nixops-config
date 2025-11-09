@@ -12,7 +12,7 @@
       "docker"
     ];
     openssh = {
-      authorizedKeys.keys = with import ../../../shared/ssh-keys.nix;; [
+      authorizedKeys.keys = with import ../../../shared/ssh-keys.nix; [
         personal.y2022
         personal.passwordless
         personal.campus-comlab
