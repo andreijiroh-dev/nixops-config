@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 # SPDX-License-Identifier: MPL-2.0
+# Reliably detect and switch between SSH agents like keychain, yubikey-agent, 1Password, etc.
 
 if [[ $DEBUG != "" ]]; then
   set -x
@@ -30,7 +31,7 @@ logOps() {
 if [[ -z "${XDG_RUNTIME_DIR}" ]]; then
   logOps warn "XDG_RUNTIME_DIR is possibly undefined, see https://github.com/swaywm/sway/issues/7202"
   logOps warn "for context and https://wiki.archlinux.org/title/XDG_Base_Directory for docs"
-  logOps warn "setting it up for you using the default '/run/user/$(id -u)' value in 3s..."
+  logOps warn "Temporarily using '/run/user/$(id -u)' for XDG_RUNTIME_DIR in 3s..."
   sleep 3
   XDG_RUNTIME_DIR="/run/user/$(id -u)"
   export XDG_RUNTIME_DIR
@@ -46,7 +47,11 @@ fi
 try_keychain_ssh_agent() {
   if [[ $FF_KEYCHAIN == "1" ]]; then
     logOps info "attempting to use keychain for SSH agents" keychain
-    [[ "$SSH_AGENT_LOADER_SLIENT" == "" ]] && eval "$(keychain --eval --agents ssh,gpg)" || eval "$(keychain --eval --agents ssh,gpg --quiet)"
+    if [[ "$SSH_AGENT_LOADER_SLIENT" == "" ]]; then
+      eval "$(keychain --ssh-spawn-gpg --ssh-allow-gpg)"
+    else
+      eval "$(keychain --eval --ssh-spawn-gpg --ssh-allow-gpg --quiet)"
+    fi
   else
     logOps warn "keychain is not in PATH yet" keychain
     return 1
@@ -55,9 +60,17 @@ try_keychain_ssh_agent() {
 
 # Ripped off NixOS-generated set-environment on my laptop for yubikey-agent setup
 try_yubikey_agent() {
-  if [[ -f "${XDG_RUNTIME_DIR}/yubikey-agent/yubikey-agent.sock" ]]; then
-    logOps info "using YubiKey SSH Agent via socket at XDG_RUNTIME_DIR" yubikey-agent
-    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/yubikey-agent/yubikey-agent.sock"
+  YUBIKEY_AGENT_AUTH_SOCK="${XDG_RUNTIME_DIR}/yubikey-agent/yubikey-agent.sock"
+  if [[ -f "${YUBIKEY_AGENT_AUTH_SOCK}" ]]; then
+    logOps info "attempting to use Yubikey SSH agent" yubikey-agent
+    if ! SSH_AUTH_SOCK=${YUBIKEY_AGENT_AUTH_SOCK} ssh-add -l >> /dev/null 2>&1; then
+      logOps warn "something went wrong while checking for Yubikey SSH agent availability" yubikey-agent
+      logOps warn "is your Yubikey plugged in properly?" yubikey-agent
+      return 1
+    fi
+  else
+    logOps error "Yubikey SSH agent seems to be not available on this host" yubikey-agent
+    return 1
   fi
 }
 
@@ -81,7 +94,8 @@ try_1password_ssh_agent() {
 ssh-agent-loader() {
   if [[ $1 == "" || $1 == "auto" ]]; then
     if [[ $SSH_CONNECTION != "" ]] && [[ $VSCODE_IPC_HOOK_CLI != "" ]]; then
-      logOps info "automatic detection is disabled while you're in a VS Code Remote SSH session"
+      logOps info "automatic detection is disabled while you're in a VS Code Remote SSH/Tunnels session"
+      logOps info "to enable SSH agent, please manually invoke the shell function with desired agent"
       return
     fi
 

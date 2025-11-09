@@ -73,11 +73,31 @@
       lib,
       zen-browser
     }:
+    let
+      our-pkgs = import ./pkgs;
+    in
     {
+      # For CI and other builds
+      packages = flake-utils.lib.eachDefaultSystem (system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          detect-vscode-for-git = pkgs.callPackage ./pkgs/detect-vscode-for-git.nix { };
+          ssh-agent-loader = pkgs.callPackage ./pkgs/ssh-agent-loader.nix { };
+        }
+      );
+
+      overlays.default = final: prev: {
+        detect-vscode-for-git = self.packages.${prev.system}.detect-vscode-for-git;
+        ssh-agent-loader = self.packages.${prev.system}.ssh-agent-loader;
+      };
+
       nixosConfigurations = {
         recoverykit-amd64 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            { nixpkgs.overlays = [ self.overlays.default ]; }
             ./hosts/recoverykit/configuration.nix
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ];
@@ -86,6 +106,7 @@
         portable-amd64-256gb = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            { nixpkgs.overlays = [ self.overlays.default ]; }
             ./hosts/portable/amd64/configuration.nix
 
             # load Determinate Nix and the rest
@@ -109,6 +130,7 @@
             # Override bat-extras with the patched version
             {
               nixpkgs.overlays = [
+                self.overlays.default
                 (final: prev: {
                   #bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
                 })
@@ -137,6 +159,7 @@
           # otherwise, it fails to build with some missing dependencies
           system = "x86_64-linux";
           modules = [
+            { nixpkgs.overlays = [ self.overlays.default ]; }
             ./hosts/stellapent-cier/configuration.nix
 
             # load Determinate Nix and the rest
@@ -162,7 +185,11 @@
         stellapent-cier = home-manager.lib.homeManagerConfiguration {
           inherit lib;
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {
+            inherit self;
+          };
           modules = [
+            { nixpkgs.overlays = [ self.overlays.default ]; }
             ./shared/home-manager/main.nix
             {
               home = {
@@ -180,10 +207,14 @@
         #  nix run home-manager/master -- switch --flake .#plain
         plain = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {
+            inherit self;
+          };
           modules = [
             # Override bat-extras with the patched version
             {
               nixpkgs.overlays = [
+                self.overlays.default
                 (final: prev: {
                   #bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
                 })
@@ -205,7 +236,11 @@
         #  nix run home-manager/master -- switch --flake .#arm64-plain
         arm64-plain = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
+          extraSpecialArgs = {
+            inherit self;
+          };
           modules = [
+            { nixpkgs.overlays = [ self.overlays.default ]; }
             ./shared/home-manager/nogui.nix
             {
               home.username = "ajhalili2006";

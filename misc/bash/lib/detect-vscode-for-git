@@ -1,25 +1,48 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: MPL-2.0
 # Sets EDITOR and related variables to use VS Code instead of firing up nano (or worse vi),
-# based on env var detection of VSCODE_* vars.
+# based on env var detection of VSCODE_* vars. Utilized by git-commit and similar git commands
+# that fire up an editor.
 
 # Handle verbose logging
+log() {
+  echo "[detect-vscode-for-git] $*"
+}
+
 if [[ -n $DEBUG ]]; then
   set -x
 fi
 
 if [[ "$VSCODE_GIT_IPC_HANDLE" != "" && "$VSCODE_GIT_ASKPASS_NODE" != "" && "$TERM_PROGRAM" == "vscode" ]]; then
   __VSCODE_BASE_PATH="$(dirname "${VSCODE_GIT_ASKPASS_NODE}")"
+  log "Detected VS Code environment. Base path: ${__VSCODE_BASE_PATH}"
 
   # Check if the path is in ~/.vscode/cli/servers (for Remote Tunnels), ~/.vscode-server/cli
   # (for Remote SSH) or not
   if [[ $__VSCODE_BASE_PATH =~ ^"$HOME"/.vscode/cli/servers ]] || [[ $__VSCODE_BASE_PATH =~ ^"$HOME"/.vscode-server/cli ]]; then
     # If it is, set the path to the correct location
-    VSCODE_CLI_PATH="${__VSCODE_BASE_PATH}/bin/remote-cli/code"
+    __VSCODE_STABLE_CLI_PATH="${__VSCODE_BASE_PATH}/bin/remote-cli/code"
+    __VSCODE_INSIDERS_CLI_PATH="${__VSCODE_BASE_PATH}/bin/remote-cli/code-insiders"
+
+    # Check if the stable or insiders version exists
+    if [[ -f "$__VSCODE_INSIDERS_CLI_PATH" ]]; then
+      VSCODE_CLI_PATH="$__VSCODE_INSIDERS_CLI_PATH"
+    elif [[ -f "$__VSCODE_STABLE_CLI_PATH" ]]; then
+      VSCODE_CLI_PATH="$__VSCODE_STABLE_CLI_PATH"
+    fi
   else
     # otherwise just use plain cli/desktop app CLI
-    VSCODE_CLI_PATH="$(command -v code)"
+    __VSCODE_STABLE_CLI_PATH="$(command -v code)"
+    __VSCODE_INSIDERS_CLI_PATH="$(command -v code-insiders)"
+
+    # Same with earlier
+    if [[ -f "$__VSCODE_INSIDERS_CLI_PATH" ]]; then
+      VSCODE_CLI_PATH="$__VSCODE_INSIDERS_CLI_PATH"
+    elif [[ -f "$__VSCODE_STABLE_CLI_PATH" ]]; then
+      VSCODE_CLI_PATH="$__VSCODE_STABLE_CLI_PATH"
+    fi
   fi
+  log "Using VS Code CLI path: ${VSCODE_CLI_PATH}"
 
   export GIT_EDITOR="${VSCODE_CLI_PATH} --wait" EDITOR="${VSCODE_CLI_PATH} --wait" VISUAL="${VSCODE_CLI_PATH} --wait" VSCODE_CLI_PATH
 fi

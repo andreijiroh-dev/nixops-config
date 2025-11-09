@@ -1,4 +1,9 @@
-{ lib, ... }: {
+{ lib, pkgs, ... }: {
+  home.packages = [
+    pkgs.detect-vscode-for-git
+    pkgs.ssh-agent-loader
+  ];
+
   # taken from https://github.com/andreijiroh-dev/dotfiles/blob/main/.config/aliases
   home.shellAliases = {
     signoff = "git commit --signoff";
@@ -63,7 +68,7 @@
       fi
 
       # source our ssh-agent-loader first
-      FF_SKIP_AUTO_SSH_AGENT_LOADER=true . ${../../misc/bash/lib/ssh-agent-loader}
+      FF_SKIP_AUTO_SSH_AGENT_LOADER=true . ${pkgs.ssh-agent-loader}/bin/ssh-agent-loader
 
       # try to use keychain in this situation
       SSH_AGENT_LOADER_SLIENT=1 ssh-agent-loader keychain
@@ -76,7 +81,7 @@
     '';
     bashrcExtra = ''
       # detect if we are inside VS Code
-      source ${../../misc/bash/lib/detect-vscode-for-git}
+      source ${pkgs.detect-vscode-for-git}/bin/detect-vscode-for-git
 
       # HACK: https://github.com/akinomyoga/ble.sh/wiki/Manual-A1-Installation#user-content-nixpkgs
       export BLESH_PATH=$(blesh-share)
@@ -87,7 +92,7 @@
       export GPG_TTY=$(tty)
       
       # source our ssh-agent-loader first
-      source ${../../misc/bash/lib/ssh-agent-loader}
+      source ${pkgs.ssh-agent-loader}/bin/ssh-agent-loader
 
       # hack around for 1Password CLI when 1Password desktop app is up
       if [[ $$FF_USE_OP_CLI_PLUGINS == "true" ]]; then
