@@ -18,6 +18,9 @@
         "rpi-aether.local"
         "aether.local"
       ];
+      "192.168.254.190" = [
+        "lairland.local"
+      ];
     };
   };
 
@@ -43,6 +46,13 @@
         "aether.tailnet"
         "aether.tailnet.andreijiroh.dev"
         "aether.tailnet.andreijiroh.eu.org"
+      ];
+      "100.82.232.51" = [
+        "lairland"
+        "lairland.tailnet"
+        "lairland.fawn-cod.ts.net"
+        "lairland.tailnet.andreijiroh.dev"
+        "lairland.tailnet.andreijiroh.eu.org"
       ];
       "100.102.205.81" = [
         "go"
