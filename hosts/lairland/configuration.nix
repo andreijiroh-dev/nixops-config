@@ -34,8 +34,8 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../shared/desktop/base.nix
-      ../../shared/desktop/kde-plasma.nix
+      #../../shared/desktop/base.nix
+      #../../shared/desktop/kde-plasma.nix
       ../../shared/server/ssh.nix
       ../../shared/server/tailscale.nix
       ../../shared/server/devenv.nix
@@ -46,6 +46,9 @@ in
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # we're not using the TPM at the moment
+  systemd.tpm2.enable = false;
+  boot.initrd.systemd.tpm2.enable = false;
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;

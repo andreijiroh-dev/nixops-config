@@ -1,7 +1,7 @@
 # This is the meta config file for nixpkgs and nix cli itself, including
 # trusted keys for cachix caches and stateVersion for NixOS.
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, self, ... }:
 
 {
   # Adopted from https://fnordig.de/til/nix/home-manager-allow-unfree.html,
