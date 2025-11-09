@@ -7,6 +7,7 @@
     ./firewall.nix
     ./fonts.nix
     ./yubikey.nix
+    ../flatpak.nix
   ];
 
   # List packages installed in system profile. To search, run:

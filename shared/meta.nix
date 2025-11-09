@@ -7,7 +7,6 @@
   imports = [
     ./1password.nix
     ./nix.nix
-    ./flatpak.nix
     ./appimages.nix
     ./gnupg.nix
     ./locale.nix
