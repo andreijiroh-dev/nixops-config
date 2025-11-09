@@ -29,8 +29,16 @@
       fsType = "ext4";
     };
 
+  # Seperate ext4 partition for local Git repo work
   fileSystems."/workspaces" =
     { device = "/dev/disk/by-uuid/3d45f467-8f59-4664-9d84-05b871c2d801";
+      fsType = "ext4";
+    };
+
+  # Dedicated 1TB HDD for Docker data outside of the regular /var/lib/docker path
+  # Used for my Homelab setup to avoid filling up the main NixOS partition.
+  fileSystems."/opt/docker-data" =
+    { device = "/dev/disk/by-uuid/c2b43f4a-4582-4f0b-b542-c1dc0ed88673";
       fsType = "ext4";
     };
 
