@@ -13,4 +13,8 @@
     ];
     createHome = true;
   };
+
+  # safety assertions iykyk
+  users.users.coolify-runner.group = "coolify-runner";
+  users.groups.coolify-runner = {};
 }
