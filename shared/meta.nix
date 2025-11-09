@@ -6,7 +6,7 @@
   # import configs first
   imports = [
     ./1password.nix
-    ./meta-configs.nix
+    ./nix.nix
     ./flatpak.nix
     ./appimages.nix
     ./gnupg.nix
@@ -42,4 +42,7 @@
     starship
     oh-my-posh # as backup lol
   ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
 }

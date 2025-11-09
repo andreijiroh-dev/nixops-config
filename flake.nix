@@ -89,15 +89,15 @@
       );
 
       overlays.default = final: prev: {
-        detect-vscode-for-git = self.packages.${prev.system}.detect-vscode-for-git;
-        ssh-agent-loader = self.packages.${prev.system}.ssh-agent-loader;
+        detect-vscode-for-git = prev.callPackage ./pkgs/detect-vscode-for-git.nix { };
+        ssh-agent-loader = prev.callPackage ./pkgs/ssh-agent-loader.nix { };
       };
 
       nixosConfigurations = {
         recoverykit-amd64 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            { nixpkgs.overlays = [ self.overlays.default ]; }
+            ./shared/meta.nix
             ./hosts/recoverykit/configuration.nix
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ];
@@ -106,6 +106,7 @@
         portable-amd64-256gb = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            ./shared/meta.nix
             { nixpkgs.overlays = [ self.overlays.default ]; }
             ./hosts/portable/amd64/configuration.nix
 
@@ -127,16 +128,7 @@
         lairland = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            # Override bat-extras with the patched version
-            {
-              nixpkgs.overlays = [
-                self.overlays.default
-                (final: prev: {
-                  #bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
-                })
-              ];
-            }
-
+            ./shared/meta.nix
             ./hosts/lairland/configuration.nix
             # load Determinate Nix and the rest
             determinate.nixosModules.default
@@ -150,6 +142,7 @@
           ];
 
           specialArgs = {
+            inherit self;
             zen-browser = zen-browser;
             dev-pkgs = dev-pkgs;
           };
@@ -160,7 +153,7 @@
           # otherwise, it fails to build with some missing dependencies
           system = "x86_64-linux";
           modules = [
-            { nixpkgs.overlays = [ self.overlays.default ]; }
+            ./shared/meta.nix
             ./hosts/stellapent-cier/configuration.nix
 
             # load Determinate Nix and the rest
@@ -173,6 +166,7 @@
             ./shared/vscode/server.nix
           ];
           specialArgs = {
+            inherit self;
             zen-browser = zen-browser;
             dev-pkgs = dev-pkgs;
           };
@@ -193,7 +187,16 @@
             inherit zen-browser;
           };
           modules = [
-            { nixpkgs.overlays = [ self.overlays.default ]; }
+            {
+              nixpkgs = {
+                overlays = [ self.overlays.default ];
+                config = {
+                  allowUnfree = true;
+                  # https://github.com/nix-community/home-manager/issues/2942
+                  allowUnfreePredicate = (_: true);
+                };
+              };
+            }
             ./shared/home-manager/main.nix
             {
               home = {
@@ -217,14 +220,15 @@
             inherit zen-browser;
           };
           modules = [
-            # Override bat-extras with the patched version
             {
-              nixpkgs.overlays = [
-                self.overlays.default
-                (final: prev: {
-                  #bat-extras = nixpkgs-bat-extras-pr.legacyPackages.${prev.system}.bat-extras;
-                })
-              ];
+              nixpkgs = {
+                overlays = [ self.overlays.default ];
+                config = {
+                  allowUnfree = true;
+                  # https://github.com/nix-community/home-manager/issues/2942
+                  allowUnfreePredicate = (_: true);
+                };
+              };
             }
 
             ./shared/home-manager/main.nix
@@ -248,7 +252,16 @@
             inherit zen-browser;
           };
           modules = [
-            { nixpkgs.overlays = [ self.overlays.default ]; }
+            { 
+              nixpkgs = {
+                overlays = [ self.overlays.default ];
+                config = {
+                  allowUnfree = true;
+                  # https://github.com/nix-community/home-manager/issues/2942
+                  allowUnfreePredicate = (_: true);
+                };
+              };
+            }
             ./shared/home-manager/nogui.nix
             {
               home.username = "ajhalili2006";

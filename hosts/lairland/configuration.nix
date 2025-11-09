@@ -34,7 +34,6 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../shared/meta.nix
       ../../shared/desktop/base.nix
       ../../shared/desktop/kde-plasma.nix
       ../../shared/server/ssh.nix

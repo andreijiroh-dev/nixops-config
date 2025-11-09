@@ -35,7 +35,6 @@ in
   imports = [
     ./hardware-configuration.nix
     ./broadcom.nix
-    ../../shared/meta.nix
     ../../shared/desktop/base.nix
     ../../shared/desktop/kde-plasma.nix
     ../../shared/server/ssh.nix
@@ -108,10 +107,6 @@ in
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  # home-manager specifics
-  home-manager.useUserPackages = true;
-  #home-manager.useGlobalPkgs = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # Might be obvious to some since I'm technically roleplaying on my

@@ -12,6 +12,7 @@
       # https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = (_: true);
     };
+    overlays = [ self.overlays.default ];
   };
 
   nix = {
@@ -23,25 +24,27 @@
       # See https://nix.dev/manual/nix/latest/development/experimental-features
       # for latest supported feature flags.
       experimental-features = [
+        "nix-command"
+        "flakes"
+
         "auto-allocate-uids"
+        "blake3-hashes"
         "ca-derivations"
         "cgroups"
         "configurable-impure-env"
-        "daemon-trust-override"
+        #"daemon-trust-override"
         "dynamic-derivations"
+        "external-builders"
         "fetch-closure"
         "fetch-tree"
-        "flakes"
         "git-hashing"
         "impure-derivations"
         "local-overlay-store"
         "mounted-ssh-store"
-        "nix-command"
         "no-url-literals"
-        "parse-toml-timestamps"
         "pipe-operators"
         "read-only-local-store"
-        "recursive-nix"
+        #"recursive-nix"
         "verified-fetches"
       ];
 
@@ -105,10 +108,11 @@
   };
 
   # Needed since Determinate Nix manages the main config file for system.
-  environment.etc."nix/nix.custom.conf" = {
-    source = ../misc/nix/nix.custom.conf;
-    mode = "0644";
-  };
+  # Commented out for a while to test if it's really needed.
+  #environment.etc."nix/nix.custom.conf" = {
+  #  source = ../misc/nix/nix.custom.conf;
+  #  mode = "0644";
+  #};
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

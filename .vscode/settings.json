@@ -9,5 +9,10 @@
     "nix.serverSettings": {
       "flake": {"autoArchive": true, "nixpkgsInputName": "nixpkgs"}
     },
-    "markdown.validate.enabled": true
+    "markdown.validate.enabled": true,
+    "evenBetterToml.schema.associations": {
+      "misc/nix/nix.user.conf": "https://raw.githubusercontent.com/nix-community/nixd/main/nixd/docs/nixd-schema.json",
+      "misc/nix/nix.custom.conf": "https://raw.githubusercontent.com/nix-community/nixd/main/nixd/docs/nixd-schema.json"
+    },
+    "evenBetterToml.taplo.configFile.path": ".taplo.toml"
 }

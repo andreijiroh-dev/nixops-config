@@ -20,15 +20,6 @@
     ./fonts.nix
   ];
 
-  # https://fnordig.de/til/nix/home-manager-allow-unfree.html
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      # https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = (_: true);
-    };
-  };
-
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
