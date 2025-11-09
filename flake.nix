@@ -74,7 +74,7 @@
       zen-browser
     }:
     let
-      our-pkgs = import ./pkgs;
+      dev-pkgs = import ./pkgs;
     in
     {
       # For CI and other builds
@@ -151,6 +151,7 @@
 
           specialArgs = {
             zen-browser = zen-browser;
+            dev-pkgs = dev-pkgs;
           };
         };
 
@@ -173,6 +174,7 @@
           ];
           specialArgs = {
             zen-browser = zen-browser;
+            dev-pkgs = dev-pkgs;
           };
         };
       };
@@ -187,6 +189,8 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
             inherit self;
+            inherit dev-pkgs;
+            inherit zen-browser;
           };
           modules = [
             { nixpkgs.overlays = [ self.overlays.default ]; }
@@ -209,6 +213,8 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
             inherit self;
+            inherit dev-pkgs;
+            inherit zen-browser;
           };
           modules = [
             # Override bat-extras with the patched version
@@ -238,6 +244,8 @@
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
             inherit self;
+            inherit dev-pkgs;
+            inherit zen-browser;
           };
           modules = [
             { nixpkgs.overlays = [ self.overlays.default ]; }
@@ -249,6 +257,7 @@
           ];
           specialArgs = {
             zen-browser = zen-browser;
+            dev-pkgs = dev-pkgs;
           };
         };
       };

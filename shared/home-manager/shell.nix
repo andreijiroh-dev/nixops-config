@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, dev-pkgs, ... }: {
   home.packages = [
     pkgs.detect-vscode-for-git
     pkgs.ssh-agent-loader

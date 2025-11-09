@@ -8,6 +8,7 @@
   pkgs,
   lib,
   zen-browser,
+  dev-pkgs,
   ...
 }:
 

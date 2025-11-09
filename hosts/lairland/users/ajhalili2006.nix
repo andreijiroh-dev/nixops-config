@@ -1,4 +1,4 @@
-{ config, pkgs, lib, zen-browser, ... }:
+{ config, pkgs, lib, zen-browser, dev-pkgs, ... }:
 
 {
   # see ../../stellapent-cier/users/gildedguy.nix for context

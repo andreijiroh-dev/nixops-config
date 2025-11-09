@@ -1,4 +1,4 @@
-{ config, pkgs, lib, zen-browser, ... }:
+{ config, pkgs, lib, zen-browser, dev-pkgs, ... }:
 
 {
   # This now configures the 'gildedguy' user within the NixOS module system
