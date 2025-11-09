@@ -1,11 +1,32 @@
 { config, pkgs, lib, zen-browser, dev-pkgs, ... }:
 
 {
-  # This now configures the 'gildedguy' user within the NixOS module system
+  # Might be obvious to some since I'm technically roleplaying on my
+  # old HP laptop my overseas Filipino dad gave me in 2024.
+  users.users.gildedguy = {
+    isNormalUser = true;
+    description = "Gildedguy (Michael Moy)"; # We're not impersonating the animatior here lol.
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
+    openssh = {
+      authorizedKeys.keys = with import ../../../shared/ssh-keys.nix;; [
+        personal.y2022
+        personal.passwordless
+        personal.campus-comlab
+        work.recaptime-dev.crew
+        rp.gildedguy
+      ];
+    };
+    linger = true;
+  };
+
   home-manager.users.gildedguy = {
     imports = [
-      ../../../shared/home-manager/main.nix
       zen-browser.homeModules.beta
+      ../../../shared/home-manager/main.nix
     ];
 
     home.username = "gildedguy";

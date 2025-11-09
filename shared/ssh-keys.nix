@@ -7,6 +7,7 @@
     y2022 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEXuD3hJwInlcHs3wkXWAWNo8es3bPAd2e8ipjyqgGp2 ajhalili2006@andreijiroh.dev";
     passwordless = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDUnTexcVQTGT+UhX8MRPkMvM6FPuskbY2Dn0ScZ3+ot ~ajhalili2006 [passwordless key for sshfs]";
     releases = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHzLVfKtq8vBYeSrrVhwFwkpfu6TDLFgyjb3UmB+Jdhl releases@andreijiroh.dev";
+    campus-comlab = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFI1Mj7gTG1IwnxPyr2AsXDq2kBq98hnijhgkGklkhWH";
   };
   work = {
     recaptime-dev = {
@@ -20,6 +21,7 @@
   };
 
   infra = {
+    termius = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC+H0oixQCgHiZWk4+H6VupW+2Aibs7poK7kNPf+hJEv";
     gcp = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9p6XYWUumCEk8ExaoProbI6BQHu52SErSlrOzUzzCUTjRPq2vfENTL7GwG6cgsrDLBxW+u+t6qoTXRVeRc7YCXzmPofls7dy2wXwBSM1Z/AzXCFDEVxtn3Y3F6gLi7nUbMZywBmBSlNjiN1w3FbBKMMP4SYgz0O1SGIjIFBQFheZgRTJxUq9DyPQRbY4U3jcJV8968JPQELKBCvmeI2iKNLOeSY1kVmwwM90yKgcvJsM/uTNXzUjTRK3Y4J0GWA2Up53pQxjmskqOusI+rwDVpnLsJEsjszvpOj5UAQrW4PuhJKjY0RYbigCrqqmCDbFuX9w6N9Sjo6Vp5MVxsMq7OwdNxNhBKDPJ8le4km8hdO8Z162+pSqUftk0hA4OjHIX2/i4avEl6Hh7MD1nbTnTbbaZV+1g6edWCnH0UASnrhulYkUNoWvpAi/bHJsfVuw5tZ8FprI5t6rCKiOXnXqU+jsn+fabDeuIt1mlN7BueebLUzAQ44npsFdSMEDCdJs= gildedguy@stellapent-cier";
     aws = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICx7San3UCFg3+vr5a07MoNBM9egqAeKHnu4Jhpx3Zwx devlab.aws";
   };

@@ -108,29 +108,6 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # Might be obvious to some since I'm technically roleplaying on my
-  # old HP laptop my overseas Filipino dad gave me in 2024.
-  users.users.gildedguy = {
-    isNormalUser = true;
-    description = "Gildedguy (Michael Moy)"; # We're not impersonating the animatior here lol.
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "docker"
-    ];
-    openssh = {
-      authorizedKeys.keys = with import ../../shared/ssh-keys.nix; [
-        personal.y2022
-        personal.passwordless
-        work.recaptime-dev.crew
-        rp.gildedguy
-      ];
-    };
-    linger = true;
-
-  };
-
   # logind adjustments for this laptop to run as a headless server while
   # the lid is closed.
   services.logind.settings.Login = {
