@@ -268,10 +268,6 @@
               home.homeDirectory = "/home/ajhalili2006";
             }
           ];
-          specialArgs = {
-            zen-browser = zen-browser;
-            dev-pkgs = dev-pkgs;
-          };
         };
       };
 
