@@ -1,4 +1,4 @@
-{ config, pkgs, lib, zen-browser, dev-pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   users.users.ajhalili2006 = {
@@ -14,7 +14,7 @@
         personal.passwordless
         personal.campus-comlab
         work.recaptime-dev.crew
-        rp.gildedguy
+        personal.rp.gildedguy
       ];
     linger = true;
   };
@@ -22,8 +22,7 @@
   # see ../../stellapent-cier/users/gildedguy.nix for context
   home-manager.users.ajhalili2006 = {
     imports = [
-      ../../../shared/home-manager/main.nix
-      zen-browser.homeModules.beta
+      ../../../shared/home-manager/nogui.nix
     ];
 
     home.username = "ajhalili2006";

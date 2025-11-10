@@ -17,4 +17,12 @@
     }))
     zed-editor
   ];
+
+  programs.zen-browser = {
+    enable = true;
+    nativeMessagingHosts = with pkgs; [
+     firefoxpwa
+     _1password-gui
+    ];
+  };
 }

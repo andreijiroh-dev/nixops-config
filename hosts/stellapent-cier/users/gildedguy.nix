@@ -17,7 +17,7 @@
         personal.passwordless
         personal.campus-comlab
         work.recaptime-dev.crew
-        rp.gildedguy
+        personal.rp.gildedguy
       ];
     };
     linger = true;
