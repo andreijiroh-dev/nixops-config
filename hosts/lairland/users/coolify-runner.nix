@@ -2,7 +2,9 @@
 
 {
   users.users.coolify-runner = {
-    isSystemUser = true;
+    isNormalUser = true;
+    uid = 9999;
+    group = "coolify-runner";
     description = "Coolify service user";
     home = "/opt/docker-data/coolify";
     extraGroups = [ "docker" ];
@@ -13,8 +15,7 @@
     ];
     createHome = true;
   };
-
-  # safety assertions iykyk
-  users.users.coolify-runner.group = "coolify-runner";
-  users.groups.coolify-runner = {};
+  users.groups.coolify-runner = {
+    gid = 9999;
+  };
 }
