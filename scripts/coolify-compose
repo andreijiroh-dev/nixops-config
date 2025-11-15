@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: MPL-2.0
+# Wrapper script for managing Coolify Docker Compose setup without needing
+# to copy-paste from the Coolify docs.
+
+COOLIFY_DIR=${COOLIFY_DIR:-"/data/coolify"}
+COOLIFY_SOURCE_DIR="${COOLIFY_DIR}/source"
+
+docker compose --env-file "${COOLIFY_SOURCE_DIR}/.env" \
+  -f "${COOLIFY_SOURCE_DIR}/docker-compose.yml" \
+  -f "${COOLIFY_SOURCE_DIR}/docker-compose.prod.yml" \
+  "$@"

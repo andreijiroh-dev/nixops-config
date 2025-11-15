@@ -74,4 +74,9 @@ in
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
+  # Used by ../../bin/coolify-compose script
+  environment.variables = {
+    COOLIFY_DIR = "/opt/docker-data/coolify";
+  };
 }
