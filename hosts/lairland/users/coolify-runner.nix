@@ -20,10 +20,10 @@
   };
 
   # Force chown on home directory to fix permissions after UID/GID change
-  system.activationScripts.chownCoolifyRunnerHome = {
-    text = ''
-      chown -R coolify-runner:coolify-runner ${config.users.users.coolify-runner.home}
-    '';
-    deps = [ "users" ];
-  };
+  #system.activationScripts.chownCoolifyRunnerHome = {
+  #  text = ''
+  #    chown -R coolify-runner:coolify-runner ${config.users.users.coolify-runner.home}
+  #  '';
+  #  deps = [ "users" ];
+  #};
 }
