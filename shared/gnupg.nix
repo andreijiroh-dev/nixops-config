@@ -11,7 +11,7 @@
   environment.systemPackages = with pkgs; [
     gnupg
     gpgme
+    gpgme.dev
     pinentry-tty
-    gpgme
   ];
 }

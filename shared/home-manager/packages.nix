@@ -40,6 +40,7 @@
     gpg-tui
     # imported from my nix profile list to avoid conflicts #
     gpgme
+    gpgme.dev
     jq
 
     ## programming languages
