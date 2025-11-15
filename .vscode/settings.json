@@ -7,7 +7,7 @@
       }
     ],
     "nix.serverSettings": {
-      "flake": {"autoArchive": true, "nixpkgsInputName": "nixpkgs"}
+      "flake": {"autoArchive": true, "nixpkgsInputName": "*"}
     },
     "markdown.validate.enabled": true,
     "evenBetterToml.schema.associations": {

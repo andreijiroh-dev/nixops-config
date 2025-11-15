@@ -1,7 +1,7 @@
 # This is the meta config file for nixpkgs and nix cli itself, including
 # trusted keys for cachix caches and stateVersion for NixOS.
 
-{ config, pkgs, lib, self, ... }:
+{ config, pkgs, lib, self, nix4vscode, ... }:
 
 {
   # Adopted from https://fnordig.de/til/nix/home-manager-allow-unfree.html,
@@ -12,7 +12,10 @@
       # https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = (_: true);
     };
-    overlays = [ self.overlays.default ];
+    overlays = [
+      self.overlays.default
+      nix4vscode.overlays.default
+    ];
   };
 
   nix = {

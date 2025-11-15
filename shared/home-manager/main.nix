@@ -38,15 +38,4 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscode;
-    profiles = {
-      default = {
-        enableExtensionUpdateCheck = true;
-      };
-    };
-    mutableExtensionsDir = true;
-  };
 }

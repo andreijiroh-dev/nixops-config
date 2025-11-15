@@ -50,6 +50,11 @@
         home-manager.follows = "home-manager";
       };
     };
+    nix4vscode = {
+      url = "github:nix-community/nix4vscode";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+    };
 
     # nix-ld
     nix-ld = {
@@ -71,7 +76,8 @@
       systems,
       nixos-generators,
       lib,
-      zen-browser
+      zen-browser,
+      nix4vscode
     }:
     let
       dev-pkgs = import ./pkgs;
@@ -107,21 +113,18 @@
           system = "x86_64-linux";
           modules = [
             ./shared/meta.nix
-            { nixpkgs.overlays = [ self.overlays.default ]; }
             ./hosts/portable/amd64/configuration.nix
-
-            # load Determinate Nix and the rest
-            determinate.nixosModules.default
-            home-manager.nixosModules.home-manager
-            vscode-server.nixosModules.default
-            nix-ld.nixosModules.nix-ld
-
-            # one-liners?
-            { programs.nix-ld.dev.enable = true; }
           ];
 
           specialArgs = {
-            zen-browser = zen-browser;
+            inherit self;
+            inherit zen-browser;
+            inherit dev-pkgs;
+            inherit nix-ld;
+            inherit determinate;
+            inherit home-manager;
+            inherit vscode-server;
+            inherit nix4vscode;
           };
         };
 
@@ -130,21 +133,17 @@
           modules = [
             ./shared/meta.nix
             ./hosts/lairland/configuration.nix
-            # load Determinate Nix and the rest
-            determinate.nixosModules.default
-            home-manager.nixosModules.home-manager
-            vscode-server.nixosModules.default
-            nix-ld.nixosModules.nix-ld
-
-            # one-liners?
-            { programs.nix-ld.dev.enable = true; }
-            ./shared/vscode/server.nix
           ];
 
           specialArgs = {
             inherit self;
-            zen-browser = zen-browser;
-            dev-pkgs = dev-pkgs;
+            inherit zen-browser;
+            inherit dev-pkgs;
+            inherit nix-ld;
+            inherit determinate;
+            inherit home-manager;
+            inherit vscode-server;
+            inherit nix4vscode;
           };
         };
 
@@ -155,20 +154,16 @@
           modules = [
             ./shared/meta.nix
             ./hosts/stellapent-cier/configuration.nix
-
-            # load Determinate Nix and the rest
-            determinate.nixosModules.default
-            home-manager.nixosModules.home-manager
-            vscode-server.nixosModules.default
-            nix-ld.nixosModules.nix-ld
-
-            # one-liners?
-            ./shared/vscode/server.nix
           ];
           specialArgs = {
             inherit self;
-            zen-browser = zen-browser;
-            dev-pkgs = dev-pkgs;
+            inherit zen-browser;
+            inherit dev-pkgs;
+            inherit nix-ld;
+            inherit determinate;
+            inherit home-manager;
+            inherit vscode-server;
+            inherit nix4vscode;
           };
         };
       };
@@ -185,11 +180,15 @@
             inherit self;
             inherit dev-pkgs;
             inherit zen-browser;
+            inherit nix4vscode;
           };
           modules = [
             {
               nixpkgs = {
-                overlays = [ self.overlays.default ];
+                overlays = [
+                  self.overlays.default
+                  nix4vscode.overlays.default
+                ];
                 config = {
                   allowUnfree = true;
                   # https://github.com/nix-community/home-manager/issues/2942
@@ -218,11 +217,15 @@
             inherit self;
             inherit dev-pkgs;
             inherit zen-browser;
+            inherit nix4vscode;
           };
           modules = [
             {
               nixpkgs = {
-                overlays = [ self.overlays.default ];
+                overlays = [
+                  self.overlays.default
+                  nix4vscode.overlays.default
+                ];
                 config = {
                   allowUnfree = true;
                   # https://github.com/nix-community/home-manager/issues/2942
@@ -254,7 +257,10 @@
           modules = [
             { 
               nixpkgs = {
-                overlays = [ self.overlays.default ];
+                overlays = [ 
+                  self.overlays.default
+                  nix4vscode.overlays.default
+                ];
                 config = {
                   allowUnfree = true;
                   # https://github.com/nix-community/home-manager/issues/2942
@@ -281,7 +287,7 @@
           networking = ./shared/networking.nix;
           locale = ./shared/locale.nix;
           gnupg = ./shared/gnupg.nix;
-          metaConfigs = ./shared/meta-configs.nix;
+          metaConfigs = ./shared/nix.nix;
           shells = {
             bash = ./shared/shells/bash.nix;
             customPrompts = ./shared/shells/custom-prompts.nix;
