@@ -1,12 +1,23 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: MPL-2.0
 # Wrapper script for managing Coolify Docker Compose setup without needing
-# to copy-paste from the Coolify docs.
+# to copy-paste --env-file and --file flags from the Coolify docs.
 
 COOLIFY_DIR=${COOLIFY_DIR:-"/data/coolify"}
 COOLIFY_SOURCE_DIR="${COOLIFY_DIR}/source"
+SUDO=${SUDO:-"sudo"}
 
-docker compose --env-file "${COOLIFY_SOURCE_DIR}/.env" \
-  -f "${COOLIFY_SOURCE_DIR}/docker-compose.yml" \
-  -f "${COOLIFY_SOURCE_DIR}/docker-compose.prod.yml" \
-  "$@"
+# Since the /data/coolify folder is chowned to 9999:root, we need to esclate
+# perms via $SUDO.
+if [[ $EUID != "0" ]]; then
+  echo "Attempting to exec as root via $(command -v ${SUDO})..."
+  exec "${SUDO}" docker compose --env-file "${COOLIFY_SOURCE_DIR}/.env" \
+    -f "${COOLIFY_SOURCE_DIR}/docker-compose.yml" \
+    -f "${COOLIFY_SOURCE_DIR}/docker-compose.prod.yml" \
+    "$@"
+else
+  exec docker compose --env-file "${COOLIFY_SOURCE_DIR}/.env" \
+    -f "${COOLIFY_SOURCE_DIR}/docker-compose.yml" \
+    -f "${COOLIFY_SOURCE_DIR}/docker-compose.prod.yml" \
+    "$@"
+fi
