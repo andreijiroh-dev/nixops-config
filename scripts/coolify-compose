@@ -7,17 +7,40 @@ COOLIFY_DIR=${COOLIFY_DIR:-"/data/coolify"}
 COOLIFY_SOURCE_DIR="${COOLIFY_DIR}/source"
 SUDO=${SUDO:-"sudo"}
 
-# Since the /data/coolify folder is chowned to 9999:root, we need to esclate
-# perms via $SUDO.
-if [[ $EUID != "0" ]]; then
-  echo "Attempting to exec as root via $(command -v ${SUDO})..."
-  exec "${SUDO}" docker compose --env-file "${COOLIFY_SOURCE_DIR}/.env" \
-    -f "${COOLIFY_SOURCE_DIR}/docker-compose.yml" \
-    -f "${COOLIFY_SOURCE_DIR}/docker-compose.prod.yml" \
-    "$@"
+# The main entrypoint to docker-compose pointing to Coolify's compose + dotenv files,
+# after handling those compose commands.
+main() {
+  # Since the /data/coolify folder is chowned to 9999:root, we need to esclate
+  # perms via $SUDO.
+  if [[ $EUID != "0" ]]; then
+    echo "Attempting to exec as root via $(command -v ${SUDO})..."
+    exec "${SUDO}" docker compose --env-file "${COOLIFY_SOURCE_DIR}/.env" \
+      -f "${COOLIFY_SOURCE_DIR}/docker-compose.yml" \
+      -f "${COOLIFY_SOURCE_DIR}/docker-compose.prod.yml" \
+      "$@"
+  else
+    exec docker compose --env-file "${COOLIFY_SOURCE_DIR}/.env" \
+      -f "${COOLIFY_SOURCE_DIR}/docker-compose.yml" \
+      -f "${COOLIFY_SOURCE_DIR}/docker-compose.prod.yml" \
+      "$@"
+  fi
+}
+
+if [[ $1 == "up" ]]; then
+  # From the Coolify docs for manual installation steps, we always want to use these
+  # flags when bringing up.
+  # Docs: https://coolify.io/docs/get-started/installation#_7-start-coolify
+  main up -d --remove-orphans --pull=always --force-recreate "$@"
+elif [[ $1 == "down" ]]; then
+  # From the Coolify docs for uninstallation steps (the Compose way of tearing down
+  # containers), we always want to use these flags when bringing down.
+  # Docs: https://coolify.io/docs/get-started/uninstallation#_1-stop-and-remove-containers
+  main down --timeout=0 "$@"
+elif [[ $1 == "stop" ]]; then
+  # From the Coolify docs for uninstallation steps (the `docker stop` one), we
+  # always want to use these flags when stopping
+  # Docs: https://coolify.io/docs/get-started/uninstallation#_1-stop-and-remove-containers
+  main stop --timeout=0 "$@"
 else
-  exec docker compose --env-file "${COOLIFY_SOURCE_DIR}/.env" \
-    -f "${COOLIFY_SOURCE_DIR}/docker-compose.yml" \
-    -f "${COOLIFY_SOURCE_DIR}/docker-compose.prod.yml" \
-    "$@"
+  main "$@"
 fi
