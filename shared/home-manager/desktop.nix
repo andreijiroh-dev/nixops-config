@@ -3,9 +3,11 @@
 
 {
   imports = [
-    zen-browser.homeModule.beta
+    # make sure to import the zen-browser home module
+    # for programs.zen-browser to work
+    zen-browser.homeModules.beta
   ];
-  
+
   home.packages = with pkgs; [
     _1password-gui
     firefoxpwa
