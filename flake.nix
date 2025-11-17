@@ -34,8 +34,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Community Extras
+    # NixOS hardware stuff
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    # vscode-server setup
     vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
       inputs = {
@@ -43,6 +45,13 @@
         flake-utils.follows = "flake-utils";
       };
     };
+    nix4vscode = {
+      url = "github:nix-community/nix4vscode";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+    };
+
+    # Firefox and friends
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs = {
@@ -53,11 +62,6 @@
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix4vscode = {
-      url = "github:nix-community/nix4vscode";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
     };
 
     # nix-ld
@@ -95,7 +99,10 @@
       nixos-generators,
       lib,
       zen-browser,
-      nix4vscode
+      nix4vscode,
+      firefox-addons,
+      agenix,
+      agenix-rekey
     }:
     let
       dev-pkgs = import ./pkgs;
