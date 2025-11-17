@@ -79,4 +79,8 @@ in
   environment.variables = {
     COOLIFY_DIR = "/opt/docker-data/coolify";
   };
+
+  environment.systemPackages = with pkgs; [
+    coolify-compose
+  ];
 }

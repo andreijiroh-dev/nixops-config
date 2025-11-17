@@ -1,4 +1,4 @@
-# `@andreijiroh-dev/nixops-config`
+# `@andreijiroh-dev/nixops-config` - ~ajhalili2006's NixOS + home-manager configs in a flake
 
 This is @ajhalili2006's NixOS + Home Manager configuration for his laptop and homelabs,
 alongside in tildes with Nix installed and in sync with the [nixpkgs-specific branch][nix-dots]
@@ -132,6 +132,30 @@ if you want to reuse some of my configurations.
       };
     };
 }
+```
+
+If you also want to use the custom packages I built through the nixpkgs' system, just add it
+to your `nixpkgs.overlays` config.
+
+```nix
+# make sure to pass `andreijiroh-dev` as `extraSpecialArgs` to your NixOS/home-manager config
+# on the flake.nix to avoid issues
+{ pkgs, andreijiroh-dev, lib, ... }:
+
+{
+  nixpkgs.overlays = [
+    andreijiroh-dev.overlays.default
+    # other overlays
+  ];
+}
+```
+
+### Installing utility packages
+
+Replace `<package-name>` with the package you want to use. [See the `pkgs` README for details.](./pkgs/README.md)
+
+```shell
+nix profile install github:andreijiroh-dev/nixops-config#<package-name>
 ```
 
 ### Building a minimial ISO for recovery

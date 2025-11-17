@@ -99,23 +99,37 @@
     }:
     let
       dev-pkgs = import ./pkgs;
-    in
-    {
-      # For CI and other builds
-      packages = flake-utils.lib.eachDefaultSystem (system:
+      # resolve the current system at evaluation time and compute the per-system packages
+      current = builtins.currentSystem;
+      systemPackages = flake-utils.lib.eachDefaultSystem (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
         in
         {
+          coolify-compose = pkgs.callPackage ./pkgs/coolify-compose.nix { };
           detect-vscode-for-git = pkgs.callPackage ./pkgs/detect-vscode-for-git.nix { };
           ssh-agent-loader = pkgs.callPackage ./pkgs/ssh-agent-loader.nix { };
         }
       );
-
+    in
+    {
       overlays.default = final: prev: {
+        coolify-compose = prev.callPackage ./pkgs/coolify-compose.nix { };
         detect-vscode-for-git = prev.callPackage ./pkgs/detect-vscode-for-git.nix { };
         ssh-agent-loader = prev.callPackage ./pkgs/ssh-agent-loader.nix { };
       };
+
+      # For CI and other builds, alongside flake-based package installs via
+      # packages.${arch}-${platform}.${package-name} output.
+      packages = systemPackages;
+
+      # Convenient aliases resolved to the current system so consumers can do:
+      #   nix profile add .#<package-name>
+      # instead of:
+      #   nix profile add .#packages.x86_64-linux.<package-name>
+      coolify-compose = systemPackages.${current}.coolify-compose;
+      detect-vscode-for-git = systemPackages.${current}.detect-vscode-for-git;
+      ssh-agent-loader = systemPackages.${current}.ssh-agent-loader;
 
       nixosConfigurations = {
         recoverykit-amd64 = nixpkgs.lib.nixosSystem {
