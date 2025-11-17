@@ -50,6 +50,10 @@
         home-manager.follows = "home-manager";
       };
     };
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix4vscode = {
       url = "github:nix-community/nix4vscode";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -59,6 +63,20 @@
     # nix-ld
     nix-ld = {
       url = "github:Mic92/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # agenix and friends for SecretOps
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+    };
+    agenix-rekey = {
+      url = "github:oddlama/agenix-rekey";
+      # Make sure to override the nixpkgs version to follow your flake,
+      # otherwise derivation paths can mismatch (when using storageMode = "derivation"),
+      # resulting in the rekeyed secrets not being found!
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
