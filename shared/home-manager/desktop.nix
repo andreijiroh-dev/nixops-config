@@ -1,7 +1,11 @@
 # Desktop apps and related configs go here in this Nix file
-{ pkgs, ... }:
+{ pkgs, zen-browser, ... }:
 
 {
+  imports = [
+    zen-browser.homeModule.beta
+  ];
+  
   home.packages = with pkgs; [
     _1password-gui
     firefoxpwa
