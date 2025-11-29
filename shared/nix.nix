@@ -21,6 +21,7 @@
   nix = {
     gc = {
       automatic = true;
+      dates = ["weekly"];
       randomizedDelaySec = "30min";
     };
     settings = {
