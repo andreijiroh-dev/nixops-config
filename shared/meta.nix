@@ -1,17 +1,15 @@
 # One Nix file to import all the base configs without cluttering the per-host
 # imports, alongside a minimal base packages.
-{ pkgs, nix-ld, determinate, home-manager, vscode-server, ... }:
+{
+  pkgs,
+  config,
+  ...
+}:
 
 {
   # import configs first
   imports = [
-    # nix flake modules first
-    nix-ld.nixosModules.nix-ld
-    determinate.nixosModules.default
-    home-manager.nixosModules.home-manager
-    vscode-server.nixosModules.default
-
-    # then the configs
+    # import shared configs
     ./1password.nix
     ./nix.nix
     ./appimages.nix

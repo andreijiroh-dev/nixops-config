@@ -102,46 +102,56 @@
       nix4vscode,
       firefox-addons,
       agenix,
-      agenix-rekey
+      agenix-rekey,
     }:
     let
       dev-pkgs = import ./pkgs;
-      # resolve the current system at evaluation time and compute the per-system packages
-      current = builtins.currentSystem;
-      systemPackages = flake-utils.lib.eachDefaultSystem (system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
+    in
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
+        overlays = {
+          default = final: prev: {
+            coolify-compose = prev.callPackage ./pkgs/coolify-compose.nix { };
+            detect-vscode-for-git = prev.callPackage ./pkgs/detect-vscode-for-git.nix { };
+            ssh-agent-loader = prev.callPackage ./pkgs/ssh-agent-loader.nix { };
+          };
+        };
+
+        # Packages for this system
+        packages = {
           coolify-compose = pkgs.callPackage ./pkgs/coolify-compose.nix { };
           detect-vscode-for-git = pkgs.callPackage ./pkgs/detect-vscode-for-git.nix { };
           ssh-agent-loader = pkgs.callPackage ./pkgs/ssh-agent-loader.nix { };
-        }
-      );
-    in
-    {
-      overlays.default = final: prev: {
-        coolify-compose = prev.callPackage ./pkgs/coolify-compose.nix { };
-        detect-vscode-for-git = prev.callPackage ./pkgs/detect-vscode-for-git.nix { };
-        ssh-agent-loader = prev.callPackage ./pkgs/ssh-agent-loader.nix { };
-      };
 
-      # For CI and other builds, alongside flake-based package installs via
-      # packages.${arch}-${platform}.${package-name} output.
-      packages = systemPackages;
+          # Optionally make one the default to support `nix profile add .#`
+          default = pkgs.callPackage ./pkgs/coolify-compose.nix { };
+        };
 
-      # Convenient aliases resolved to the current system so consumers can do:
-      #   nix profile add .#<package-name>
-      # instead of:
-      #   nix profile add .#packages.x86_64-linux.<package-name>
-      coolify-compose = systemPackages.${current}.coolify-compose;
-      detect-vscode-for-git = systemPackages.${current}.detect-vscode-for-git;
-      ssh-agent-loader = systemPackages.${current}.ssh-agent-loader;
+        # If you want app-style outputs, you can also define apps here:
+        # apps.default = {
+        #   type = "app";
+        #   program = "${self.packages.${system}.coolify-compose}/bin/coolify-compose";
+        # };
 
+        # Keep nixosConfigurations and homeConfigurations outside of eachDefaultSystem
+        # or gate them by `system` if needed; shown below outside the lambda.
+      }
+    )
+    // {
       nixosConfigurations = {
         recoverykit-amd64 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            # nix flake modules first
+            nix-ld.nixosModules.nix-ld
+            determinate.nixosModules.default
+            home-manager.nixosModules.home-manager
+            vscode-server.nixosModules.default
+
+            # and then the configs
             ./shared/meta.nix
             ./hosts/recoverykit/configuration.nix
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
@@ -151,38 +161,38 @@
         portable-amd64-256gb = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            # nix flake modules first
+            nix-ld.nixosModules.nix-ld
+            determinate.nixosModules.default
+            home-manager.nixosModules.home-manager
+            vscode-server.nixosModules.default
+
+            # and then the configs
             ./shared/meta.nix
             ./hosts/portable/amd64/configuration.nix
           ];
 
           specialArgs = {
-            inherit self;
             inherit zen-browser;
-            inherit dev-pkgs;
-            inherit nix-ld;
-            inherit determinate;
-            inherit home-manager;
-            inherit vscode-server;
-            inherit nix4vscode;
           };
         };
 
         lairland = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            # nix flake modules first
+            nix-ld.nixosModules.nix-ld
+            determinate.nixosModules.default
+            home-manager.nixosModules.home-manager
+            vscode-server.nixosModules.default
+
+            # and then the configs
             ./shared/meta.nix
             ./hosts/lairland/configuration.nix
           ];
 
           specialArgs = {
-            inherit self;
             inherit zen-browser;
-            inherit dev-pkgs;
-            inherit nix-ld;
-            inherit determinate;
-            inherit home-manager;
-            inherit vscode-server;
-            inherit nix4vscode;
           };
         };
 
@@ -195,14 +205,7 @@
             ./hosts/stellapent-cier/configuration.nix
           ];
           specialArgs = {
-            inherit self;
             inherit zen-browser;
-            inherit dev-pkgs;
-            inherit nix-ld;
-            inherit determinate;
-            inherit home-manager;
-            inherit vscode-server;
-            inherit nix4vscode;
           };
         };
       };
@@ -235,6 +238,7 @@
                 };
               };
             }
+            zen-browser.homeModules.beta
             ./shared/home-manager/main.nix
             {
               home = {
@@ -272,7 +276,7 @@
                 };
               };
             }
-
+            zen-browser.homeModules.beta
             ./shared/home-manager/main.nix
             {
               home.username = "ajhalili2006";
@@ -294,9 +298,9 @@
             inherit zen-browser;
           };
           modules = [
-            { 
+            {
               nixpkgs = {
-                overlays = [ 
+                overlays = [
                   self.overlays.default
                   nix4vscode.overlays.default
                 ];
@@ -307,6 +311,7 @@
                 };
               };
             }
+            zen-browser.homeModules.beta
             ./shared/home-manager/nogui.nix
             {
               home.username = "ajhalili2006";

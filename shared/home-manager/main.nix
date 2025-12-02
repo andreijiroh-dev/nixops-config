@@ -7,7 +7,6 @@
   pkgs,
   lib,
   home-manager,
-  zen-browser,
   ...
 }:
 

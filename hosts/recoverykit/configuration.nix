@@ -7,7 +7,7 @@
   imports = [
     ../../shared/systemd.nix
     ../../shared/server/ssh.nix
-    ../../shared/meta-configs.nix
+    ../../shared/nix.nix
     ../../shared/systemd.nix
   ];
 

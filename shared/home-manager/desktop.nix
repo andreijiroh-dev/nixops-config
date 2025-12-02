@@ -1,11 +1,11 @@
 # Desktop apps and related configs go here in this Nix file
-{ pkgs, zen-browser, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     # make sure to import the zen-browser home module
     # for programs.zen-browser to work
-    zen-browser.homeModules.beta
+    #zen-browser.homeModules.beta
   ];
 
   home.packages = with pkgs; [
@@ -27,8 +27,8 @@
   programs.zen-browser = {
     enable = true;
     nativeMessagingHosts = with pkgs; [
-     firefoxpwa
-     _1password-gui
+      firefoxpwa
+      _1password-gui
     ];
   };
 }
