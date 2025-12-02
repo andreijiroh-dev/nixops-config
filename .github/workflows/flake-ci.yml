@@ -1,4 +1,4 @@
-name: Nix Flake Builds
+name: Nix Flake Builds CI
 
 on:
   schedule:
@@ -15,11 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Deterinate Nix
         uses: DeterminateSystems/nix-installer-action@main
         with:
           determinate: true
+
+      - name: Run checks
+        run: nix flake check
 
       - name: Update flake
         run: |
@@ -65,7 +68,7 @@ jobs:
           nix build .#nixosConfigurations.recoverykit-amd64.config.system.build.isoImage --verbose --show-trace
           cp result/iso/*.iso ./dist/ -rv
           echo ::endgroup
-      
+
       - name: Upload as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -107,10 +110,10 @@ jobs:
         run: |
           docker pull ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:${{env.PREBUILD_TAG}}
           docker tag ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:${{env.PREBUILD_TAG}} ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:dev
-      
+
       - name: Build the SD image
         run: cd hosts/raspi-base && docker compose up
-      
+
       - name: Upload as artifact
         uses: actions/upload-artifact@v4
         with:

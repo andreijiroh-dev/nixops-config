@@ -10,8 +10,8 @@ of my dotfiles repository.
 
 | Workflow Name and Type | CI Platform | Badge/Link |
 | --- | --- | --- |
-| Nix Flake Builds (push) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/update-flakes.yml/badge.svg)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/update-flakes.yml) |
-| Nix Flake Builds (schedule, every 06:30 UTC Saturday) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/update-flakes.yml/badge.svg?event=schedule)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/update-flakes.yml) |
+| Nix Flake Builds (push) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml/badge.svg)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml) |
+| Nix Flake Builds (schedule, every 06:30 UTC Saturday) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml/badge.svg?event=schedule)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml) |
 
 ## Mirrors
 
