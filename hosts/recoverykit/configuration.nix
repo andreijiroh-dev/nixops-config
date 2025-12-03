@@ -1,7 +1,13 @@
 # This NixOS configuration is for the custom recovery/installation media
 # using the minimal image here, probably built on GitHub Actions.
 
-{ lib, nixpkgs, ... }:
+{
+  lib,
+  nixpkgs,
+  self,
+  nix4vscode,
+  ...
+}:
 
 {
   imports = [

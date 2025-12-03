@@ -146,6 +146,12 @@
         recoverykit-amd64 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            (
+              { ... }:
+              {
+                _module.args = { inherit self nix4vscode; };
+              }
+            )
             # nix flake modules first
             nix-ld.nixosModules.nix-ld
             determinate.nixosModules.default
@@ -157,11 +163,21 @@
             ./hosts/recoverykit/configuration.nix
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ];
+
+          specialArgs = {
+            inherit zen-browser nix4vscode self;
+          };
         };
 
         portable-amd64-256gb = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            (
+              { ... }:
+              {
+                _module.args = { inherit self nix4vscode; };
+              }
+            )
             # nix flake modules first
             nix-ld.nixosModules.nix-ld
             determinate.nixosModules.default
@@ -181,6 +197,12 @@
         lairland = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            (
+              { ... }:
+              {
+                _module.args = { inherit self nix4vscode; };
+              }
+            )
             # nix flake modules first
             nix-ld.nixosModules.nix-ld
             determinate.nixosModules.default
@@ -202,11 +224,17 @@
           # otherwise, it fails to build with some missing dependencies
           system = "x86_64-linux";
           modules = [
+            (
+              { ... }:
+              {
+                _module.args = { inherit self nix4vscode; };
+              }
+            )
             ./shared/meta.nix
             ./hosts/stellapent-cier/configuration.nix
           ];
           specialArgs = {
-            inherit zen-browser self;
+            inherit zen-browser nix4vscode self;
           };
         };
       };
