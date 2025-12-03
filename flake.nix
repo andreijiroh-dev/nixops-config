@@ -245,6 +245,10 @@
                 _module.args = { inherit self nix4vscode; };
               }
             )
+            nix-ld.nixosModules.nix-ld
+            determinate.nixosModules.default
+            home-manager.nixosModules.home-manager
+            vscode-server.nixosModules.default
             ./shared/meta.nix
             ./hosts/stellapent-cier/configuration.nix
           ];
