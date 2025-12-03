@@ -106,6 +106,13 @@
     }:
     let
       dev-pkgs = import ./pkgs;
+      
+      # Reusable overlay function for any system
+      overlayFor = system: final: prev: {
+        coolify-compose = prev.callPackage ./pkgs/coolify-compose.nix { };
+        detect-vscode-for-git = prev.callPackage ./pkgs/detect-vscode-for-git.nix { };
+        ssh-agent-loader = prev.callPackage ./pkgs/ssh-agent-loader.nix { };
+      };
     in
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -113,14 +120,6 @@
         pkgs = import nixpkgs { inherit system; };
       in
       {
-        overlays = {
-          default = final: prev: {
-            coolify-compose = prev.callPackage ./pkgs/coolify-compose.nix { };
-            detect-vscode-for-git = prev.callPackage ./pkgs/detect-vscode-for-git.nix { };
-            ssh-agent-loader = prev.callPackage ./pkgs/ssh-agent-loader.nix { };
-          };
-        };
-
         # Packages for this system
         packages = {
           coolify-compose = pkgs.callPackage ./pkgs/coolify-compose.nix { };
@@ -142,6 +141,22 @@
       }
     )
     // {
+      # Top-level overlays for downstream consumers
+      overlays = {
+        # System-aware default overlay that works regardless of the system
+        default = final: prev:
+          let
+            sys = final.system or prev.stdenv.system or "x86_64-linux";
+          in
+          (overlayFor sys) final prev;
+        
+        # Per-system overlays for compatibility
+        x86_64-linux = overlayFor "x86_64-linux";
+        aarch64-linux = overlayFor "aarch64-linux";
+        x86_64-darwin = overlayFor "x86_64-darwin";
+        aarch64-darwin = overlayFor "aarch64-darwin";
+      };
+      
       nixosConfigurations = {
         recoverykit-amd64 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
