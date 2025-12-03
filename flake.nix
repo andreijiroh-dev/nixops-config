@@ -107,7 +107,8 @@
     let
       dev-pkgs = import ./pkgs;
     in
-    flake-utils.lib.eachDefaultSystem (system:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs { inherit system; };
       in
@@ -173,7 +174,7 @@
           ];
 
           specialArgs = {
-            inherit zen-browser;
+            inherit zen-browser self;
           };
         };
 
@@ -192,7 +193,7 @@
           ];
 
           specialArgs = {
-            inherit zen-browser;
+            inherit zen-browser self;
           };
         };
 
@@ -205,7 +206,7 @@
             ./hosts/stellapent-cier/configuration.nix
           ];
           specialArgs = {
-            inherit zen-browser;
+            inherit zen-browser self;
           };
         };
       };
@@ -219,10 +220,12 @@
           inherit lib;
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
-            inherit self;
-            inherit dev-pkgs;
-            inherit zen-browser;
-            inherit nix4vscode;
+            inherit
+              self
+              dev-pkgs
+              zen-browser
+              nix4vscode
+              ;
           };
           modules = [
             {
@@ -257,10 +260,12 @@
         plain = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
-            inherit self;
-            inherit dev-pkgs;
-            inherit zen-browser;
-            inherit nix4vscode;
+            inherit
+              self
+              dev-pkgs
+              zen-browser
+              nix4vscode
+              ;
           };
           modules = [
             {
@@ -293,9 +298,12 @@
         arm64-plain = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
-            inherit self;
-            inherit dev-pkgs;
-            inherit zen-browser;
+            inherit
+              self
+              dev-pkgs
+              zen-browser
+              nix4vscode
+              ;
           };
           modules = [
             {
