@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: "30 6 * * 5"
   push:
-    branches: [main]
+    branches: ["*"]
 
 permissions:
   contents: write
@@ -48,7 +48,7 @@ jobs:
       cancel-in-progress: false
       group: recoverykit-iso-builds
     needs: [update-lockfile]
-    name: Build recovery ISO
+    name: Build custom recovery/minimal ISO
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
