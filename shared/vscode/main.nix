@@ -1,20 +1,25 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   inherit (pkgs.nix4vscode)
     forVscode
     forVscodePrerelease
-  ;
+    ;
 in
 {
   imports = [
     ./server.nix
   ];
-  
+
   programs.vscode = {
     package = pkgs.vscode;
     enable = true;
-    profiles.default.extensions = {
+    extensions =
       forVscode [
         # themeing
         "GitHub.github-vscode-theme"
@@ -50,13 +55,15 @@ in
         "bierner.markdown-yaml-preamble"
         "DavidAnson.vscode-markdownlint"
 
-      ] ++ forVscodePrerelease [
+      ]
+      ++ forVscodePrerelease [
         # tooling
         "eamodio.gitlens"
         "ms-vscode.remote-server"
         "ms-vscode-remote.remote-ssh"
         "GitHub.vscode-pull-request-github"
-      ] ++ [
+      ]
+      ++ [
         # AI tools
         # Manually pinned to fix hash mismatch (since Copilot releases are tied to VSC monthly releases
         (pkgs.vscode-utils.extensionFromVscodeMarketplace {
@@ -65,6 +72,6 @@ in
           version = "1.388.0";
           sha256 = "sha256-wusgZJrLNEEptx5WZviRLjpibF0R4vTg5xK6ywZK9og=";
         })
-     ];
+      ];
   };
 }
