@@ -14,7 +14,7 @@ in
   programs.vscode = {
     package = pkgs.vscode;
     enable = true;
-    extensions =
+    profiles.default.extensions = {
       forVscode [
         # themeing
         "GitHub.github-vscode-theme"
@@ -63,8 +63,8 @@ in
           name = "copilot";
           publisher = "GitHub";
           version = "1.388.0";
-          sha256 = "sha256-8fv+z+ksWYWDty1JPg6Pe5De1FdFLKmVC+hy8kF0s3g=";
+          sha256 = "sha256-wusgZJrLNEEptx5WZviRLjpibF0R4vTg5xK6ywZK9og=";
         })
-];
+     ];
   };
 }

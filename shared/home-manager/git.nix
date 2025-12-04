@@ -10,13 +10,15 @@
     lfs = {
       enable = true;
     };
-    userName = "Andrei Jiroh Halili";
-    userEmail = "ajhalili2006@andreijiroh.dev";
+    settings.user = {
+      name = "Andrei Jiroh Halili";
+      email = "ajhalili2006@andreijiroh.dev";
+    };
     signing = {
       key = "4D5E631758CB9CC45941B1CE67BFC91B3DA12BE8";
       signByDefault = true;
     };
-    aliases = {
+    settings.alias = {
       signoff = "commit --signoff";
       amend = "commit -a --amend";
       remotes = "remote -v";
@@ -32,7 +34,7 @@
       hard = "reset --hard";
       soft = "reset --soft";
     };
-    extraConfig = {
+    settings = {
       format = {
         signOff = true;
       };
