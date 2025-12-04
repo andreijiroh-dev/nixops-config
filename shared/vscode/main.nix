@@ -56,9 +56,15 @@ in
         "ms-vscode.remote-server"
         "ms-vscode-remote.remote-ssh"
         "GitHub.vscode-pull-request-github"
-
+      ] ++ [
         # AI tools
-        "GitHub.copilot"
-      ];
+        # Manually pinned to fix hash mismatch (since Copilot releases are tied to VSC monthly releases
+        (pkgs.vscode-utils.extensionFromVscodeMarketplace {
+          name = "copilot";
+          publisher = "GitHub";
+          version = "1.388.0";
+          sha256 = "sha256-8fv+z+ksWYWDty1JPg6Pe5De1FdFLKmVC+hy8kF0s3g=";
+        })
+];
   };
 }
