@@ -83,8 +83,15 @@
       # resulting in the rekeyed secrets not being found!
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
 
+    chaotic = {
+      url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+  };
   outputs =
     inputs@{
       self,
@@ -103,10 +110,11 @@
       firefox-addons,
       agenix,
       agenix-rekey,
+      chaotic,
     }:
     let
       dev-pkgs = import ./pkgs;
-      
+
       # Reusable overlay function for any system
       overlayFor = system: final: prev: {
         coolify-compose = prev.callPackage ./pkgs/coolify-compose.nix { };
@@ -144,19 +152,20 @@
       # Top-level overlays for downstream consumers
       overlays = {
         # System-aware default overlay that works regardless of the system
-        default = final: prev:
+        default =
+          final: prev:
           let
             sys = final.system or prev.stdenv.system or "x86_64-linux";
           in
           (overlayFor sys) final prev;
-        
+
         # Per-system overlays for compatibility
         x86_64-linux = overlayFor "x86_64-linux";
         aarch64-linux = overlayFor "aarch64-linux";
         x86_64-darwin = overlayFor "x86_64-darwin";
         aarch64-darwin = overlayFor "aarch64-darwin";
       };
-      
+
       nixosConfigurations = {
         recoverykit-amd64 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -223,6 +232,7 @@
             determinate.nixosModules.default
             home-manager.nixosModules.home-manager
             vscode-server.nixosModules.default
+            chaotic.nixosModules.default
 
             # and then the configs
             ./shared/meta.nix
@@ -230,7 +240,7 @@
           ];
 
           specialArgs = {
-            inherit zen-browser self;
+            inherit zen-browser self chaotic;
           };
         };
 
@@ -249,11 +259,17 @@
             determinate.nixosModules.default
             home-manager.nixosModules.home-manager
             vscode-server.nixosModules.default
+            chaotic.nixosModules.default
             ./shared/meta.nix
             ./hosts/stellapent-cier/configuration.nix
           ];
           specialArgs = {
-            inherit zen-browser nix4vscode self;
+            inherit
+              zen-browser
+              nix4vscode
+              self
+              chaotic
+              ;
           };
         };
       };
@@ -272,6 +288,7 @@
               dev-pkgs
               zen-browser
               nix4vscode
+              chaotic
               ;
           };
           modules = [
@@ -289,6 +306,7 @@
               };
             }
             zen-browser.homeModules.beta
+            chaotic.homeManagerModules.default
             ./shared/home-manager/main.nix
             {
               home = {
@@ -312,6 +330,7 @@
               dev-pkgs
               zen-browser
               nix4vscode
+              chaotic
               ;
           };
           modules = [
@@ -329,6 +348,7 @@
               };
             }
             zen-browser.homeModules.beta
+            chaotic.homeManagerModules.default
             ./shared/home-manager/main.nix
             {
               home.username = "ajhalili2006";
@@ -350,6 +370,7 @@
               dev-pkgs
               zen-browser
               nix4vscode
+              chaotic
               ;
           };
           modules = [
@@ -367,6 +388,7 @@
               };
             }
             zen-browser.homeModules.beta
+            chaotic.homeManagerModules.default
             ./shared/home-manager/nogui.nix
             {
               home.username = "ajhalili2006";
