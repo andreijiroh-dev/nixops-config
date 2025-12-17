@@ -20,6 +20,8 @@ let
         "lairland.local"
         "lairland.tailnet"
         "lairland.fawn-cod.ts.net"
+        "nextcloud.andreijiroh.dev"
+        "coolify.andreijiroh.dev"
       ];
     }
     // localNetwork.halilifam;
@@ -83,4 +85,13 @@ in
   environment.systemPackages = with pkgs; [
     coolify-compose
   ];
+
+  # Docker related chores
+  virtualisation.docker = {
+    daemon.settings = {
+      data-root = "/opt/docker-data/engine";
+      ipv6 = true;
+      live-restore = true;
+    };
+  };
 }
