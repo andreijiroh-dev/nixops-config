@@ -11,7 +11,12 @@
     matrix = "@ajhalili2006@envs.net";
     keys = [
       {
-        fingerprint = "4D5E 6317 58CB 9CC4 5941  B1CE 67BF C91B 3DA1 2BE8"
+        # main key
+        fingerprint = "4D5E 6317 58CB 9CC4 5941  B1CE 67BF C91B 3DA1 2BE8";
+      }
+      {
+        # recaptime.dev specifics
+        fingerprint = "A715 100E 58CF 6050 0EE1  5965 2F38 4539 C700 B263";
       }
     ];
   };
