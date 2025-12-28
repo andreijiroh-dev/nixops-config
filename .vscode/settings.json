@@ -1,25 +1,29 @@
 {
-    "git.alwaysSignOff": true,
-    "scm.alwaysShowActions": true,
-    "github.copilot.chat.commitMessageGeneration.instructions": [
-      {
-        "text": "Use Conventional Commits format with a subject line under 50 characters (hard limit: 72) and a detailed body with lines under 72 characters."
-      }
-    ],
-    "nix.serverSettings": {
-      "flake": {"autoArchive": true, "nixpkgsInputName": "*"}
-    },
-    "markdown.validate.enabled": true,
-    "evenBetterToml.schema.associations": {
-      "misc/nix/nix.user.conf": "https://raw.githubusercontent.com/nix-community/nixd/main/nixd/docs/nixd-schema.json",
-      "misc/nix/nix.custom.conf": "https://raw.githubusercontent.com/nix-community/nixd/main/nixd/docs/nixd-schema.json"
-    },
-    "evenBetterToml.taplo.configFile.path": ".taplo.toml",
-    "nix.enableLanguageServer": true,
-    "nix.serverPath": "nil",
-    "[nix]": {
-      "editor.insertSpaces": true,
-      "editor.tabSize": 2,
-      "editor.defaultFormatter": "jnoortheen.nix-ide"
+  "git.alwaysSignOff": true,
+  "scm.alwaysShowActions": true,
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Use Conventional Commits format with a subject line under 50 characters (hard limit: 72) and a detailed body with lines under 72 characters."
     }
+  ],
+  "nix.serverSettings": {
+    "flake": {
+      "autoArchive": true,
+      "nixpkgsInputName": "*",
+    }
+  },
+  "markdown.validate.enabled": true,
+  "evenBetterToml.schema.associations": {
+    "misc/nix/nix.user.conf": "https://raw.githubusercontent.com/nix-community/nixd/main/nixd/docs/nixd-schema.json",
+    "misc/nix/nix.custom.conf": "https://raw.githubusercontent.com/nix-community/nixd/main/nixd/docs/nixd-schema.json"
+  },
+  "evenBetterToml.taplo.configFile.path": ".taplo.toml",
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nil",
+  "[nix]": {
+    "editor.defaultFormatter": "jnoortheen.nix-ide"
+  },
+  "nix.formatterPath": "nixfmt",
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
 }

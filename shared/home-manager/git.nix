@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 # Reference: https://mynixos.com/home-manager/options/programs.git and
 # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.git.enable
@@ -10,31 +10,55 @@
     lfs = {
       enable = true;
     };
-    settings.user = {
-      name = "Andrei Jiroh Halili";
-      email = "ajhalili2006@andreijiroh.dev";
+    maintenance = {
+      enable = true;
     };
+    ignores = [
+      "*~"
+      "*.swp"
+      "*.tmp"
+      "*.save"
+      ".DS_Store"
+      ".cache"
+      "public/"
+      "node_modules/"
+      "data/"
+      ".data/"
+      "tmp/"
+      "*.decrypted"
+    ];
     signing = {
-      key = "4D5E631758CB9CC45941B1CE67BFC91B3DA12BE8";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEXuD3hJwInlcHs3wkXWAWNo8es3bPAd2e8ipjyqgGp2 @ajhalili2006's SSH key, circa 2022";
       signByDefault = true;
-    };
-    settings.alias = {
-      signoff = "commit --signoff";
-      amend = "commit -a --amend";
-      remotes = "remote -v";
-      root = "rev-parse --show-toplevel";
-      unstage = "restore --staged";
-      stats = "status";
-      co = "checkout";
-      switch-remote = "branch -u";
-      set-push-url = "remote set-url --push";
-      set-push-remote = "remote set-url --push";
-      set-remote-url = "remote set-url";
-      set-remote = "remote set-url";
-      hard = "reset --hard";
-      soft = "reset --soft";
+      format = "ssh";
+      signer = lib.mkIf (
+        (config.services.desktopManager.plasma6.enable or false) ||
+        (config.services.xserver.desktopManager.plasma5.enable or false)
+      ) "${pkgs._1password-gui}/share/1password/op-ssh-sign";
     };
     settings = {
+      user = {
+        name = "Andrei Jiroh Halili";
+        email = "ajhalili2006@andreijiroh.dev";
+      };
+
+      alias = {
+        signoff = "commit --signoff";
+        amend = "commit -a --amend";
+        remotes = "remote -v";
+        root = "rev-parse --show-toplevel";
+        unstage = "restore --staged";
+        stats = "status";
+        co = "checkout";
+        switch-remote = "branch -u";
+        set-push-url = "remote set-url --push";
+        set-push-remote = "remote set-url --push";
+        set-remote-url = "remote set-url";
+        set-remote = "remote set-url";
+        hard = "reset --hard";
+        soft = "reset --soft";
+      };
+
       format = {
         signOff = true;
       };
