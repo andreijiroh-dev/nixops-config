@@ -182,11 +182,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1766635416,
-        "narHash": "sha256-Nfjtg55eTeSk99YF4zykkmyWjMR0LJ75aXOSCptMZOM=",
+        "lastModified": 1766846533,
+        "narHash": "sha256-D7XoHk5/daZt3E0K6uCueVxpDYp+cIoCctoTsz5mjfk=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "981ca9cae3898b79f085e5aa739b911bc330782f",
+        "rev": "e55ad9427895bc94e55b2cb6474ca46773816885",
         "type": "gitlab"
       },
       "original": {
@@ -401,11 +401,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1766682973,
-        "narHash": "sha256-GKO35onS711ThCxwWcfuvbIBKXwriahGqs+WZuJ3v9E=",
+        "lastModified": 1766881808,
+        "narHash": "sha256-JR7A2xS3EBPWFeONzhqez5vp7nKEsp7eLj2Ks210Srk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "91cdb0e2d574c64fae80d221f4bf09d5592e9ec2",
+        "rev": "d2e0458d6531885600b346e161c38790dc356fa8",
         "type": "github"
       },
       "original": {
@@ -439,11 +439,11 @@
     },
     "lib": {
       "locked": {
-        "lastModified": 1765674936,
-        "narHash": "sha256-k00uTP4JNfmejrCLJOwdObYC9jHRrr/5M/a/8L2EIdo=",
+        "lastModified": 1766884708,
+        "narHash": "sha256-x8nyRwtD0HMeYtX60xuIuZJbwwoI7/UKAdCiATnQNz0=",
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "2075416fcb47225d9b68ac469a5c4801a9c4dd85",
+        "rev": "15177f81ad356040b4460a676838154cbf7f6213",
         "type": "github"
       },
       "original": {
@@ -526,11 +526,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1766715018,
-        "narHash": "sha256-9uOwYRBkSpBFY7gliw7RXgFxMLJR2Qe43t2MV2aYPg4=",
+        "lastModified": 1766888402,
+        "narHash": "sha256-c9jhIV89E6NX40KR+qd0kzccTqxiL5goZ5xWCUDDskE=",
         "owner": "nix-community",
         "repo": "nix4vscode",
-        "rev": "23b1c4fb7d3c5239d04eb3bb9818ec4666b45d58",
+        "rev": "2c428b8f09116e29398257217df2f06d80708a0b",
         "type": "github"
       },
       "original": {
@@ -784,11 +784,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1766697593,
-        "narHash": "sha256-mGZBEN67mxeOsBhplBRLm6L+y++8jU46EEUYgemG1aQ=",
+        "lastModified": 1766897152,
+        "narHash": "sha256-mD1GDg1eIHYUwk536j4uJX1IfQArsLQm2SL7rTQwAPI=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "98d8f48ba80a4b6e3b56addad850d57132301075",
+        "rev": "fe8d1a61a904b336f453d7ab5ae7d691a21c5cbf",
         "type": "github"
       },
       "original": {
