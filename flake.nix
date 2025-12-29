@@ -349,7 +349,7 @@
             }
             zen-browser.homeModules.beta
             chaotic.homeManagerModules.default
-            ./shared/home-manager/main.nix
+            ./shared/home-manager/nogui.nix
             {
               home.username = "ajhalili2006";
               home.homeDirectory = "/home/ajhalili2006";
