@@ -3,6 +3,7 @@
         "jnoortheen.nix-ide",
         "mads-hartmann.bash-ide-vscode",
         "bbenoist.nix",
-        "tamasfe.even-better-toml"
+        "tamasfe.even-better-toml",
+        "timonwong.shellcheck"
     ]
 }

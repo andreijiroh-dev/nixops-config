@@ -25,6 +25,7 @@ in
         "GitHub.github-vscode-theme"
         "PKief.material-icon-theme"
         "PKief.material-product-icons"
+        "SpaceBox.monospace-idx-theme"
 
         # tooling
         "mkhl.direnv"
@@ -54,7 +55,8 @@ in
         "bierner.markdown-mermaid"
         "bierner.markdown-yaml-preamble"
         "DavidAnson.vscode-markdownlint"
-
+        "timonwong.shellcheck"
+        "exiasr.hadolint"
       ]
       ++ forVscodePrerelease [
         # tooling
@@ -62,16 +64,6 @@ in
         "ms-vscode.remote-server"
         "ms-vscode-remote.remote-ssh"
         "GitHub.vscode-pull-request-github"
-      ]
-      ++ [
-        # AI tools
-        # Manually pinned to fix hash mismatch (since Copilot releases are tied to VSC monthly releases
-        (pkgs.vscode-utils.extensionFromVscodeMarketplace {
-          name = "copilot";
-          publisher = "GitHub";
-          version = "1.388.0";
-          sha256 = "sha256-7RjK8+PNI+rIuRQfCwpvswAiz991dacRO2qYhcv1vhk=";
-        })
       ];
   };
 }
