@@ -1,6 +1,6 @@
 { pkgs, lib, ... }: {
   # Allow local config imports
-  improts = lib.optionals (builtins.pathExists ./dev.local.nix) [
+  imports = lib.optionals (builtins.pathExists ./dev.local.nix) [
     ./dev.local.nix
   ];
 
@@ -14,7 +14,7 @@
     shellcheck
     shfmt
     hadolint
-
+    nixos-generators
     nil
     nixfmt
   ];

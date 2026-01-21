@@ -3,3 +3,4 @@ result
 *.log
 *.key
 *.priv
+.idx/dev.local.nix
