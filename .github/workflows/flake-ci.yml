@@ -41,7 +41,7 @@ jobs:
           git config --global user.name "RecapTimeBot"
           git config --global user.email "recaptimebot@gmail.com"
           git add flake.lock
-          git commit -m "chore(flake): update lockfile [skip-ci]" || echo "No changes to commit"
+          git commit -m "chore(flake): update lockfile [skip-ci]" --signoff || echo "No changes to commit"
           git push
   build-iso:
     concurrency:
@@ -64,12 +64,14 @@ jobs:
       - name: Show flake metadata
         run: nix flake metadata
 
-      - run: |
-          mkdir dist
-          echo ::group::Building amd64 minimal ISO file
-          nix build .#nixosConfigurations.recoverykit-amd64.config.system.build.isoImage --verbose --show-trace
-          cp result/iso/*.iso ./dist/ -rv
-          echo ::endgroup
+      - name: Build amd64 minimal ISO file
+        run: nix build .#nixosConfigurations.recoverykit-amd64.config.system.build.isoImage --verbose --show-trace
+      
+      - name: Build custom live graphical ISO
+        run: nix build --impure .#nixosConfigurations.live-cd.config.system.build.isoImage --verbose --show-trace
+        
+      - name: Prepare for artifact uploads
+        run: cp result/iso/*.iso ./dist/ -rv
 
       - name: Upload as artifact
         uses: actions/upload-artifact@v4
