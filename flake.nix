@@ -289,6 +289,15 @@
             chaotic.nixosModules.default
             ./hosts/live-cd/kde-plasma.nix
           ];
+          specialArgs = {
+            inherit
+              zen-browser
+              nix4vscode
+              self
+              chaotic
+              nixpkgs
+              ;
+          };
         };
       };
       homeConfigurations = {

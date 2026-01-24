@@ -2,14 +2,13 @@
 
 {
   imports = [
-    "${nixpkgs}/nixos/modules/installer/iso-image.nix"
     ./base.nix
     ../../shared/desktop/fonts.nix
   ];
   isoImage.edition = "graphical";
   isoImage.showConfiguration = lib.mkDefault false;
 
-  specializsations.plasma.configurations = {
+  specialisation.plasma.configuration = {
     imports = [
       "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
       ../../shared/desktop/kde-plasma.nix

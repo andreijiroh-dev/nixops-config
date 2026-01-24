@@ -87,7 +87,7 @@ in
     users.ajhalili2006 = baseHmConfig // {
       home.username = "ajhalili2006";
       home.homeDirectory = "/home/ajhalili2006";
-      home.stateVersion = "25.05";
+      home.stateVersion = "26.05";
     };
   };
 

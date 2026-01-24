@@ -1,7 +1,7 @@
 { pkgs, nixpkgs, lib, config, ... }:
 
 {
-  import = [
+  imports = [
     ../../shared/nix.nix
     ../../shared/gnupg.nix
     ../../shared/locale.nix
@@ -13,7 +13,6 @@
     ../../shared/vscode/server.nix
     ../../shared/server/ssh.nix
     ../../shared/server/tailscale.nix
-    "${nixpkgs}/nixos/modules/installer/iso-image.nix"
     "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
     "${nixpkgs}/nixos/modules/installer/cd-dvd/latest-kernel.nix"
   ];
@@ -21,7 +20,7 @@
   isoImage.configurationName = lib.mkDefault "(Linux ${config.boot.kernelPackages.kernel.version})";
 
   networking = {
-    hostname = "multichaos-livecd";
+    hostName = "multichaos-livecd";
     networkmanager.enable = true;
   };
 
@@ -55,16 +54,14 @@
     fastfetch
   ];
 
-  config = {
-    users.users.nixos = {
-      openssh = {
-        authorizedKeys.keys = with import ../../shared/ssh-keys.nix; [
-          personal.y2022
-          personal.passwordless
-          personal.rp.gildedguy
-          work.recaptime-dev.crew
-        ];
-      };
+  users.users.nixos = {
+    openssh = {
+      authorizedKeys.keys = with import ../../shared/ssh-keys.nix; [
+        personal.y2022
+        personal.passwordless
+        personal.rp.gildedguy
+        work.recaptime-dev.crew
+      ];
     };
   };
 
