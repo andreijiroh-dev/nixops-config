@@ -11,7 +11,7 @@
     openFirewall = true;
     disableTaildrop = false;
     extraDaemonFlags = [
-      "--verbose 3"
+      "--verbose=3"
     ];
   };
 

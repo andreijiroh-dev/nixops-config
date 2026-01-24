@@ -272,6 +272,24 @@
               ;
           };
         };
+
+        live-cd = nixpkgs.lib.nixosSystem {
+          system = builtins.currentSystem;
+          modules = [
+            (
+              { ... }:
+              {
+                _module.args = { inherit self nix4vscode; };
+              }
+            )
+            nix-ld.nixosModules.nix-ld
+            determinate.nixosModules.default
+            home-manager.nixosModules.home-manager
+            vscode-server.nixosModules.default
+            chaotic.nixosModules.default
+            ./hosts/live-cd/kde-plasma.nix
+          ];
+        };
       };
       homeConfigurations = {
         # Usage
