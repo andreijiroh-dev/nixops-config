@@ -47,7 +47,6 @@
     # other utils
     wakatime-cli
     doppler
-    dotenvx
 
     # system utils
     neofetch
