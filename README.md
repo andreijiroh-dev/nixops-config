@@ -25,6 +25,14 @@ Along with the following mirrors:
 
 ## Usage
 
+### Poking around Gemini CLI + Chat in VS Code?
+
+I already ported my GitHub Copilot instructions into the standard `AGENT.md` file
+so your AI tools can easily speedrun things in different shell sessions with Gemini
+CLI up and running. While this is untested, I symlinked the old file location for
+compatibility so you're good to go if you are contributing patches or just forking
+around and finding out.
+
 ### Installing NixOS
 
 It is recommended to install NixOS using either the Calamares-based graphical
