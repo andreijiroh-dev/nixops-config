@@ -81,13 +81,16 @@ jobs:
         run: nix flake metadata
 
       - name: Build amd64 minimal ISO file
-        run: nix build .#nixosConfigurations.recoverykit-amd64.config.system.build.isoImage --verbose --show-trace
+        run: nix build .#nixosConfigurations.recoverykit-amd64.config.system.build.isoImage -vv --show-trace
       
       - name: Build custom live graphical ISO
-        run: nix build --impure .#nixosConfigurations.live-cd.config.system.build.isoImage --verbose --show-trace
+        run: nix build --impure .#nixosConfigurations.live-cd.config.system.build.isoImage -vv --show-trace
         
       - name: Prepare for artifact uploads
-        run: cp result/iso/*.iso ./dist/ -rv
+        run: |
+          mkdir dist
+          cp *.iso ./dist/ -rv
+          cp result/iso/*.iso ./dist/ -rv
 
       - name: Upload as artifact
         uses: actions/upload-artifact@v4
