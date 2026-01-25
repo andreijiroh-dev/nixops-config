@@ -32,5 +32,5 @@
     ];
   };
 
-  programs.git.signer = "${pkgs._1password-gui}/share/1password/op-ssh-sign";
+  programs.git.signing.signer = "${pkgs._1password-gui}/share/1password/op-ssh-sign";
 }
