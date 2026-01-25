@@ -87,7 +87,7 @@ jobs:
         run: |
           set -xe
 
-          nix build .#nixosConfigurations.live-cd-graphical.config.system.build.isoImage -vv --show-trace
+          nix build --impure .#nixosConfigurations.live-cd-graphical.config.system.build.isoImage -vv --show-trace
           cp result/iso/*.iso ./dist/ -rv
       
       - name: Build custom live graphical ISO
