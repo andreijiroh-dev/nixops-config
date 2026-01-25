@@ -14,7 +14,7 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/09170382-8b7e-47cc-8fde-d9035039b785";
+    { device = "/dev/disk/by-uuid/8e01edcc-4c43-4a97-9ce3-039aa0a200c2";
       fsType = "ext4";
     };
 
@@ -31,6 +31,11 @@
 
   fileSystems."/workspaces" =
     { device = "/dev/disk/by-uuid/a8d0810e-4bbf-479d-baea-28b1441ad68f";
+      fsType = "ext4";
+    };
+
+  fileSystems."/opt/alpine" =
+    { device = "/dev/disk/by-uuid/0aa7134d-2dc1-41aa-9a2f-bdde0eeb93a1";
       fsType = "ext4";
     };
 
