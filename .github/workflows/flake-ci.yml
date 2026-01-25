@@ -87,15 +87,34 @@ jobs:
         run: |
           set -xe
 
+          echo ::group::Build log
           nix build --impure .#nixosConfigurations.live-cd-graphical.config.system.build.isoImage -vv --show-trace
-          cp result/iso/*.iso ./dist/ -rv
+          echo ::endgroup::
+          
+          # temporary hackaround for permission errors
+          sudo cp result/iso/*.iso ./dist/ -rv
       
       - name: Build custom live graphical ISO
         run: |
           set -xe
 
+          echo ::group::Build log
           nix build --impure .#nixosConfigurations.live-cd-graphical.config.system.build.isoImage -vv --show-trace
-          cp result/iso/*.iso ./dist/ -rv
+          echo ::endgroup::
+
+          echo ::group::Post-build inspection
+          echo "${PWD}/result:"
+          ls -Al result
+
+          echo "${PWD}/result/iso:"
+          ls -Al result/iso
+          echo ::endgroup::
+
+          # temporary hackaround for permission errors
+          sudo cp result/iso/*.iso ./dist/ -rv
+
+      - name: Fix perms before deployment
+        run: sudo chown -Rv $(id -u):$(id -g) dist/*.iso && chmod -Rv 644 dist/*.iso
 
       - name: Upload as artifact
         uses: actions/upload-artifact@v4
