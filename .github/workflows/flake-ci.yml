@@ -80,22 +80,27 @@ jobs:
       - name: Show flake metadata
         run: nix flake metadata
 
+      - name: Prep dist dir
+        run: mkdir dist
+
       - name: Build amd64 minimal ISO file
-        run: nix build .#nixosConfigurations.recoverykit-amd64.config.system.build.isoImage -vv --show-trace
+        run: |
+          set -xe
+
+          nix build .#nixosConfigurations.live-cd-graphical.config.system.build.isoImage -vv --show-trace
+          cp result/iso/*.iso ./dist/ -rv
       
       - name: Build custom live graphical ISO
-        run: nix build --impure .#nixosConfigurations.live-cd.config.system.build.isoImage -vv --show-trace
-        
-      - name: Prepare for artifact uploads
         run: |
-          mkdir dist
-          cp *.iso ./dist/ -rv
+          set -xe
+
+          nix build --impure .#nixosConfigurations.live-cd-graphical.config.system.build.isoImage -vv --show-trace
           cp result/iso/*.iso ./dist/ -rv
 
       - name: Upload as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: nixos-recoverykit-iso
+          name: nixos-custom-iso
           path: dist
   build-raspi-sdimg:
     concurrency:
