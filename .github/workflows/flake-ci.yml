@@ -90,6 +90,14 @@ jobs:
           echo ::group::Build log
           nix build --impure .#nixosConfigurations.live-cd-graphical.config.system.build.isoImage -vv --show-trace
           echo ::endgroup::
+
+          echo ::group::Post-build inspection
+          echo "${PWD}/result:"
+          ls -Al result
+
+          echo "${PWD}/result/iso:"
+          ls -Al result/iso
+          echo ::endgroup::
           
           # temporary hackaround for permission errors
           sudo cp result/iso/*.iso ./dist/ -rv
