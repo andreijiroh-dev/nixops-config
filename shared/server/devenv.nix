@@ -25,7 +25,7 @@
     # other utils
     wakatime-cli
     doppler
-    dotenvx
+    #dotenvx
   ];
 
   virtualisation = {

@@ -13,11 +13,15 @@
     ../../shared/vscode/server.nix
     ../../shared/server/ssh.nix
     ../../shared/server/tailscale.nix
+    ../../shared/desktop/yubikey.nix
     "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
     "${nixpkgs}/nixos/modules/installer/cd-dvd/latest-kernel.nix"
   ];
-  isoImage.showConfiguration = lib.mkDefault false;
+  isoImage.showConfiguration = lib.mkDefault true;
   isoImage.configurationName = lib.mkDefault "(Linux ${config.boot.kernelPackages.kernel.version})";
+  system.nixos.tags = [ "livecd" ];
+  system.nixos.release = "unstable-rolling";
+  system.nixos.codeName = "Rolling unstable Live CD builds via CI";
 
   networking = {
     hostName = "multichaos-livecd";
@@ -44,16 +48,21 @@
     glab
     fjo
 
-    # other utils
+    # dev utils
     wakatime-cli
     doppler
 
     # system utils
     neofetch
     fastfetch
+    byobu
+    tmux
+    htop
+    btop
   ];
 
   users.users.nixos = {
+    description = "live CD user";
     openssh = {
       authorizedKeys.keys = with import ../../shared/ssh-keys.nix; [
         personal.y2022
@@ -68,4 +77,6 @@
     "--verbose=3"
     "--state=mem:"
   ];
+
+  networking.networkmanager.wifi.powersave = false;
 }
