@@ -19,9 +19,9 @@
   ];
   isoImage.showConfiguration = lib.mkDefault true;
   isoImage.configurationName = lib.mkDefault "(Linux ${config.boot.kernelPackages.kernel.version})";
-  system.nixos.tags = [ "livecd" ];
-  system.nixos.release = "unstable-rolling";
-  system.nixos.codeName = "Rolling unstable Live CD builds via CI";
+  #system.nixos.tags = [ "livecd" ];
+  #system.nixos.release = "unstable-rolling";
+  #system.nixos.codeName = "Rolling unstable Live CD builds via CI";
 
   networking = {
     hostName = "multichaos-livecd";

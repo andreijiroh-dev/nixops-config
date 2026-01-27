@@ -136,6 +136,30 @@
 
           # Optionally make one the default to support `nix profile add .#`
           default = pkgs.callPackage ./pkgs/coolify-compose.nix { };
+
+          live-cd = (nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              ({ ... }: {
+                _module.args = { inherit self nix4vscode; };
+              })
+              nix-ld.nixosModules.nix-ld
+              determinate.nixosModules.default
+              home-manager.nixosModules.home-manager
+              vscode-server.nixosModules.default
+              chaotic.nixosModules.default
+              ./hosts/live-cd/kde-plasma.nix
+            ];
+            specialArgs = {
+              inherit
+                zen-browser
+                nix4vscode
+                self
+                chaotic
+                nixpkgs
+                ;
+            };
+          }).config.system.build.isoImage;
         };
 
         # If you want app-style outputs, you can also define apps here:
@@ -274,7 +298,7 @@
         };
 
         live-cd-minimal = nixpkgs.lib.nixosSystem {
-          system = builtins.currentSystem;
+          system = "x86_64-linux";
           modules = [
             (
               { ... }:
@@ -301,7 +325,7 @@
         };
 
         live-cd-graphical = nixpkgs.lib.nixosSystem {
-          system = builtins.currentSystem;
+          system = "x86_64-linux";
           modules = [
             (
               { ... }:

@@ -48,7 +48,7 @@ jobs:
       cancel-in-progress: false
       group: recoverykit-iso-builds
     needs: [update-lockfile]
-    name: Build custom recovery/minimal ISO
+    name: Build custom Live CD ISO
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -83,31 +83,12 @@ jobs:
       - name: Prep dist dir
         run: mkdir dist
 
-      - name: Build amd64 minimal ISO file
+      - name: Build custom live ISO
         run: |
           set -xe
 
           echo ::group::Build log
-          nix build --impure .#nixosConfigurations.live-cd-graphical.config.system.build.isoImage -vv --show-trace
-          echo ::endgroup::
-
-          echo ::group::Post-build inspection
-          echo "${PWD}/result:"
-          ls -Al result
-
-          echo "${PWD}/result/iso:"
-          ls -Al result/iso
-          echo ::endgroup::
-          
-          # temporary hackaround for permission errors
-          sudo cp result/iso/*.iso ./dist/ -rv
-      
-      - name: Build custom live graphical ISO
-        run: |
-          set -xe
-
-          echo ::group::Build log
-          nix build --impure .#nixosConfigurations.live-cd-graphical.config.system.build.isoImage -vv --show-trace
+          nix build .#live-cd -vv --show-trace
           echo ::endgroup::
 
           echo ::group::Post-build inspection

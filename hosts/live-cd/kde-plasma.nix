@@ -5,7 +5,6 @@
     ./base.nix
   ];
   isoImage.edition = "graphical";
-  isoImage.showConfiguration = lib.mkDefault false;
 
   specialisation.plasma.configuration = {
     imports = [
