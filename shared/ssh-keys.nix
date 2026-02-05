@@ -12,6 +12,9 @@
     rp = {
       gildedguy = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzMlrUe7qMA1P0lP56lq2dKTrwFU6CrVltQ9um+PhOMLkoi31kAlujHtWF6mqGRLXcK0Ao/0Wqug++r82Zu0u7dpAv8LCExtaRRMzagwPkEe4OOqUBOpS6mggfsik8mNA+1UtpkXJ+ZiB4cXtNKEZC0jtxWOTXSV67qgkSxuO+YBWB+7pnESkB0KorqwOoWGGUVfYQtbKUAt6VqM4s6dn7saXqwmN0tCPO6a+4L4mazkYjFD11HhktYsjP9dvnxYSOtMrSFb9JOXRST2LdiIJgwg+HTqBSWGO7aBRHMJaTF3ajlbMtKDQI/EcNQLyGgX6yFdjjzz9DRY+2oU0vPTytdqM2BKsfLlR0GVg7BVL7TZPaLJ1lgpCl4Z1oClW9FOzhnYJVT0W+IKPsnYsFPfv/BVgjWF7YtLdc5zqFJ31PULtikCyd0I6Kt95YD0HdrlR2faWcBHI8KKEAwCCanodGnK/xTOxisTX2dXOxx3mvR/L3Wil2ca5hnD+vt500/o8= gildedguy@andreijiroh";
     };
+    sshid = {
+      tbd = "tbd";
+    };
   };
 
   work = {
