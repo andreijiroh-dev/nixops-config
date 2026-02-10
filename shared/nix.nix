@@ -7,7 +7,7 @@
   lib,
   self,
   nix4vscode,
-  llm-agents
+  llm-agents,
   ...
 }:
 
