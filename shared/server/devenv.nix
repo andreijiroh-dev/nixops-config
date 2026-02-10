@@ -26,6 +26,14 @@
     wakatime-cli
     doppler
     #dotenvx
+
+    # genai tools
+    llm-agents.gemini-cli
+    llm-agents.copilot-cli
+    llm-agents.amp
+    llm-agents.agent-deck
+    llm-agents.backlog-md
+    llm-agents.coderabbit-cli
   ];
 
   virtualisation = {

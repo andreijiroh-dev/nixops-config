@@ -7,6 +7,7 @@
   lib,
   self,
   nix4vscode,
+  llm-agents
   ...
 }:
 
@@ -22,6 +23,7 @@
     overlays = [
       self.overlays.default
       nix4vscode.overlays.default
+      llm-agents.overlays.default
     ];
   };
 
@@ -103,6 +105,9 @@
 
         # recaptime.dev cache
         "recaptime-dev.cachix.org-1:b0UBO1zONf6ceTIoR06AKhgid4ZOl5kxB/gOIdZ9J6g="
+
+        # numtide
+        "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
       ];
 
       # also list them all too
@@ -114,6 +119,7 @@
         "https://andreijiroh-dev.cachix.org"
         "https://ajhalili2006-nixos-builds.cachix.org"
         "https://recaptime-dev.cachix.org"
+        "https://cache.numtide.com"
       ];
     };
   };

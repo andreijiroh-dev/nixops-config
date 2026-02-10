@@ -1,5 +1,51 @@
 {
   description = "Andrei Jiroh's NixOS and home-manager configurations (AKA declarative dotfiles)";
+  nixConfig = {
+    extra-trusted-public-keys = [
+      # cache.nixos.org
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+
+      # cache.flakehub.com
+      "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
+      "cache.flakehub.com-4:Asi8qIv291s0aYLyH6IOnr5Kf6+OF14WVjkE6t3xMio="
+      "cache.flakehub.com-5:zB96CRlL7tiPtzA9/WKyPkp3A2vqxqgdgyTVNGShPDU="
+      "cache.flakehub.com-6:W4EGFwAGgBj3he7c5fNh9NkOXw0PUVaxygCVKeuvaqU="
+      "cache.flakehub.com-7:mvxJ2DZVHn/kRxlIaxYNMuDG1OvMckZu32um1TadOR8="
+      "cache.flakehub.com-8:moO+OVS0mnTjBTcOUh2kYLQEd59ExzyoW1QgQ8XAARQ="
+      "cache.flakehub.com-9:wChaSeTI6TeCuV/Sg2513ZIM9i0qJaYsF+lZCXg0J6o="
+      "cache.flakehub.com-10:2GqeNlIp6AKp4EF2MVbE1kBOp9iBSyo0UPR9KoR0o1Y="
+
+      # nix-community
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+
+      # devenv.sh
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+
+      # my caches for nixos and nixpkgs related builds (including devenvs)
+      "ajhalili2006-nixos-builds.cachix.org-1:fA8HXvGR1i792D+CxL2iW/TQzUcyoW7zPUmC9Q4mQLg="
+
+      # the main cache itself
+      "andreijiroh-dev.cachix.org-1:7Jd0STdBOLiNu5fiA+AKwcMqQD2PA1j9zLDGyDkuyBo="
+
+      # recaptime.dev cache
+      "recaptime-dev.cachix.org-1:b0UBO1zONf6ceTIoR06AKhgid4ZOl5kxB/gOIdZ9J6g="
+
+      # numtide
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+    ];
+
+    # also list them all too
+    extra-trusted-substituters = [
+      "https://cache.nixos.org"
+      "https://cache.flakehub.com"
+      "https://nix-community.cachix.org"
+      "https://devenv.cachix.org"
+      "https://andreijiroh-dev.cachix.org"
+      "https://ajhalili2006-nixos-builds.cachix.org"
+      "https://recaptime-dev.cachix.org"
+      "https://cache.numtide.com"
+    ];
+  };
 
   # try to be in-sync with the nix-channels
   inputs = {
@@ -91,6 +137,10 @@
       };
     };
 
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     inputs@{
@@ -111,6 +161,7 @@
       agenix,
       agenix-rekey,
       chaotic,
+      llm-agents,
     }:
     let
       dev-pkgs = import ./pkgs;
@@ -197,7 +248,7 @@
             (
               { ... }:
               {
-                _module.args = { inherit self nix4vscode; };
+                _module.args = { inherit self nix4vscode llm-agents; };
               }
             )
             # nix flake modules first
@@ -223,7 +274,7 @@
             (
               { ... }:
               {
-                _module.args = { inherit self nix4vscode; };
+                _module.args = { inherit self nix4vscode llm-agents; };
               }
             )
             # nix flake modules first
@@ -248,7 +299,7 @@
             (
               { ... }:
               {
-                _module.args = { inherit self nix4vscode; };
+                _module.args = { inherit self nix4vscode llm-agents; };
               }
             )
             # nix flake modules first
@@ -276,7 +327,7 @@
             (
               { ... }:
               {
-                _module.args = { inherit self nix4vscode; };
+                _module.args = { inherit self nix4vscode llm-agents; };
               }
             )
             nix-ld.nixosModules.nix-ld
@@ -293,6 +344,7 @@
               nix4vscode
               self
               chaotic
+              llm-agents
               ;
           };
         };
@@ -303,7 +355,7 @@
             (
               { ... }:
               {
-                _module.args = { inherit self nix4vscode; };
+                _module.args = { inherit self nix4vscode llm-agents; };
               }
             )
             nix-ld.nixosModules.nix-ld
@@ -320,6 +372,7 @@
               self
               chaotic
               nixpkgs
+              llm-agents
               ;
           };
         };
@@ -330,7 +383,7 @@
             (
               { ... }:
               {
-                _module.args = { inherit self nix4vscode; };
+                _module.args = { inherit self nix4vscode llm-agents; };
               }
             )
             nix-ld.nixosModules.nix-ld
@@ -347,6 +400,7 @@
               self
               chaotic
               nixpkgs
+              llm-agents
               ;
           };
         };
@@ -367,6 +421,7 @@
               zen-browser
               nix4vscode
               chaotic
+              llm-agents
               ;
           };
           modules = [
@@ -409,6 +464,7 @@
               zen-browser
               nix4vscode
               chaotic
+              llm-agents
               ;
           };
           modules = [
@@ -417,6 +473,7 @@
                 overlays = [
                   self.overlays.default
                   nix4vscode.overlays.default
+                  llm-agents.overlays.default
                 ];
                 config = {
                   allowUnfree = true;
@@ -449,6 +506,7 @@
               zen-browser
               nix4vscode
               chaotic
+              llm-agents
               ;
           };
           modules = [
@@ -457,6 +515,7 @@
                 overlays = [
                   self.overlays.default
                   nix4vscode.overlays.default
+                  llm-agents.overlays.default
                 ];
                 config = {
                   allowUnfree = true;

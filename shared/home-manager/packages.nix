@@ -25,10 +25,6 @@
     gh
     glab
     forgejo-cli
-    # bet we'll going to have a field day since Copilot is now available for free
-    # (this is seperate from the gh copilot extension for those asking)
-    # context: https://github.blog/news-insights/product-news/github-copilot-in-vscode-free/
-    gh-copilot
     # markdownlint
     markdownlint-cli
     # https://doppler.com
@@ -88,6 +84,14 @@
     yt-dlp
     twitch-dl
     twitch-chat-downloader
+
+    # gen ai tools
+    llm-agents.gemini-cli
+    llm-agents.copilot-cli
+    llm-agents.amp
+    llm-agents.agent-deck
+    llm-agents.backlog-md
+    llm-agents.coderabbit-cli
   ];
 
   programs.bashmount = {
