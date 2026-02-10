@@ -26,6 +26,7 @@
       "bbenoist.nix"
       "tamasfe.even-better-toml"
       "timonwong.shellcheck"
+      "google.gemini-cli-vscode-ide-companion"
     ];
     workspace = {
       onCreate.default.openFiles = [ "flake.nix" ];
