@@ -33,5 +33,6 @@
   hosts = {
     lairland = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMJeo4V8JiW0eLIzmpNB1jdhde0RR5pVOCaSUoBxXces root@lairland.fawn-cod.ts.net";
     stellapent-cier = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHJkAk5TIXkwy9xKPmcyucgbz6SRSG5qhVAPod2nSw1M root@stellapent-cier.fawn-cod.ts.net";
+    nixbuilds-net = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM";
   };
 }
