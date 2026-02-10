@@ -192,7 +192,7 @@
             inherit system;
             modules = [
               ({ ... }: {
-                _module.args = { inherit self nix4vscode; };
+                _module.args = { inherit self nix4vscode llm-agents; };
               })
               nix-ld.nixosModules.nix-ld
               determinate.nixosModules.default
@@ -208,6 +208,7 @@
                 self
                 chaotic
                 nixpkgs
+                llm-agents
                 ;
             };
           }).config.system.build.isoImage;
