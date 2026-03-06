@@ -21,7 +21,12 @@ let
         "lairland.tailnet"
         "lairland.fawn-cod.ts.net"
         "nextcloud.andreijiroh.dev"
-        "coolify.andreijiroh.dev"
+        "authentik.recaptime.dev"
+        "issues.recaptime.dev"
+        "phorge.recaptime.dev"
+        "engineering.recaptime.dev"
+        "phorge-updates.recaptime.dev"
+        #"coolify.andreijiroh.dev"
       ];
     }
     // localNetwork.halilifam;
