@@ -4,3 +4,5 @@ result
 *.key
 *.priv
 .idx/dev.local.nix
+.logs/
+build-*
