@@ -56,4 +56,11 @@
   programs.nix-ld.dev = {
     enable = true;
   };
+
+  # sysctl stuff
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv6.ip_forward" = 1;
+    "vm.swappiness" = 60;
+  };
 }
