@@ -1,4 +1,11 @@
-{ config, pkgs, lib, zen-browser, dev-pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  zen-browser,
+  dev-pkgs,
+  ...
+}:
 
 {
   users.users.coolify-runner = {
@@ -10,8 +17,16 @@
     extraGroups = [ "docker" ];
     linger = false;
     openssh.authorizedKeys.keys = with import ../../../shared/ssh-keys.nix; [
+      personal.y2022
       personal.campus-comlab
+      personal.passwordless
+      personal.rp.gildedguy
       infra.termius
+      work.recaptime-dev.crew
+      sshid.personal.stellapent-cier
+      sshid.personal.zarc
+      fido2Keys.hackclub_yubikey.main
+      fido2Keys.hackclub_yubikey.backup
     ];
     createHome = true;
   };

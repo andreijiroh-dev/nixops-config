@@ -1,4 +1,11 @@
-{ config, pkgs, lib, zen-browser, dev-pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  zen-browser,
+  dev-pkgs,
+  ...
+}:
 
 {
   # Might be obvious to some since I'm technically roleplaying on my
@@ -14,10 +21,14 @@
     openssh = {
       authorizedKeys.keys = with import ../../../shared/ssh-keys.nix; [
         personal.y2022
-        personal.passwordless
         personal.campus-comlab
-        work.recaptime-dev.crew
+        personal.passwordless
         personal.rp.gildedguy
+        work.recaptime-dev.crew
+        sshid.personal.stellapent-cier
+        sshid.personal.zarc
+        fido2Keys.hackclub_yubikey.main
+        fido2Keys.hackclub_yubikey.backup
       ];
     };
     linger = true;
