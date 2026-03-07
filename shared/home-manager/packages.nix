@@ -38,11 +38,16 @@
     gpgme
     gpgme.dev
     jq
+    # infraops
+    cloudflared
+    opentofu
+    tofu-ls
+    tfmigrate
 
     ## programming languages
     # js
     deno
-    nodejs_22
+    nodejs_24
     pnpm
     yarn
     # python

@@ -22,6 +22,12 @@
     glab
     fjo
 
+    # infraops
+    cloudflared
+    opentofu
+    tofu-ls
+    tfmigrate
+
     # other utils
     wakatime-cli
     doppler
@@ -55,7 +61,7 @@
             "1.1.1.1"
             "1.0.0.1"
           ];
-          #ipv6 = true;
+          ipv6 = true;
         };
       };
     };
