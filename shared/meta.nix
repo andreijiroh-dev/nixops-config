@@ -1,5 +1,5 @@
 # One Nix file to import all the base configs without cluttering the per-host
-# imports, alongside a minimal base packages.
+# imports, alongside a minimal base packages and some tweaks at sysctls.
 {
   pkgs,
   config,
@@ -60,7 +60,7 @@
   # sysctl stuff
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
-    "net.ipv6.ip_forward" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
     "vm.swappiness" = 60;
   };
 }
