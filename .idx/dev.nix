@@ -8,15 +8,30 @@
   channel = "unstable";
 
   packages = with pkgs; [
+    # git tools
     gitFull
     github-cli
     glab
+
+    # shell + Containerfile linting/formatting
     shellcheck
     shfmt
     hadolint
+
+    # nix utils
     nixos-generators
     nil
     nixfmt
+    ragenix
+
+    # genai toolkit
+    gemini-cli
+    github-copilot-cli
+
+    # misc
+    rage
+    openssh
+    cloudflared
   ];
 
   idx = {
