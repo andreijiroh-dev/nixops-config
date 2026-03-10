@@ -11,7 +11,6 @@
     ../../shared/shells/custom-prompts.nix
     ../../shared/1password.nix
     ../../shared/vscode/server.nix
-    ../../shared/server/ssh.nix
     ../../shared/server/tailscale.nix
     ../../shared/desktop/yubikey.nix
     "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"

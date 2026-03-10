@@ -5,7 +5,7 @@
   time = {
     timeZone = "Asia/Manila";
     # since we're no longer being taken ahold by Windows 11 slavery in terms of hw clock
-    # confusion, we cn set this to false to use UTC.
+    # confusion, we can set this to false to use UTC.
     hardwareClockInLocalTime = false;
   };
 

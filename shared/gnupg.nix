@@ -6,6 +6,7 @@
      enable = true;
      enableSSHSupport = true;
      enableBrowserSocket = true;
+     pinentryPackage = pkgs.pinentry-curses;
   };
 
   environment.systemPackages = with pkgs; [
@@ -13,5 +14,6 @@
     gpgme
     gpgme.dev
     pinentry-tty
+    pinentry-curses
   ];
 }

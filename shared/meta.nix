@@ -20,6 +20,8 @@
     ./shells/bash.nix
     ./shells/custom-prompts.nix
     ./vscode/main.nix
+    ./server/ssh.nix
+    ./server/tailscale.nix
   ];
 
   # and then the base packages itself
@@ -36,12 +38,15 @@
     # misc tools and utils
     curl
     wget
-    nano
-    neovim
     fastfetch
     jq
     rclone
     ntfsprogs
+
+    # TUI-based text editors
+    nano
+    neovim
+    emacs
 
     # shell prompt customizations
     starship

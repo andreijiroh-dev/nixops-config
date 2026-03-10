@@ -10,7 +10,7 @@
       "no-runtime-versions"
     ];
     settings = {
-      scan_timeout = 500;
+      scan_timeout = 5000;
       command_timeout = 15000;
       directory = {
         truncation_length = 4;
