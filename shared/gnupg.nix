@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   # enable gpg-agent with SSH support
@@ -6,7 +6,7 @@
      enable = true;
      enableSSHSupport = true;
      enableBrowserSocket = true;
-     pinentryPackage = pkgs.pinentry-curses;
+     pinentryPackage = lib.mkDefault pkgs.pinentry-curses;
   };
 
   environment.systemPackages = with pkgs; [
