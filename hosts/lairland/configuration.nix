@@ -51,6 +51,7 @@ in
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
   # we're not using the TPM at the moment
   systemd.tpm2.enable = false;
   boot.initrd.systemd.tpm2.enable = false;
@@ -96,4 +97,7 @@ in
       live-restore = true;
     };
   };
+
+  # agenix stuff
+  age.reky.hostPubkey = with import ../../shared/ssh-keys.nix; hosts.stellapent-cier;
 }

@@ -116,4 +116,7 @@ in
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
+
+  # agenix stuff
+  age.reky.hostPubkey = with import ../../shared/ssh-keys.nix; hosts.stellapent-cier;
 }

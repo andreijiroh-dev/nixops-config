@@ -6,7 +6,8 @@
     direnv
     cachix
     devbox
-    nixfmt-rfc-style
+    nixfmt
+    nixfmt-tree
     nil
     nixd
 

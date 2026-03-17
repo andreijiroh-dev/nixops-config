@@ -22,6 +22,7 @@
     ./vscode/main.nix
     ./server/ssh.nix
     ./server/tailscale.nix
+    ./agenix.nix
   ];
 
   # and then the base packages itself

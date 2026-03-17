@@ -570,5 +570,26 @@
           cockpit = ./shared/server/cockpit.nix;
         };
       };
+    }
+  // flake-utils.lib.eachDefaultSystem (system: rec {
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [ agenix-rekey.overlays.default ];
     };
+    devShells.default = pkgs.mkShell {
+      packages = with pkgs; [
+        agenix-rekey
+        gitFull
+        gh
+        glab
+        fjo
+        nixfmt
+        nixfmt-tree
+        nil
+        nixd
+        rage
+        ragenix
+      ];
+    };
+  });
 }
