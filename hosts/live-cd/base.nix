@@ -37,7 +37,8 @@
     direnv
     cachix
     devbox
-    nixfmt-rfc-style
+    nixfmt
+    nixfmt-tree
     nil
     nixd
 
@@ -52,7 +53,6 @@
     doppler
 
     # system utils
-    neofetch
     fastfetch
     byobu
     tmux
@@ -65,9 +65,14 @@
     openssh = {
       authorizedKeys.keys = with import ../../shared/ssh-keys.nix; [
         personal.y2022
+        personal.campus-comlab
         personal.passwordless
         personal.rp.gildedguy
         work.recaptime-dev.crew
+        sshid.personal.stellapent-cier
+        sshid.personal.zarc
+        fido2Keys.hackclub_yubikey.main
+        fido2Keys.hackclub_yubikey.backup
       ];
     };
   };

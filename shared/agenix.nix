@@ -1,6 +1,6 @@
 # This is my agenix setup for all things SecretOps on my NixOS and home-manager
 # configurations.
-{ lib, pkgs, config, self, ... }:
+{ lib, pkgs, config, self, agenix-rekey, agenix, ... }:
 
 let
   pubkeys = import ../shared/ssh-keys.nix;
@@ -11,6 +11,11 @@ let
   hackclub_yk = pubkeys.fido2Keys.hackclub_yubikey;
 in
 {
+  imports = [
+    agenix.nixosModules.default
+    agenix-rekey.nixosModules.default
+  ];
+
   age.rekey = {
     # Master identity - private key used for decryption (must exist on machine running rekey)
     masterIdentities = [
