@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, config, pkgs, ... }:
 
 {
   services.timesyncd = {
@@ -16,4 +16,22 @@
 	    "3.asia.pool.ntp.org"
     ];
   };
+
+  # use systemd for boot stage 1
+  boot.initrd.systemd = {
+    enable = true;
+    extraBin = {
+      bash = "${pkgs.bash}/bin/bash";
+      utils = "${pkgs.busybox}/bin/busybox";
+    };
+  };
+  boot.initrd.network.ssh.enable = true;
+  boot.initrd.network.ssh.authorizedKeys = with ./ssh-keys.nix; [
+    personal.y2022
+    personal.passwordless
+    personal.rp.gildedguy
+    work.recaptime-dev.crew
+    fido2Keys.hackclub_yubikey.main
+    fido2Keys.hackclub_yubikey.backup
+  ];
 }

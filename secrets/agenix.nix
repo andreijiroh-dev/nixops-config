@@ -1,5 +1,5 @@
 # This is my agenix setup for all things SecretOps on my NixOS and home-manager
-# configurations.
+# configurations. This may be unused due to usage of agenix-rekey.
 { lib, pkgs, config, ... }:
 
 let

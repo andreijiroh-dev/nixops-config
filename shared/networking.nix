@@ -13,8 +13,8 @@
   ];
 
   # systemd-resolved related settings
-  boot.initrd.services.resolved.enable = true;
   services.resolved.enable = true;
+  boot.initrd.services.resolved.enable = true;
   services.resolved.settings.Resolve = {
     DNSSEC = "false"; # https://superuser.com/a/1493674
     # Commented this out since Tailscale do thee heavy work for MagicDNS
