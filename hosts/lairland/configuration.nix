@@ -48,56 +48,58 @@ in
       ./users/coolify-runner.nix
     ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  config = {
+    # Bootloader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
 
-  # we're not using the TPM at the moment
-  systemd.tpm2.enable = false;
-  boot.initrd.systemd.tpm2.enable = false;
+    # we're not using the TPM at the moment
+    systemd.tpm2.enable = false;
+    boot.initrd.systemd.tpm2.enable = false;
 
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+    # Use latest kernel.
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking = {
-    hosts = hostsFile;
-    hostName = "lairland";
-    networkmanager.enable = true;
-  };
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # Used by ../../bin/coolify-compose script
-  environment.variables = {
-    COOLIFY_DIR = "/opt/docker-data/coolify";
-  };
-
-  environment.systemPackages = with pkgs; [
-    coolify-compose
-  ];
-
-  # Docker related chores
-  virtualisation.docker = {
-    daemon.settings = {
-      data-root = "/opt/docker-data/engine";
-      ipv6 = true;
-      live-restore = true;
+    networking = {
+      hosts = hostsFile;
+      hostName = "lairland";
+      networkmanager.enable = true;
     };
-  };
 
-  # agenix stuff
-  age.reky.hostPubkey = with import ../../shared/ssh-keys.nix; hosts.stellapent-cier;
+    # Configure network proxy if necessary
+    # networking.proxy.default = "http://user:password@proxy:port/";
+    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+    # Enable CUPS to print documents.
+    services.printing.enable = true;
+
+    # Some programs need SUID wrappers, can be configured further or are
+    # started in user sessions.
+    # programs.mtr.enable = true;
+    # programs.gnupg.agent = {
+    #   enable = true;
+    #   enableSSHSupport = true;
+    # };
+
+    # Used by ../../bin/coolify-compose script
+    environment.variables = {
+      COOLIFY_DIR = "/opt/docker-data/coolify";
+    };
+
+    environment.systemPackages = with pkgs; [
+      coolify-compose
+    ];
+
+    # Docker related chores
+    virtualisation.docker = {
+      daemon.settings = {
+        data-root = "/opt/docker-data/engine";
+        ipv6 = true;
+        live-restore = true;
+      };
+    };
+
+    # agenix stuff
+    age.reky.hostPubkey = with import ../../shared/ssh-keys.nix; hosts.lairland;
+  };
 }

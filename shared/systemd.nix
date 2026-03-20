@@ -23,6 +23,8 @@
     extraBin = {
       bash = "${pkgs.bash}/bin/bash";
       utils = "${pkgs.busybox}/bin/busybox";
+      umount = "${pkgs.util-linux}/bin/umount";
+      nano = "${pkgs.nano}/bin/nano";
     };
   };
   boot.initrd.network.ssh.enable = true;

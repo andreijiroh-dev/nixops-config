@@ -6,10 +6,17 @@
 }:
 
 {
-  services.vscode-server.enable = true;
-  services.vscode-server.installPath = [
-    "$HOME/.vscode-server"
-    "$HOME/.vscode-server-oss"
-    "$HOME/.vscode-server-insiders"
+  imports = [
+    ../options.nix
   ];
+  config = {
+    services.vscode-server = {
+      enable = true;
+      installPath = [
+        "$HOME/.vscode-server"
+        "$HOME/.vscode-server-oss"
+        "$HOME/.vscode-server-insiders"
+      ];
+    };
+  };
 }

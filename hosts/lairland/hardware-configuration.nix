@@ -8,52 +8,54 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "uas" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  config = {
+    boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "uas" "sd_mod" "sr_mod" ];
+    boot.initrd.kernelModules = [ ];
+    boot.kernelModules = [ "kvm-intel" ];
+    boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/93d4a464-80bb-43ad-909a-61556ca2ac2e";
-      fsType = "ext4";
-    };
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/93d4a464-80bb-43ad-909a-61556ca2ac2e";
+        fsType = "ext4";
+      };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1AB1-2566";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
+    fileSystems."/boot" =
+      { device = "/dev/disk/by-uuid/1AB1-2566";
+        fsType = "vfat";
+        options = [ "fmask=0077" "dmask=0077" ];
+      };
 
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/d9e01375-ed14-4c4d-bfaf-a7eab47dfef5";
-      fsType = "ext4";
-    };
+    fileSystems."/home" =
+      { device = "/dev/disk/by-uuid/d9e01375-ed14-4c4d-bfaf-a7eab47dfef5";
+        fsType = "ext4";
+      };
 
-  # Seperate ext4 partition for local Git repo work
-  fileSystems."/workspaces" =
-    { device = "/dev/disk/by-uuid/3d45f467-8f59-4664-9d84-05b871c2d801";
-      fsType = "ext4";
-    };
+    # Seperate ext4 partition for local Git repo work
+    fileSystems."/workspaces" =
+      { device = "/dev/disk/by-uuid/3d45f467-8f59-4664-9d84-05b871c2d801";
+        fsType = "ext4";
+      };
 
-  # Dedicated 1TB HDD for Docker data outside of the regular /var/lib/docker path
-  # Used for my Homelab setup to avoid filling up the main NixOS partition.
-  fileSystems."/opt/docker-data" =
-    { device = "/dev/disk/by-uuid/c2b43f4a-4582-4f0b-b542-c1dc0ed88673";
-      fsType = "ext4";
-    };
+    # Dedicated 1TB HDD for Docker data outside of the regular /var/lib/docker path
+    # Used for my Homelab setup to avoid filling up the main NixOS partition.
+    fileSystems."/opt/docker-data" =
+      { device = "/dev/disk/by-uuid/c2b43f4a-4582-4f0b-b542-c1dc0ed88673";
+        fsType = "ext4";
+      };
 
-  swapDevices = [ ];
+    swapDevices = [ ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
-  # networking.interfaces.eno2.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s20f0u11.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp0s20f0u9.useDHCP = lib.mkDefault true;
+    # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+    # (the default) this is the recommended approach. When using systemd-networkd it's
+    # still possible to use this option, but it's recommended to use it in conjunction
+    # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+    networking.useDHCP = lib.mkDefault true;
+    # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
+    # networking.interfaces.eno2.useDHCP = lib.mkDefault true;
+    # networking.interfaces.enp0s20f0u11.useDHCP = lib.mkDefault true;
+    # networking.interfaces.wlp0s20f0u9.useDHCP = lib.mkDefault true;
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+    hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  };
 }

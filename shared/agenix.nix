@@ -3,9 +3,10 @@
 { lib, pkgs, config, self, agenix-rekey, agenix, ... }:
 
 let
-  pubkeys = import ../shared/ssh-keys.nix;
+  cfg = config.nixops-config.secretOps.agenix;
 
   # the you do you part
+  pubkeys = import ../shared/ssh-keys.nix;
   main = pubkeys.personal.y2022;
   work = pubkeys.work.recaptime-dev.crew;
   hackclub_yk = pubkeys.fido2Keys.hackclub_yubikey;
@@ -16,19 +17,21 @@ in
     agenix-rekey.nixosModules.default
   ];
 
-  age.rekey = {
-    # Master identity - private key used for decryption (must exist on machine running rekey)
-    masterIdentities = [
-      main
-      work
-      hackclub_yk.main
-    ];
+  config = {
+    age.rekey = {
+      # Master identity - private key used for decryption (must exist on machine running rekey)
+      masterIdentities = [
+        main
+        work
+        hackclub_yk.main
+      ];
 
-    # Store rekeyed secrets locally per-host
-    storageMode = "local";
-    localStorageDir = lib.mkDefault (self + "/secrets/rekeyed/${config.networking.hostName}");
+      # Store rekeyed secrets locally per-host
+      storageMode = "local";
+      localStorageDir = lib.mkDefault (self + "/secrets/rekeyed/${config.networking.hostName}");
 
-    # Host pubkey must be set per-host in configurations/nixos/<host>/default.nix:
-    # age.rekey.hostPubkey = "ssh-ed25519 AAAA...";
+      # Host pubkey must be set per-host in configurations/nixos/<host>/default.nix:
+      # age.rekey.hostPubkey = "ssh-ed25519 AAAA...";
+    };
   };
 }

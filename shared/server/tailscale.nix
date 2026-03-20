@@ -5,15 +5,17 @@
 { config, pkgs, lib, ... }:
 
 {
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "both";
-    openFirewall = true;
-    disableTaildrop = false;
-    extraDaemonFlags = [
-      "--verbose=3"
-    ];
-  };
+  config = {
+    services.tailscale = {
+      enable = true;
+      useRoutingFeatures = "both";
+      openFirewall = true;
+      disableTaildrop = false;
+      extraDaemonFlags = [
+        "--verbose=3"
+      ];
+    };
 
-  system.nixos.tags = [ "tailnet" ];
+    system.nixos.tags = [ "tailnet" ];
+  };
 }

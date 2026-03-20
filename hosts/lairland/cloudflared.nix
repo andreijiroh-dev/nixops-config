@@ -6,7 +6,7 @@
 }:
 
 {
-  systemd.services.cloudflared-remote = {
+  config.systemd.services.cloudflared-remote = {
     description = "Cloudflare Tunnel (Remote Managed) for Lairland HQ";
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" ];
@@ -20,7 +20,7 @@
     };
   };
 
-  systemd.services.cloudflared-remote-recaptime-dev = {
+  config.systemd.services.cloudflared-remote-recaptime-dev = {
     description = "Cloudflare Tunnel (Remote Managed) for Recap Time Squad";
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" ];

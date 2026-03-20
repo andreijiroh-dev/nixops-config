@@ -1,4 +1,4 @@
-{ pkgs, zen-browser, ... }:
+{ pkgs, zen-browser, config, lib, ... }:
 
 {
   programs.firefox = {

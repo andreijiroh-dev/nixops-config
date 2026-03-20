@@ -9,6 +9,7 @@
 {
   # import configs first
   imports = [
+    ./options.nix
     # import shared configs
     ./1password.nix
     ./nix.nix

@@ -1,19 +1,22 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 
+let
+  cfg = config.nixops-config.secretOps.gnupg;
+in
 {
-  # enable gpg-agent with SSH support
-  programs.gnupg.agent = {
-     enable = true;
-     enableSSHSupport = true;
-     enableBrowserSocket = true;
-     pinentryPackage = lib.mkDefault pkgs.pinentry-curses;
-  };
+  config = lib.mkIf cfg.enable {
+    programs.gnupg.agent = {
+      agent = true;
+      enableSSHSupport = cfg.sshAgentIntegration;
+      pinentryPackage = cfg.pinentryPkg;
+    };
 
-  environment.systemPackages = with pkgs; [
-    gnupg
-    gpgme
-    gpgme.dev
-    pinentry-tty
-    pinentry-curses
-  ];
+    environment.systemPackages = with pkgs; [
+      gnupg
+      gpgme
+      gpgme.dev
+      pinentry-tty
+      cfg.pinentryPkg
+    ];
+  };
 }
