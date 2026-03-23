@@ -70,14 +70,14 @@
 
     # home-manager
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "https://flakehub.com/f/nix-community/home-manager/0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Determinate Nix
     determinate = {
       url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # NixOS hardware stuff
