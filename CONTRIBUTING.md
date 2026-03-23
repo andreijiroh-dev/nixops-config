@@ -10,7 +10,7 @@ Other than the regular "review and agree to the [Community Code of Conduct][ccoc
 
 ## Sending patches
 
-TODO
+TODO: To be documented soon
 
 [dvscfg]: ./misc/bash/lib/detect-vscode-for-git
 [sal]: ./misc/bash/lib/ssh-agent-loader
