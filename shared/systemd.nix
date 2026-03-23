@@ -21,9 +21,9 @@
   boot.initrd.systemd = {
     enable = true;
     extraBin = {
-      bash = "${pkgs.bash}/bin/bash";
-      utils = "${pkgs.busybox}/bin/busybox";
-      umount = "${pkgs.util-linux}/bin/umount";
+      bash = lib.mkForce "${pkgs.bash}/bin/bash";
+      utils = lib.mkForce "${pkgs.busybox}/bin/busybox";
+      umount = lib.mkForce "${pkgs.util-linux}/bin/umount";
       nano = "${pkgs.nano}/bin/nano";
     };
   };

@@ -100,6 +100,7 @@ in
     };
 
     # agenix stuff
+    nixops-config.secretOps.agenix.enable = true;
     age.reky.hostPubkey = with import ../../shared/ssh-keys.nix; hosts.lairland;
   };
 }

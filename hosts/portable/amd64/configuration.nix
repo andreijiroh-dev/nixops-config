@@ -101,4 +101,8 @@ in
 
     system.nixos.tags = [ "portable-configs" "portable-amd64" ];
   };
+
+  # Custom configs here
+  nixops-config.secretOps.gnupg.enable = true;
+  nixops-config.secretOps.agenix.enable = true;
 }

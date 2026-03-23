@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  self,
   ...
 }:
 
@@ -14,7 +15,7 @@ in
 {
   imports = [
     ./server.nix
-    ../options.nix
+    "${self}/shared/options.nix"
   ];
 
   config = {

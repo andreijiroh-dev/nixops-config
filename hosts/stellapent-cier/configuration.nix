@@ -118,5 +118,7 @@ in
   programs.mtr.enable = true;
 
   # agenix stuff
+  nixops-config.secretOps.agenix.enable = true;
   age.reky.hostPubkey = with import ../../shared/ssh-keys.nix; hosts.stellapent-cier;
+  nixops-config.secretOps.gnupg.enable = lib.mkDefault true;
 }

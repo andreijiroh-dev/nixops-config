@@ -5,12 +5,13 @@
   config,
   pkgs,
   lib,
+  self,
   ...
 }:
 
 {
   imports = [
-    ../options.nix
+    "${self}/shared/options.nix"
   ];
   config = {
     services.openssh = {
@@ -31,9 +32,12 @@
           "hmac-sha2-256" # required for Cloudflare Access SSH via Browser Rendering
         ];
       };
-      startAgent = true;
     };
+    # Enable OpenSSH agent on login
+    # https://search.nixos.org/options?channel=unstable&query=programs.ssh.&show=programs.ssh.startAgent
+    programs.ssh.startAgent = true;
 
+    # mosh support
     programs.mosh.enable = true;
 
     # disable hibernation and hybrid sleep

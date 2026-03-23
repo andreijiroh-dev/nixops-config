@@ -6,7 +6,7 @@ in
 {
   config = lib.mkIf cfg.enable {
     programs.gnupg.agent = {
-      agent = true;
+      enable = true;
       enableSSHSupport = cfg.sshAgentIntegration;
       pinentryPackage = cfg.pinentryPkg;
     };

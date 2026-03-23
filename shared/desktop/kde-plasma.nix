@@ -7,19 +7,21 @@
     ./base.nix
   ];
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  config = {
+    # Enable the KDE Plasma Desktop Environment.
+    services.displayManager.sddm.enable = true;
+    services.desktopManager.plasma6.enable = true;
 
-  # Also enable KDE Connect
-  programs.kdeconnect.enable = true;
+    # Also enable KDE Connect
+    programs.kdeconnect.enable = true;
 
-  # Manual override for pinentryPackage
-  programs.gnupg.agent.pinentryPackage = pkgs.pinentry-qt;
+    # Manual override for pinentryPackage
+    nixops-config.secretOps.gnupg.pinentryPkg = pkgs.pinentry-qt;
 
-  environment.systemPackages = with pkgs; [
-    kdePackages.krfb
-    pinentry-qt
-    kdePackages.kate
-  ];
+    environment.systemPackages = with pkgs; [
+      kdePackages.krfb
+      pinentry-qt
+      kdePackages.kate
+    ];
+  };
 }

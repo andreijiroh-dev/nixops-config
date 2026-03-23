@@ -2,12 +2,13 @@
   config,
   pkgs,
   inputs,
+  self,
   ...
 }:
 
 {
   imports = [
-    ../options.nix
+    "${self}/shared/options.nix"
   ];
   config = {
     services.vscode-server = {

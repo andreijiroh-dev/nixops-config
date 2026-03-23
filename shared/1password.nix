@@ -2,11 +2,12 @@
   config,
   lib,
   pkgs,
+  self,
   ...
 }:
 {
   imports = [
-    ../options.nix
+    "${self}/shared/options.nix"
   ];
   config = {
     programs._1password.enable = true;
