@@ -1,6 +1,14 @@
 # This is my agenix setup for all things SecretOps on my NixOS and home-manager
 # configurations.
-{ lib, pkgs, config, self, agenix-rekey, agenix, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  self,
+  agenix-rekey,
+  agenix,
+  ...
+}:
 
 let
   cfg = config.nixops-config.secretOps.agenix;
@@ -12,10 +20,10 @@ let
   hackclub_yk = pubkeys.fido2Keys.hackclub_yubikey;
 in
 {
-  imports = [
-    agenix.nixosModules.default
-    agenix-rekey.nixosModules.default
-  ];
+  #imports = [
+  #  agenix.nixosModules.default
+  #  agenix-rekey.nixosModules.default
+  #];
 
   config = {
     age.rekey = {

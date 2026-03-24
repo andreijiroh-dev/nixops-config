@@ -176,7 +176,13 @@
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            agenix-rekey.overlays.default
+            llm-agents.overlays.default
+          ];
+        };
       in
       {
         # Packages for this system
@@ -188,39 +194,52 @@
           # Optionally make one the default to support `nix profile add .#`
           default = pkgs.callPackage ./pkgs/coolify-compose.nix { };
 
-          live-cd = (nixpkgs.lib.nixosSystem {
-            inherit system;
-            modules = [
-              nix-ld.nixosModules.nix-ld
-              determinate.nixosModules.default
-              home-manager.nixosModules.home-manager
-              vscode-server.nixosModules.default
-              chaotic.nixosModules.default
-              ./hosts/live-cd/kde-plasma.nix
-            ];
-            specialArgs = {
-              inherit
-                self
-                nixpkgs
-                home-manager
-                nixos-hardware
-                determinate
-                vscode-server
-                nix-ld
-                flake-utils
-                systems
-                nixos-generators
-                zen-browser
-                nix4vscode
-                firefox-addons
-                agenix
-                agenix-rekey
-                chaotic
-                llm-agents
-                dev-pkgs
-                ;
-            };
-          }).config.system.build.isoImage;
+          live-cd =
+            (nixpkgs.lib.nixosSystem {
+              inherit system;
+              modules = [
+                nix-ld.nixosModules.nix-ld
+                determinate.nixosModules.default
+                home-manager.nixosModules.home-manager
+                vscode-server.nixosModules.default
+                chaotic.nixosModules.default
+                ./hosts/live-cd/kde-plasma.nix
+              ];
+              specialArgs = {
+                inherit
+                  self
+                  nixpkgs
+                  home-manager
+                  nixos-hardware
+                  determinate
+                  vscode-server
+                  nix-ld
+                  flake-utils
+                  systems
+                  nixos-generators
+                  zen-browser
+                  nix4vscode
+                  firefox-addons
+                  agenix
+                  agenix-rekey
+                  chaotic
+                  llm-agents
+                  dev-pkgs
+                  ;
+              };
+            }).config.system.build.isoImage;
+        };
+
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [
+            agenix-rekey
+            gitFull
+            nano
+            nixfmt-tree
+            nixfmt
+            nil
+            nixd
+          ];
         };
 
         # If you want app-style outputs, you can also define apps here:
@@ -269,25 +288,25 @@
 
           specialArgs = {
             inherit
-                self
-                nixpkgs
-                home-manager
-                nixos-hardware
-                determinate
-                vscode-server
-                nix-ld
-                flake-utils
-                systems
-                nixos-generators
-                zen-browser
-                nix4vscode
-                firefox-addons
-                agenix
-                agenix-rekey
-                chaotic
-                llm-agents
-                dev-pkgs
-                ;
+              self
+              nixpkgs
+              home-manager
+              nixos-hardware
+              determinate
+              vscode-server
+              nix-ld
+              flake-utils
+              systems
+              nixos-generators
+              zen-browser
+              nix4vscode
+              firefox-addons
+              agenix
+              agenix-rekey
+              chaotic
+              llm-agents
+              dev-pkgs
+              ;
           };
         };
 
@@ -299,6 +318,8 @@
             determinate.nixosModules.default
             home-manager.nixosModules.home-manager
             vscode-server.nixosModules.default
+            agenix.nixosModules.default
+            agenix-rekey.nixosModules.default
 
             # and then the configs
             ./shared/meta.nix
@@ -307,25 +328,25 @@
 
           specialArgs = {
             inherit
-                self
-                nixpkgs
-                home-manager
-                nixos-hardware
-                determinate
-                vscode-server
-                nix-ld
-                flake-utils
-                systems
-                nixos-generators
-                zen-browser
-                nix4vscode
-                firefox-addons
-                agenix
-                agenix-rekey
-                chaotic
-                llm-agents
-                dev-pkgs
-                ;
+              self
+              nixpkgs
+              home-manager
+              nixos-hardware
+              determinate
+              vscode-server
+              nix-ld
+              flake-utils
+              systems
+              nixos-generators
+              zen-browser
+              nix4vscode
+              firefox-addons
+              agenix
+              agenix-rekey
+              chaotic
+              llm-agents
+              dev-pkgs
+              ;
           };
         };
 
@@ -348,25 +369,25 @@
 
           specialArgs = {
             inherit
-                self
-                nixpkgs
-                home-manager
-                nixos-hardware
-                determinate
-                vscode-server
-                nix-ld
-                flake-utils
-                systems
-                nixos-generators
-                zen-browser
-                nix4vscode
-                firefox-addons
-                agenix
-                agenix-rekey
-                chaotic
-                llm-agents
-                dev-pkgs
-                ;
+              self
+              nixpkgs
+              home-manager
+              nixos-hardware
+              determinate
+              vscode-server
+              nix-ld
+              flake-utils
+              systems
+              nixos-generators
+              zen-browser
+              nix4vscode
+              firefox-addons
+              agenix
+              agenix-rekey
+              chaotic
+              llm-agents
+              dev-pkgs
+              ;
           };
         };
 
@@ -387,25 +408,25 @@
           ];
           specialArgs = {
             inherit
-                self
-                nixpkgs
-                home-manager
-                nixos-hardware
-                determinate
-                vscode-server
-                nix-ld
-                flake-utils
-                systems
-                nixos-generators
-                zen-browser
-                nix4vscode
-                firefox-addons
-                agenix
-                agenix-rekey
-                chaotic
-                llm-agents
-                dev-pkgs
-                ;
+              self
+              nixpkgs
+              home-manager
+              nixos-hardware
+              determinate
+              vscode-server
+              nix-ld
+              flake-utils
+              systems
+              nixos-generators
+              zen-browser
+              nix4vscode
+              firefox-addons
+              agenix
+              agenix-rekey
+              chaotic
+              llm-agents
+              dev-pkgs
+              ;
           };
         };
 
@@ -421,25 +442,25 @@
           ];
           specialArgs = {
             inherit
-                self
-                nixpkgs
-                home-manager
-                nixos-hardware
-                determinate
-                vscode-server
-                nix-ld
-                flake-utils
-                systems
-                nixos-generators
-                zen-browser
-                nix4vscode
-                firefox-addons
-                agenix
-                agenix-rekey
-                chaotic
-                llm-agents
-                dev-pkgs
-                ;
+              self
+              nixpkgs
+              home-manager
+              nixos-hardware
+              determinate
+              vscode-server
+              nix-ld
+              flake-utils
+              systems
+              nixos-generators
+              zen-browser
+              nix4vscode
+              firefox-addons
+              agenix
+              agenix-rekey
+              chaotic
+              llm-agents
+              dev-pkgs
+              ;
           };
         };
 
@@ -455,25 +476,25 @@
           ];
           specialArgs = {
             inherit
-                self
-                nixpkgs
-                home-manager
-                nixos-hardware
-                determinate
-                vscode-server
-                nix-ld
-                flake-utils
-                systems
-                nixos-generators
-                zen-browser
-                nix4vscode
-                firefox-addons
-                agenix
-                agenix-rekey
-                chaotic
-                llm-agents
-                dev-pkgs
-                ;
+              self
+              nixpkgs
+              home-manager
+              nixos-hardware
+              determinate
+              vscode-server
+              nix-ld
+              flake-utils
+              systems
+              nixos-generators
+              zen-browser
+              nix4vscode
+              firefox-addons
+              agenix
+              agenix-rekey
+              chaotic
+              llm-agents
+              dev-pkgs
+              ;
           };
         };
       };
@@ -488,25 +509,25 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
             inherit
-                self
-                nixpkgs
-                home-manager
-                nixos-hardware
-                determinate
-                vscode-server
-                nix-ld
-                flake-utils
-                systems
-                nixos-generators
-                zen-browser
-                nix4vscode
-                firefox-addons
-                agenix
-                agenix-rekey
-                chaotic
-                llm-agents
-                dev-pkgs
-                ;
+              self
+              nixpkgs
+              home-manager
+              nixos-hardware
+              determinate
+              vscode-server
+              nix-ld
+              flake-utils
+              systems
+              nixos-generators
+              zen-browser
+              nix4vscode
+              firefox-addons
+              agenix
+              agenix-rekey
+              chaotic
+              llm-agents
+              dev-pkgs
+              ;
           };
           modules = [
             {
@@ -543,25 +564,25 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {
             inherit
-                self
-                nixpkgs
-                home-manager
-                nixos-hardware
-                determinate
-                vscode-server
-                nix-ld
-                flake-utils
-                systems
-                nixos-generators
-                zen-browser
-                nix4vscode
-                firefox-addons
-                agenix
-                agenix-rekey
-                chaotic
-                llm-agents
-                dev-pkgs
-                ;
+              self
+              nixpkgs
+              home-manager
+              nixos-hardware
+              determinate
+              vscode-server
+              nix-ld
+              flake-utils
+              systems
+              nixos-generators
+              zen-browser
+              nix4vscode
+              firefox-addons
+              agenix
+              agenix-rekey
+              chaotic
+              llm-agents
+              dev-pkgs
+              ;
           };
           modules = [
             {
@@ -597,25 +618,25 @@
           pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = {
             inherit
-                self
-                nixpkgs
-                home-manager
-                nixos-hardware
-                determinate
-                vscode-server
-                nix-ld
-                flake-utils
-                systems
-                nixos-generators
-                zen-browser
-                nix4vscode
-                firefox-addons
-                agenix
-                agenix-rekey
-                chaotic
-                llm-agents
-                dev-pkgs
-                ;
+              self
+              nixpkgs
+              home-manager
+              nixos-hardware
+              determinate
+              vscode-server
+              nix-ld
+              flake-utils
+              systems
+              nixos-generators
+              zen-browser
+              nix4vscode
+              firefox-addons
+              agenix
+              agenix-rekey
+              chaotic
+              llm-agents
+              dev-pkgs
+              ;
           };
           modules = [
             {
@@ -641,6 +662,20 @@
             }
           ];
         };
+      };
+
+      # Expose the necessary information in your flake so agenix-rekey
+      # knows where it has to look for secrets and paths.
+      #
+      # Make sure that the pkgs passed here comes from the same nixpkgs version as
+      # the pkgs used on your hosts in `nixosConfigurations`/`darwinConfigurations`, otherwise the rekeyed
+      # derivations will not be found!
+      agenix-rekey = agenix-rekey.configure {
+        userFlake = self;
+        nixosConfigurations = self.nixosConfigurations;
+        darwinConfigurations = self.darwinConfigurations or { };
+        # Example for colmena:
+        # nixosConfigurations = ((colmena.lib.makeHive self.colmena).introspect (x: x)).nodes;
       };
 
       # This is for external users who want to reproduce my configs as needed
