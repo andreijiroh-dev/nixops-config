@@ -31,7 +31,7 @@ in
       "ms-azuretools.vscode-containers"
       "GitHub.copilot-chat"
       "wdhongtw.gpg-indicator"
-      "WakaTime.vscode-wakatime"
+      "WakaTime.vscode-wakatime.29.0.3"
       "ms-vscode.remote-repositories"
       "GitHub.remotehub"
 
@@ -39,6 +39,7 @@ in
       "bbenoist.Nix"
       "arrterian.nix-env-selector"
       "brettm12345.nixfmt-vscode"
+      #"jnoortheen.nix-ide"
       "tamasfe.even-better-toml"
       "bierner.emojisense"
       "redhat.vscode-yaml"
@@ -54,12 +55,12 @@ in
       "DavidAnson.vscode-markdownlint"
       "timonwong.shellcheck"
       "exiasr.hadolint"
-      "eamodio.gitlens"
     ]
     ++ forVscodePrerelease [
       # tooling
       "ms-vscode.remote-server"
       "ms-vscode-remote.remote-ssh"
       "GitHub.vscode-pull-request-github"
+      "eamodio.gitlens"
     ];
 }

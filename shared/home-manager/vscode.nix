@@ -4,10 +4,10 @@
   lib,
   self,
   ...
-}:
+}@args:
 
 let
-  extensions = with ../vscode/extensions.nix; extIndex;
+  extensions = with import ../vscode/extensions.nix args; extIndex;
 in
 {
   programs.vscode = {
