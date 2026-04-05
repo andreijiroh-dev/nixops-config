@@ -50,7 +50,7 @@
         enable = true;
         package = pkgs.podman;
         extraPackages = with pkgs; [
-          gvisor
+          #gvisor
           podman-compose
         ];
       };
