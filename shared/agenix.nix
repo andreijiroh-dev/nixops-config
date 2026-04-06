@@ -41,9 +41,9 @@ in
       # Host pubkey must be set per-host in configurations/nixos/<host>/default.nix:
       # age.rekey.hostPubkey = "ssh-ed25519 AAAA...";
     };
-  };
 
-  environment.systemPackages = with pkgs; [
-    agenix-rekey
-  ];
+    environment.systemPackages = with pkgs; [
+      agenix-rekey
+    ];
+  };
 }
