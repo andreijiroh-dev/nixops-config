@@ -66,7 +66,6 @@
     # home-manager stuff
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
-    home.enableNixpkgsReleaseCheck = false; # ignore warnings about outdated nixpkgs in home-manager
 
     # nix-ld flake opts
     programs.nix-ld.dev = {

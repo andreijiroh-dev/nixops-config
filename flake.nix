@@ -401,8 +401,8 @@
             nix-ld.nixosModules.nix-ld
             determinate.nixosModules.default
             home-manager.nixosModules.home-manager
-            agenix.nixosModules.default
-            agenix-rekey.nixosModules.default
+            #agenix.nixosModules.default
+            #agenix-rekey.nixosModules.default
             vscode-server.nixosModules.default
             chaotic.nixosModules.default
             ./shared/meta.nix
