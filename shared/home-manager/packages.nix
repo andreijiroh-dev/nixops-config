@@ -79,6 +79,7 @@
     unrar-wrapper
     storj-uplink
     rclone
+    goat-cli
 
     # shell utils
     starship
