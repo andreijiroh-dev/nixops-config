@@ -239,6 +239,8 @@
             nixfmt
             nil
             nixd
+            shellcheck
+            shfmt
           ];
         };
 
@@ -673,7 +675,7 @@
       agenix-rekey = agenix-rekey.configure {
         userFlake = self;
         nixosConfigurations = self.nixosConfigurations;
-        darwinConfigurations = self.darwinConfigurations or { };
+        #darwinConfigurations = self.darwinConfigurations or { };
         # Example for colmena:
         # nixosConfigurations = ((colmena.lib.makeHive self.colmena).introspect (x: x)).nodes;
       };

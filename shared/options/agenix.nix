@@ -1,11 +1,13 @@
-{ lib, config, options, pkgs, ... }:
+{
+  lib,
+  config,
+  options,
+  pkgs,
+  ...
+}:
 
 {
   options.nixops-config.secretOps.agenix = {
-    enable = lib.mkOption {
-      description = "Enable agenix and agenix-reky for this NixOS or home-manager config. Requires `rekey.hostPubkey` to be set.";
-      default = false;
-      type = lib.types.bool;
-    };
+    enable = lib.mkEnableOption "Enable agenix and agenix-reky for this NixOS or home-manager config. Requires `rekey.hostPubkey` to be set.";
   };
 }
