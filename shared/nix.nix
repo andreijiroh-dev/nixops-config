@@ -8,6 +8,7 @@
   self,
   nix4vscode,
   llm-agents,
+  agenix-rekey,
   ...
 }:
 
@@ -24,6 +25,7 @@
       overlays = [
         self.overlays.default
         nix4vscode.overlays.default
+        agenix-rekey.overlays.default
         llm-agents.overlays.default
       ];
     };

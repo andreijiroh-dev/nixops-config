@@ -25,7 +25,7 @@ in
   #  agenix-rekey.nixosModules.default
   #];
 
-  config = {
+  config = lib.mkIf cfg.enable {
     age.rekey = {
       # Master identity - private key used for decryption (must exist on machine running rekey)
       masterIdentities = [
@@ -42,4 +42,8 @@ in
       # age.rekey.hostPubkey = "ssh-ed25519 AAAA...";
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    agenix-rekey
+  ];
 }

@@ -53,6 +53,10 @@
     # shell prompt customizations
     starship
     oh-my-posh # as backup lol
+
+    # iykyk secretops (see also agenix.nix)
+    age
+    rage
   ];
 
   # home-manager stuff
