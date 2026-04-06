@@ -320,8 +320,8 @@
             determinate.nixosModules.default
             home-manager.nixosModules.home-manager
             vscode-server.nixosModules.default
-            agenix.nixosModules.default
-            agenix-rekey.nixosModules.default
+            #agenix.nixosModules.default
+            #agenix-rekey.nixosModules.default
 
             # and then the configs
             ./shared/meta.nix
@@ -359,8 +359,8 @@
             nix-ld.nixosModules.nix-ld
             determinate.nixosModules.default
             home-manager.nixosModules.home-manager
-            agenix.nixosModules.default
-            agenix-rekey.nixosModules.default
+            #agenix.nixosModules.default
+            #agenix-rekey.nixosModules.default
             vscode-server.nixosModules.default
             chaotic.nixosModules.default
 
