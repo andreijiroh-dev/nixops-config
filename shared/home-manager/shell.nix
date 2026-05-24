@@ -1,7 +1,7 @@
 { lib, pkgs, dev-pkgs, ... }: {
-  home.packages = [
-    pkgs.detect-vscode-for-git
-    pkgs.ssh-agent-loader
+  home.packages = with pkgs; [
+    detect-vscode-for-git
+    ssh-agent-loader
   ];
 
   # taken from https://github.com/andreijiroh-dev/dotfiles/blob/main/.config/aliases
@@ -31,10 +31,10 @@
 
   home.sessionVariables = {
     NIXOS_ALLOW_UNFREE = "1"; # for impure builds
-    # use nano for now
-    EDITOR = "nano";
-    GIT_EDITOR = "nano";
-    VISUAL = "nano";
+    # previously nano but we're cooking with helix here (sorry neovim users :3)
+    EDITOR = "hx";
+    GIT_EDITOR = "hx";
+    VISUAL = "hx";
     # enable buildkit on `docker build` by default
     DOCKER_BUILDKIT = "1";
     # Context: https://drewdevault.com/2021/08/06/goproxy-breaks-go.html
@@ -42,6 +42,7 @@
     GOSUMDB = "off";
     # set GOPATH to ~/.local/share/go
     GOPATH = "$HOME/.local/share/go";
+    GCC_COLORS = "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01";
   };
 
   programs.bash = {
@@ -99,9 +100,6 @@
         test -f "$HOME/.config/op/plugins.sh" && source "$HOME/.config/op/plugins.sh"
       fi
 
-      # hook in direnv and friends
-      eval "$(direnv hook bash)"
-
       if [ "$(command -v dircolors)" != "" ]; then
         test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
         alias ls='ls --color=auto'
@@ -112,9 +110,7 @@
         alias fgrep='fgrep --color=auto'
         alias egrep='egrep --color=auto'
       fi
-
-      export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
+       
       [[ ! ''${BLE_VERSION-} ]] || ble-attach
     '';
     #enableLsColors = true;

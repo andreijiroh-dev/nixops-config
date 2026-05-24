@@ -57,7 +57,7 @@
           "impure-derivations"
           "local-overlay-store"
           "mounted-ssh-store"
-          "no-url-literals"
+          #"no-url-literals"
           "pipe-operators"
           "read-only-local-store"
           #"recursive-nix"
@@ -124,6 +124,9 @@
           "https://recaptime-dev.cachix.org"
           "https://cache.numtide.com"
         ];
+
+        # https://nix.dev/manual/nix/2.34/release-notes/rl-2.34#new-lint-infrastructure
+        lint-url-literals = "fatal";
       };
     };
 

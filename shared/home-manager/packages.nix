@@ -80,6 +80,8 @@
     storj-uplink
     rclone
     goat-cli
+    helix
+    zellij
 
     # shell utils
     starship
@@ -92,7 +94,7 @@
     twitch-chat-downloader
 
     # gen ai tools
-    llm-agents.gemini-cli
+    #llm-agents.gemini-cli
     llm-agents.copilot-cli
     llm-agents.amp
     llm-agents.agent-deck
