@@ -25,8 +25,8 @@ in
     agenix-rekey.nixosModules.default
   ];
 
-  config = lib.mkIf cfg.enable {
-    age.rekey = {
+  config = {
+    age.rekey = lib.mkIf cfg.enable {
       # Master identity - private key used for decryption (must exist on machine running rekey)
       masterIdentities = [
         main

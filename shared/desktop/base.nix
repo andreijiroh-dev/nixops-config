@@ -14,8 +14,10 @@
   # $ nix search wget
   config = {
     environment.systemPackages = with pkgs; [
+      # mailbox thing
       thunderbird
 
+      # office apps
       libreoffice-qt6-fresh
       hunspell
       hunspellDicts.en_US
@@ -28,6 +30,10 @@
       (pkgs.termius.overrideAttrs (oldAttrs: {
         buildInputs = oldAttrs.buildInputs or [ ] ++ [ pkgs.sqlite ];
       }))
+
+      # wayland tooling
+      wl-clipboard-rs
+      wl-clipboard-x11
     ];
   };
 }

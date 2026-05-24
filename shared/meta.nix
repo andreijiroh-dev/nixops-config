@@ -16,7 +16,7 @@
     ./locale.nix
     ./networking.nix
     ./systemd.nix
-    ./agenix.nix
+    #./agenix.nix
     # shells and dev tools
     ./gnupg.nix
     ./shells/bash.nix
@@ -37,6 +37,7 @@
       tmux
       htop
       btop
+      zellij
 
       # git tools
       gitFull
@@ -51,8 +52,9 @@
 
       # TUI-based text editors
       nano
-      neovim
-      emacs
+      neovim # why not?
+      emacs # see our System Admin course for context
+      helix
 
       # shell prompt customizations
       starship

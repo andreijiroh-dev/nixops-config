@@ -34,11 +34,12 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ./broadcom.nix
+    #./broadcom.nix
     ../../shared/desktop/kde-plasma.nix
     ../../shared/server/devenv.nix
     ../../shared/server/cockpit.nix
     ./users/gildedguy.nix
+    ../../shared/agenix.nix
   ];
 
   # Bootloader

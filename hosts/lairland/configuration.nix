@@ -38,15 +38,16 @@ let
   hostsFile = baseHostsFile // extraHosts;
 in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../shared/server/tailscale.nix
-      ../../shared/server/devenv.nix
-      ../../shared/server/cockpit.nix
-      ./users/ajhalili2006.nix
-      ./users/coolify-runner.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../shared/server/tailscale.nix
+    ../../shared/server/devenv.nix
+    ../../shared/server/cockpit.nix
+    ./users/ajhalili2006.nix
+    ./users/coolify-runner.nix
+    ../../shared/agenix.nix
+  ];
 
   config = {
     # Bootloader.
