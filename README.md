@@ -4,7 +4,7 @@ This is @ajhalili2006's NixOS + Home Manager configuration for his laptop and ho
 alongside in tildes with Nix installed and in sync with the [nixpkgs-specific branch][nix-dots]
 of my dotfiles repository.
 
-[nix-dots]: https://gitlab.com/andreijiroh-dev/dotfiles/tree/nixpkgs
+[nix-dots]: https://gitlab.com/andreijiroh-dev/dotfiles/tree/nixpkgs/base
 
 ## CI Status
 
@@ -15,13 +15,13 @@ of my dotfiles repository.
 
 ## Mirrors
 
-Canonically published at [GitLab SaaS](https://gitlab.com/andreijiroh-dev/nixops-config),
+Canonically published at [GitLab.com](https://gitlab.com/andreijiroh-dev/nixops-config),
 with push mirroring enabled to [GitHub](https://github.com/andreijiroh-dev/nixops-config).
 Along with the following mirrors:
 
 - [sourcehut hosted](https://git.sr.ht/~ajhalili2006/nixops-config)
 - [Manimun GitLab](https://mau.dev/andreijiroh-dev/nixops-config)
-- [Hack Club Nest's Forgejo instance](https://git.hackclub.app/andreijiroh-dev/nixops-config)
+- [Tangled](https://tangled.org/andreijiroh.dev/nixops-config)
 
 ## Usage
 
