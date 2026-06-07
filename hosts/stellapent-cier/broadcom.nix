@@ -2,11 +2,11 @@
 
 {
   # load broadcom wireless driver
-  boot.kernelModules = [ "wl" ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [ broadcom_sta ];
+  #boot.kernelModules = [ "wl" ];
+  #boot.extraModulePackages = with config.boot.kernelPackages; [ broadcom_sta ];
   
   # blacklist similar modules to avoid collision
-  boot.blacklistedKernelModules = [ "b43" "bcma" ];
+  #boot.blacklistedKernelModules = [ "b43" "bcma" ];
 
   hardware.firmware = with pkgs; [
     broadcom-bt-firmware
@@ -30,5 +30,6 @@
     "broadcom-sta-6.30.223.271-59-6.19.5"
     "broadcom-sta-6.30.223.271-59-6.19.9"
     "broadcom-sta-6.30.223.271-59-6.19.10"
+    "broadcom-sta-6.30.223.271-59-7.0.10"
  ];
 }
