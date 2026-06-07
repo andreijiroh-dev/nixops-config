@@ -49,6 +49,7 @@
       jq
       rclone
       ntfsprogs
+      smartmontools
 
       # TUI-based text editors
       nano
@@ -80,5 +81,8 @@
       "net.ipv6.conf.all.forwarding" = 1;
       "vm.swappiness" = 60;
     };
+
+    # monitor health via smartmontools
+    services.smartd.enable = true;
   };
 }
