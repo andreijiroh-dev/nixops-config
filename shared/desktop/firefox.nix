@@ -1,14 +1,15 @@
-{ pkgs, zen-browser, config, lib, ... }:
+{
+  pkgs,
+  zen-browser,
+  config,
+  lib,
+  ...
+}:
 
 {
   config = {
     programs.firefox = {
       enable = true;
-      nativeMessagingHosts.packages = with pkgs; [
-        firefoxpwa
-        #    _1password-gui
-        #    gnupg
-      ];
       package = pkgs.firefox;
     };
 

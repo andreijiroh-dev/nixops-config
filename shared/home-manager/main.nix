@@ -13,7 +13,6 @@
 {
   imports = [
     ./packages.nix
-    ./desktop.nix
     ./git.nix
     ./shell.nix
     ./fonts.nix

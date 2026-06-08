@@ -38,6 +38,7 @@
     imports = [
       zen-browser.homeModules.beta
       ../../../shared/home-manager/main.nix
+      ../../../shared/home-manager/desktop.nix
     ];
 
     home.username = "gildedguy";

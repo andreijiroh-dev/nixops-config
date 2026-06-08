@@ -10,7 +10,7 @@
 
   home.packages = with pkgs; [
     _1password-gui
-    firefoxpwa
+    #firefoxpwa
     #rpi-imager
     kdePackages.krfb
     #mysql-workbench
@@ -27,7 +27,7 @@
   programs.zen-browser = {
     enable = true;
     nativeMessagingHosts = with pkgs; [
-      firefoxpwa
+      #firefoxpwa
       _1password-gui
     ];
   };

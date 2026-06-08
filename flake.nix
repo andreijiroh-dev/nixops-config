@@ -501,6 +501,7 @@
         };
       };
       homeConfigurations = {
+
         # Usage
         # - From GitHub:
         #  nix run home-manager/master -- switch --flake github:andreijiroh-dev/nixops-config#stellapent-cier
@@ -548,6 +549,7 @@
             zen-browser.homeModules.beta
             chaotic.homeManagerModules.default
             ./shared/home-manager/main.nix
+            #./shared/home-manager/desktop.nix
             {
               home = {
                 username = "gildedguy";
@@ -603,7 +605,7 @@
             }
             zen-browser.homeModules.beta
             chaotic.homeManagerModules.default
-            ./shared/home-manager/nogui.nix
+            ./shared/home-manager/main.nix
             {
               home.username = "ajhalili2006";
               home.homeDirectory = "/home/ajhalili2006";
@@ -657,7 +659,7 @@
             }
             zen-browser.homeModules.beta
             chaotic.homeManagerModules.default
-            ./shared/home-manager/nogui.nix
+            ./shared/home-manager/main.nix
             {
               home.username = "ajhalili2006";
               home.homeDirectory = "/home/ajhalili2006";

@@ -51,9 +51,10 @@
     pnpm
     yarn
     # python
-    python313
-    pipx
+    python314
+    #pipx
     pipenv
+    uv
     # go + rust
     go
     rustup
@@ -96,7 +97,7 @@
     # gen ai tools
     #llm-agents.gemini-cli
     llm-agents.copilot-cli
-    llm-agents.amp
+    #llm-agents.amp
     llm-agents.agent-deck
     llm-agents.backlog-md
     llm-agents.coderabbit-cli
