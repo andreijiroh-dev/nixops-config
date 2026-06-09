@@ -25,13 +25,11 @@ Along with the following mirrors:
 
 ## Usage
 
-### Poking around Gemini CLI + Chat in VS Code?
+### Poking around Antigravity CLI or GitHub Copilot?
 
-I already ported my GitHub Copilot instructions into the standard `AGENT.md` file
-so your AI tools can easily speedrun things in different shell sessions with Gemini
-CLI up and running. While this is untested, I symlinked the old file location for
-compatibility so you're good to go if you are contributing patches or just forking
-around and finding out.
+I already ported my GitHub Copilot instructions into the standard `AGENT.md` file so your AI tools can easily speedrun things in different shell sessions with Gemini CLI up and running. While this is untested, I symlinked the old file location for compatibility so you're good to go if you are contributing patches or just forking around and finding out for your own NixOS + home-manager setups.
+
+Since I am also a Zed user (I know Claude Code and Zed Agent users are staring at me for taking the 1-year-long Google AI Pro trial for students and using Google Gemini more than GitHub Copilot since the pricing changes earlier)
 
 ### Installing NixOS
 

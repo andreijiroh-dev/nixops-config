@@ -1,23 +1,30 @@
 {
   "languages": {
     "Nix": {
-      "language_servers": ["nil", "!nixd"]
-    }
+      "language_servers": ["nil", "!nixd"],
+    },
   },
   "lsp": {
     "nil": {
       "initialization_options": {
         "formatting": {
-          "command": ["nixfmt"]
+          "command": ["nixfmt"],
         },
         "nix": {
           "flake": {
             "autoArchive": true,
             "autoEvalInputs": false,
-            "nixpkgsInputName": "nixpkgs"
-          }
-        }
-      }
-    }
-  }
+            "nixpkgsInputName": "nixpkgs",
+          },
+        },
+      },
+    },
+  },
+  "git_hosting_providers": [
+    {
+      "base_url": "https://mau.dev",
+      "provider": "gitlab",
+      "name": "Manimum GitLab",
+    },
+  ],
 }
