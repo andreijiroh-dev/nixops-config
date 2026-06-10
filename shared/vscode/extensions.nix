@@ -29,7 +29,7 @@ in
       "github.vscode-github-actions"
       "ms-vscode-remote.remote-ssh-edit"
       "ms-azuretools.vscode-containers"
-      "GitHub.copilot-chat"
+      #"GitHub.copilot-chat"
       "wdhongtw.gpg-indicator"
       "WakaTime.vscode-wakatime.29.0.3"
       "ms-vscode.remote-repositories"
