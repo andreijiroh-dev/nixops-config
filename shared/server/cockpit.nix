@@ -10,7 +10,7 @@
         cockpit-files
         cockpit-podman
         cockpit-machines
-        cockpit-zfs
+        #cockpit-zfs
       ];
     };
 
