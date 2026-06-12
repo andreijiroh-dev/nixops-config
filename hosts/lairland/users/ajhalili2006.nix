@@ -31,7 +31,7 @@
   # see ../../stellapent-cier/users/gildedguy.nix for context
   home-manager.users.ajhalili2006 = {
     imports = [
-      ../../../shared/home-manager/nogui.nix
+      ../../../shared/home-manager/main.nix.nix
     ];
 
     home.username = "ajhalili2006";
