@@ -12,7 +12,7 @@ in
 {
   imports = [
     ./server.nix
-    "${self}/shared/options.nix"
+    #"${self}/shared/options.nix"
   ];
 
   config = {

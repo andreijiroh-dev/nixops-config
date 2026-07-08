@@ -1,8 +1,5 @@
-result
-*.iso
+*.txt
 *.log
-*.key
-*.priv
-.idx/dev.local.nix
+*.swp
+.build/
 .logs/
-build-*

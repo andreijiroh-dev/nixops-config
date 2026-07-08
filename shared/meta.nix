@@ -9,8 +9,6 @@
 {
   # import configs first
   imports = [
-    # module opts
-    ./options.nix
     # nix stuff and systemd
     ./nix.nix
     ./locale.nix
@@ -67,6 +65,7 @@
     ];
 
     # home-manager stuff
+    home-manager.enable = true;
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
 

@@ -20,12 +20,13 @@ let
   hackclub_yk = pubkeys.fido2Keys.hackclub_yubikey;
 in
 {
-  imports = [
-    agenix.nixosModules.default
-    agenix-rekey.nixosModules.default
-  ];
-
+  options = import ./options/agenix.nix;
   config = {
+    imports = [
+      agenix.nixosModules.default
+      agenix-rekey.nixosModules.default
+    ];
+
     age.rekey = lib.mkIf cfg.enable {
       # Master identity - private key used for decryption (must exist on machine running rekey)
       masterIdentities = [

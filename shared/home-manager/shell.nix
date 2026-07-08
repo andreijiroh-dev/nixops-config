@@ -1,4 +1,10 @@
-{ lib, pkgs, dev-pkgs, ... }: {
+{
+  lib,
+  pkgs,
+  dev-pkgs,
+  ...
+}:
+{
   home.packages = with pkgs; [
     detect-vscode-for-git
     ssh-agent-loader
@@ -85,13 +91,13 @@
       source ${pkgs.detect-vscode-for-git}/bin/detect-vscode-for-git
 
       # HACK: https://github.com/akinomyoga/ble.sh/wiki/Manual-A1-Installation#user-content-nixpkgs
-      export BLESH_PATH=$(blesh-share)
-      [[ $- == *i* ]] && source "$BLESH_PATH/ble.sh" --attach=none
+      #export BLESH_PATH=$(blesh-share)
+      #[[ $- == *i* ]] && source "$BLESH_PATH/ble.sh" --attach=none
     '';
     initExtra = ''
       # hackaround for GPG on CLI mode
       export GPG_TTY=$(tty)
-      
+
       # source our ssh-agent-loader first
       source ${pkgs.ssh-agent-loader}/bin/ssh-agent-loader
 
@@ -110,7 +116,7 @@
         alias fgrep='fgrep --color=auto'
         alias egrep='egrep --color=auto'
       fi
-       
+
       [[ ! ''${BLE_VERSION-} ]] || ble-attach
     '';
     #enableLsColors = true;

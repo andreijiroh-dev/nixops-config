@@ -7,7 +7,7 @@
 }:
 {
   imports = [
-    "${self}/shared/options.nix"
+    #"${self}/shared/options.nix"
   ];
   config = {
     programs._1password.enable = true;
@@ -22,7 +22,6 @@
         "halilifam"
       ];
     };
-
 
     # HACK: Allow zen-browser and vivaldi to be used with 1Password
     environment.etc = {

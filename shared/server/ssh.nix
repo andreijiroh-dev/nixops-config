@@ -11,7 +11,7 @@
 
 {
   imports = [
-    "${self}/shared/options.nix"
+    #"${self}/shared/options.nix"
   ];
   config = {
     services.openssh = {

@@ -78,7 +78,6 @@ imports = [
   ../../shared/server/ssh.nix
   ../../shared/server/tailscale.nix
   ../../shared/systemd.nix
-  ../../shared/yubikey.nix
   # add more imports here
 ]
 ```

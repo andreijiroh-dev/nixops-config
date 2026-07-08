@@ -1,10 +1,16 @@
 # Configs for KDE Plasma DE and friends
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
     ./base.nix
+    ./yubikey.nix
   ];
 
   config = {
