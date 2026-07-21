@@ -1,5 +1,14 @@
+# build logs and artifacts
+result
+*.iso
 *.txt
 *.log
 *.swp
 .build/
 .logs/
+
+# secrets
+*.key
+*.priv
+.idx/dev.local.nix
+*.decrypted

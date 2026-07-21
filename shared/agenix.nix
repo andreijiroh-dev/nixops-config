@@ -20,11 +20,11 @@ let
   hackclub_yk = pubkeys.fido2Keys.hackclub_yubikey;
 in
 {
-  options = import ./options/agenix.nix;
   config = {
     imports = [
       agenix.nixosModules.default
       agenix-rekey.nixosModules.default
+      ./options/agenix.nix
     ];
 
     age.rekey = lib.mkIf cfg.enable {
