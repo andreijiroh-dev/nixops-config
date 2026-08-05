@@ -65,7 +65,7 @@
     ];
 
     # home-manager stuff
-    home-manager.enable = true;
+    #home-manager.enable = true;
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
 

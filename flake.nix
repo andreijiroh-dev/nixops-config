@@ -180,7 +180,7 @@
           inherit system;
           overlays = [
             agenix-rekey.overlays.default
-            llm-agents.overlays.default
+            llm-agents.overlays.shared-nixpkgs
           ];
         };
       in
@@ -538,6 +538,7 @@
                 overlays = [
                   self.overlays.default
                   nix4vscode.overlays.default
+                  llm-agents.outputs.shared-nixpkgs
                 ];
                 config = {
                   allowUnfree = true;
@@ -594,7 +595,7 @@
                 overlays = [
                   self.overlays.default
                   nix4vscode.overlays.default
-                  llm-agents.overlays.default
+                  llm-agents.overlays.shared-nixpkgs
                 ];
                 config = {
                   allowUnfree = true;
@@ -648,7 +649,7 @@
                 overlays = [
                   self.overlays.default
                   nix4vscode.overlays.default
-                  llm-agents.overlays.default
+                  llm-agents.overlays.shared-nixpkgs
                 ];
                 config = {
                   allowUnfree = true;

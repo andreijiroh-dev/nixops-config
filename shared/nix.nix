@@ -26,7 +26,7 @@
         self.overlays.default
         nix4vscode.overlays.default
         agenix-rekey.overlays.default
-        llm-agents.overlays.default
+        llm-agents.overlays.shared-nixpkgs
       ];
     };
 
@@ -42,7 +42,6 @@
         experimental-features = [
           "nix-command"
           "flakes"
-
           "auto-allocate-uids"
           "blake3-hashes"
           "ca-derivations"
