@@ -50,6 +50,15 @@
     termius = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC+H0oixQCgHiZWk4+H6VupW+2Aibs7poK7kNPf+hJEv";
     gcp = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9p6XYWUumCEk8ExaoProbI6BQHu52SErSlrOzUzzCUTjRPq2vfENTL7GwG6cgsrDLBxW+u+t6qoTXRVeRc7YCXzmPofls7dy2wXwBSM1Z/AzXCFDEVxtn3Y3F6gLi7nUbMZywBmBSlNjiN1w3FbBKMMP4SYgz0O1SGIjIFBQFheZgRTJxUq9DyPQRbY4U3jcJV8968JPQELKBCvmeI2iKNLOeSY1kVmwwM90yKgcvJsM/uTNXzUjTRK3Y4J0GWA2Up53pQxjmskqOusI+rwDVpnLsJEsjszvpOj5UAQrW4PuhJKjY0RYbigCrqqmCDbFuX9w6N9Sjo6Vp5MVxsMq7OwdNxNhBKDPJ8le4km8hdO8Z162+pSqUftk0hA4OjHIX2/i4avEl6Hh7MD1nbTnTbbaZV+1g6edWCnH0UASnrhulYkUNoWvpAi/bHJsfVuw5tZ8FprI5t6rCKiOXnXqU+jsn+fabDeuIt1mlN7BueebLUzAQ44npsFdSMEDCdJs= gildedguy@stellapent-cier";
     aws = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICx7San3UCFg3+vr5a07MoNBM9egqAeKHnu4Jhpx3Zwx devlab.aws";
+
+    # SSH CA certs
+    ca_certs = {
+      # Cloduflare Access for Infrastructure
+      cfAccessForInfra = {
+        ajhalili2006 = "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFvJ8mJaqrzH5UzDFNPB3EXO2FY9A1ko9m62L6O40ZmJfWK0ugNAQf6RfidCFE7hSZIxHix9goMXJH628xh080o= open-ssh-ca@cloudflareaccess.org";
+        recaptime-dev = "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGNXZ8lUZgsT0ct2OrkorlNcN+k+c2lrl5GIRUFae+KNDK8HKCM9u2dsP7+52pC2Ry9dNBN4k6P7j5fR8XdmMtg= open-ssh-ca@cloudflareaccess.org";
+      };
+    };
   };
 
   # Hardware-backed SSH keys

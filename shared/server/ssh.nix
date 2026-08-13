@@ -9,6 +9,9 @@
   ...
 }:
 
+let
+  caCerts = with import ../ssh-keys.nix; infra.ca_certs;
+in
 {
   imports = [
     #"${self}/shared/options.nix"
@@ -31,6 +34,11 @@
           "umac-128-etm@openssh.com"
           "hmac-sha2-256" # required for Cloudflare Access SSH via Browser Rendering
         ];
+
+        TrustedUserCAKeys = pkgs.writeText "cloudflare-ca.pub" ''
+          ${caCerts.cfAccessForInfra.ajhalili2006}
+          ${caCerts.cfAccessForInfra.recaptime-dev}
+        '';
       };
     };
     # Enable OpenSSH agent on login
