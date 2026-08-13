@@ -9,7 +9,7 @@ let
   cfg = config.nixops-config.secretOps.gnupg;
 in
 {
-  imports = [ ./options/gnupg.nix ];
+  imports = [ ./options/module.nix ];
   config = lib.mkIf cfg.enable {
     programs.gnupg.agent = {
       enable = true;

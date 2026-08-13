@@ -14,7 +14,6 @@
     ./locale.nix
     ./networking.nix
     ./systemd.nix
-    #./agenix.nix
     # shells and dev tools
     ./gnupg.nix
     ./shells/bash.nix
@@ -25,6 +24,8 @@
     # desktop stuff
     ./1password.nix
     ./appimages.nix
+    # custom utils
+    ./options/module.nix
   ];
 
   # and then the base packages itself
