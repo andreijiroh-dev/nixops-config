@@ -1,0 +1,40 @@
+name: Nix Flake CI - lockfile updates
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 22 * * 5'
+
+jobs:
+  update-lockfile:
+    name: Update flake lockfile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Deterinate Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          determinate: true
+
+      - name: Check eval and run tests
+        run: nix flake check
+        continue-on-error: true
+
+      - name: Update flake
+        run: |
+          echo ::group::Updating lockfile
+          nix flake update
+          echo ::endgroup::
+
+          echo ::group::Metadata
+          nix flake metadata
+          echo ::endgroup::
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "RecapTimeBot"
+          git config --global user.email "recaptimebot@gmail.com"
+          git add flake.lock
+          git commit -m "chore(flake): update lockfile" --signoff || echo "No changes to commit"
+          git push

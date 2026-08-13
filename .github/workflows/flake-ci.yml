@@ -1,8 +1,7 @@
 name: Nix Flake Builds CI
 
 on:
-  schedule:
-    - cron: "30 6 * * 5"
+  workflow_dispatch:
   push:
   pull_request:
 
@@ -11,43 +10,10 @@ permissions:
   actions: write
 
 jobs:
-  update-lockfile:
-    name: Update flake lockfile
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Deterinate Nix
-        uses: DeterminateSystems/nix-installer-action@main
-        with:
-          determinate: true
-
-      - name: Check eval and run tests
-        run: nix flake check
-        continue-on-error: true
-
-      - name: Update flake
-        run: |
-          echo ::group::Updating lockfile
-          nix flake update
-          echo ::endgroup::
-
-          echo ::group::Metadata
-          nix flake metadata
-          echo ::endgroup::
-
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "RecapTimeBot"
-          git config --global user.email "recaptimebot@gmail.com"
-          git add flake.lock
-          git commit -m "chore(flake): update lockfile [skip-ci]" --signoff || echo "No changes to commit"
-          git push
   build-iso:
     concurrency:
       cancel-in-progress: false
       group: recoverykit-iso-builds
-    needs: [update-lockfile]
     name: Build custom Live CD ISO
     runs-on: ubuntu-latest
     steps:
@@ -62,7 +28,7 @@ jobs:
           # this might remove tools that are actually needed,
           # if set to "true" but frees about 6 GB
           tool-cache: false
-          
+
           # all of these default to true, but feel free to set to
           # "false" if necessary for your workflow
           android: true
@@ -110,64 +76,64 @@ jobs:
         with:
           name: nixos-custom-iso
           path: dist
-  build-raspi-sdimg:
-    concurrency:
-      cancel-in-progress: false
-      group: raspi-sd-img-builds
-    needs: [update-lockfile]
-    name: Build custom Raspberry Pi SD image
-    runs-on: ubuntu-latest
-    env:
-      PREBUILD_TAG: build-1743088286
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: main
+  #build-raspi-sdimg:
+  #  concurrency:
+  #    cancel-in-progress: false
+  #    group: raspi-sd-img-builds
+  #  needs: [update-lockfile]
+  #  name: Build custom Raspberry Pi SD image
+  #  runs-on: ubuntu-latest
+  #  env:
+  #    PREBUILD_TAG: build-1743088286
+  #  steps:
+  #    - uses: actions/checkout@v4
+  #       with:
+  #        fetch-depth: 0
+  #        ref: main
+  #
+  #    - name: Free Disk Space
+  #      uses: jlumbroso/free-disk-space@main
+  #      with:
+  #        # this might remove tools that are actually needed,
+  #        # if set to "true" but frees about 6 GB
+  #        tool-cache: false
 
-      - name: Free Disk Space
-        uses: jlumbroso/free-disk-space@main
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-          
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: true
-          swap-storage: true
+  #        # all of these default to true, but feel free to set to
+  #        # "false" if necessary for your workflow
+  #        android: true
+  #        dotnet: true
+  #        haskell: true
+  #        large-packages: true
+  #        docker-images: true
+  #        swap-storage: true
+  #
+  #    - name: Setup Deterinate Nix
+  #      uses: DeterminateSystems/nix-installer-action@main
+  #      with:
+  #        determinate: true
+  #
+  #    - name: Show flake metadata
+  #      run: nix flake metadata
+  #
+  #    # https://github.com/docker/setup-qemu-action
+  #    - name: Set up QEMU
+  #      uses: docker/setup-qemu-action@v3
+  #
+  #    # https://github.com/docker/setup-buildx-action
+  #    - name: Set up Docker Buildx
+  #      id: buildx
+  #      uses: docker/setup-buildx-action@v1
+  #
+  #    - name: Prepare build environment
+  #      run: |
+  #        docker pull ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:${{env.PREBUILD_TAG}}
+  #        docker tag ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:${{env.PREBUILD_TAG}} ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:dev
 
-      - name: Setup Deterinate Nix
-        uses: DeterminateSystems/nix-installer-action@main
-        with:
-          determinate: true
-
-      - name: Show flake metadata
-        run: nix flake metadata
-
-      # https://github.com/docker/setup-qemu-action
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      # https://github.com/docker/setup-buildx-action
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Prepare build environment
-        run: |
-          docker pull ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:${{env.PREBUILD_TAG}}
-          docker tag ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:${{env.PREBUILD_TAG}} ghcr.io/andreijiroh-dev/nixops-config/rpi-sd-imager:dev
-
-      - name: Build the SD image
-        run: cd hosts/raspi-base && docker compose up
-
-      - name: Upload as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: nixos-raspi-sd-img
-          path: hosts/raspi-base/output
+  #    - name: Build the SD image
+  #      run: cd hosts/raspi-base && docker compose up
+  #
+  #    - name: Upload as artifact
+  #      uses: actions/upload-artifact@v4
+  #      with:
+  #        name: nixos-raspi-sd-img
+  #        path: hosts/raspi-base/output
