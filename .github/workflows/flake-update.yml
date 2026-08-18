@@ -47,10 +47,11 @@ jobs:
           git config --global user.name "RecapTimeBot"
           git config --global user.email "recaptimebot@gmail.com"
           git add flake.lock
-          git commit -m "chore(flake): update lockfile" --signoff || echo "No changes to commit"
+          git commit -m "chore(flake): update lockfile via GitHub Actions [skip ci]" --signoff || echo "No changes to commit"
           git push
 
       - name: Show forecast
+        continue-on-error: true
         run: |
           echo ::group::Forecast for stellapent-cier.tailnet
           nix run github:getchoo/nix-forecast#nix-forecast -- -c ".#nixosConfigurations.stellapent-cier"

@@ -1,4 +1,4 @@
-name: Nix Flake Builds CI
+name: Nix Flake CI - Live ISO Builds
 
 on:
   workflow_dispatch:
@@ -30,11 +30,7 @@ jobs:
     name: Build custom Live CD ISO
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-          ref: main
-
+      # Free up disk space first for our builds
       - name: Free Disk Space
         uses: jlumbroso/free-disk-space@main
         with:
@@ -51,10 +47,17 @@ jobs:
           docker-images: true
           swap-storage: true
 
+      # then setup deterinate nix to our CI setup
       - name: Setup Deterinate Nix
         uses: DeterminateSystems/nix-installer-action@main
         with:
           determinate: true
+
+      # then checkout the repository to get our flake for the rest
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          ref: main
 
       - name: Show flake metadata
         run: nix flake metadata
