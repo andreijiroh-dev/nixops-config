@@ -3,6 +3,7 @@
 {
   imports = [
     "${self}/shared/meta.nix"
+    "${self}/shared/server/ssh.nix"
     "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
     "${nixpkgs}/nixos/modules/installer/cd-dvd/latest-kernel.nix"
   ];
