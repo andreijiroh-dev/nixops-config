@@ -4,11 +4,22 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '30 22 * * 5'
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/flake-update.yml
+      - 'shared/*.nix'
+      - 'shared/**/*.nix'
+      - 'hosts/**/*.nix'
 
 jobs:
   update-lockfile:
     name: Update flake lockfile
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
     steps:
       - uses: actions/checkout@v4
 

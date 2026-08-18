@@ -3,11 +3,24 @@ name: Nix Flake Builds CI
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/flake-update.yml
+      - 'shared/*.nix'
+      - 'shared/**/*.nix'
+      - 'hosts/**/*.nix'
   pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/flake-update.yml
+      - 'shared/*.nix'
+      - 'shared/**/*.nix'
+      - 'hosts/**/*.nix'
 
 permissions:
-  contents: write
-  actions: write
+  contents: read
 
 jobs:
   build-iso:
