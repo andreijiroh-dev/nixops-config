@@ -85,7 +85,7 @@ jobs:
         run: sudo chown -Rv $(id -u):$(id -g) dist/*.iso && chmod -Rv 644 dist/*.iso
 
       - name: Upload as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: nixos-custom-iso
           path: dist
@@ -146,7 +146,7 @@ jobs:
   #      run: cd hosts/raspi-base && docker compose up
   #
   #    - name: Upload as artifact
-  #      uses: actions/upload-artifact@v4
+  #      uses: actions/upload-artifact@v7
   #      with:
   #        name: nixos-raspi-sd-img
   #        path: hosts/raspi-base/output
