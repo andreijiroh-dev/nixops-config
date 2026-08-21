@@ -37,16 +37,16 @@ The repository is structured as a Nix flake.
 
 #### Adding a new host
 
-1.  Create a new directory in `hosts/` for the new host.
-2.  Add a `configuration.nix` file inside the new directory. You can use one of the existing host configurations as a template.
-3.  Add a new entry to the `nixosConfigurations` in `flake.nix` for the new host, pointing to your new `configuration.nix`.
-4.  Import the necessary shared modules into your `configuration.nix`.
+1. Create a new directory in `hosts/` for the new host.
+2. Add a `configuration.nix` file inside the new directory. You can use one of the existing host configurations as a template.
+3. Add a new entry to the `nixosConfigurations` in `flake.nix` for the new host, pointing to your new `configuration.nix`.
+4. Import the necessary shared modules into your `configuration.nix`.
 
 #### Modifying a configuration
 
-1.  Identify which module or host configuration you need to change.
-2.  Make your changes to the respective `.nix` file.
-3.  To apply the changes to a machine, run `sudo nixos-rebuild switch --flake .#<hostname>` on that machine, where `<hostname>` is the name of the host you want to update.
+1. Identify which module or host configuration you need to change.
+2.  Make your changes to the respective  `.nix` file.
+3. To apply the changes to a machine, run `sudo nixos-rebuild switch --flake .#<hostname>` on that machine, where `<hostname>` is the name of the host you want to update.
 
 #### Updating dependencies
 
@@ -65,6 +65,7 @@ This will update the `flake.lock` file with the latest versions of the dependenc
 - `shared/home-manager/main.nix`: The main entry point for user-specific configurations managed by Home Manager.
 - `shared/home-manager/nogui.nix`: A headless Home Manager configuration (used in `plain` configs).
 - `hosts/<hostname>/configuration.nix`: The main configuration file for a specific host.
+- `hosts/<hostname>/hardware-configuration.nix`: The 
 - `hosts/<hostname>/users/<username>.nix`: User-specific configurations for a given host, leveraging Home Manager. See `hosts/stellapent-cier/users/gildedguy.nix` for an example.
 - `hosts/live-cd/base.nix` and `hosts/live-cd/kde-plasma.nix`: Live CD-specific NixOS configurations
 

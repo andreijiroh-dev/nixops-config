@@ -10,8 +10,8 @@ of my dotfiles repository.
 
 | Workflow Name and Type | CI Platform | Badge/Link |
 | --- | --- | --- |
-| Nix Flake Builds (push) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml/badge.svg)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml) |
-| Nix Flake Builds (schedule, every 06:30 UTC Saturday) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml/badge.svg?event=schedule)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml) |
+| Nix Flake CI - Live ISO builds (push) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml/badge.svg)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml) |
+| Nix Flake CI - lockfile updates (schedule, every 22:30 UTC Fridays) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml/badge.svg?event=schedule)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml) |
 
 ## Mirrors
 
@@ -23,20 +23,26 @@ Along with the following mirrors:
 - [Manimun GitLab](https://mau.dev/andreijiroh-dev/nixops-config)
 - [Tangled](https://tangled.org/andreijiroh.dev/nixops-config)
 
-## Usage
+## Usage / Docs
 
-### Poking around Antigravity CLI or GitHub Copilot?
+### Poking around Antigravity CLI or GitHub Copilot? (aka: To fork or copy along the configs?)
 
-I already ported my GitHub Copilot instructions into the standard `AGENT.md` file so your AI tools can easily speedrun things in different shell sessions with Gemini CLI up and running. While this is untested, I symlinked the old file location for compatibility so you're good to go if you are contributing patches or just forking around and finding out for your own NixOS + home-manager setups.
+I already ported my GitHub Copilot instructions into the standard `AGENTS.md` file so
+your AI tools can easily speedrun things in different shell sessions with Antigravity CLI
+(and friends) up and running. While this is untested, I symlinked the old file location for
+compatibility so you're good to go if you are contributing patches or just forking around and
+finding out for your own NixOS + home-manager setups.
 
-Since I am also a Zed user (I know Claude Code and Zed Agent users are staring at me for taking the 1-year-long Google AI Pro trial for students and using Google Gemini more than GitHub Copilot since the pricing changes earlier)
+Since I am also a Zed user, I also tucked in some project-wide settings and you can even use
+Zed Agent if you need to (I am on the free year of Zed Pro for university/college students since
+July 24, 2026 alongside holding the Google AI Pro trial for students since October 11, 2026).
 
 ### Installing NixOS
 
 It is recommended to install NixOS using either the Calamares-based graphical
-installer or manually through the `nixos-install` utility, especially
-when you have consider partitioning on your drive to ensure that you can roll back
-safely in case things go wrong.
+installer or manually through the `nixos-install` utility, especially when you have
+consider partitioning on your drive to ensure that you can roll back safely in case
+things go wrong.
 
 After installation, copy the generated NixOS configuration files from `/etc/nixos`
 into a new directory named `hosts/<host-name>`. Note that on the rest of
@@ -64,6 +70,28 @@ On the `flake.nix` file, under the `nixosConfigurations` block, add the new host
     # one-liners?
     { programs.nix-ld.dev.enable = true; }
   ];
+  specialArgs = {
+    inherit
+      self
+      nixpkgs
+      home-manager
+      nixos-hardware
+      determinate
+      vscode-server
+      nix-ld
+      flake-utils
+      systems
+      nixos-generators
+      zen-browser
+      nix4vscode
+      firefox-addons
+      agenix
+      agenix-rekey
+      chaotic
+      llm-agents
+      dev-pkgs
+      ;
+  };
 };
 ```
 
@@ -82,12 +110,13 @@ imports = [
 ]
 ```
 
-Adjust as needed before running a `nixos-rebuild switch` into the new configuration.
+Adjust as needed before running a `nixos-rebuild switch` or `nixos-rebuild boot`
+into the new configuration and you're ready to go.
 
 ### Updating configuration or upgrading NixOS system
 
 ```bash
-EDITOR="nano" # or code if you do
+EDITOR="nano" # or code/zed/hx if you do
 $EDITOR <path/to/nixfile.nix>
 git stage <path/to/nixfile.nix>
 git commit --signoff
