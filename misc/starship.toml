@@ -7,7 +7,7 @@
 
 ## Custom configs go below this line ##
 command_timeout = 15000
-scan_timeout = 5000
+scan_timeout = 15000
 
 ## Nerd Font Symbols + brackets segments theme from upstream, alongside some minor tweaks
 [aws]
