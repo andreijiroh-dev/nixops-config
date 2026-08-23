@@ -15,6 +15,7 @@
 
     environment.systemPackages = [
       zen-browser.packages.${pkgs.system}.default
+      pkgs.tor-browser
     ];
   };
 }
