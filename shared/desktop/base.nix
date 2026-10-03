@@ -8,6 +8,7 @@
     ./fonts.nix
     ./yubikey.nix
     ../flatpak.nix
+    ./misc-usr-fix.nix
   ];
 
   # List packages installed in system profile. To search, run:
