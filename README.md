@@ -11,7 +11,7 @@ of my dotfiles repository.
 | Workflow Name and Type | CI Platform | Badge/Link |
 | --- | --- | --- |
 | Nix Flake CI - Live ISO builds (push) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml/badge.svg)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml) |
-| Nix Flake CI - lockfile updates (schedule, every 22:30 UTC Fridays) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml/badge.svg?event=schedule)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-ci.yml) |
+| Nix Flake CI - lockfile updates (schedule, every 22:30 UTC Fridays) | GitHub Actions | [![Nix Flake Builds](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-update.yml/badge.svg?event=schedule)](https://github.com/andreijiroh-dev/nixops-config/actions/workflows/flake-update.yml) |
 
 ## Mirrors
 
@@ -19,7 +19,7 @@ Canonically published at [GitLab.com](https://gitlab.com/andreijiroh-dev/nixops-
 with push mirroring enabled to [GitHub](https://github.com/andreijiroh-dev/nixops-config).
 Along with the following mirrors:
 
-- [sourcehut hosted](https://git.sr.ht/~ajhalili2006/nixops-config)
+- ~~[sourcehut hosted](https://git.sr.ht/~ajhalili2006/nixops-config)~~ (deprecated due to its anti-AI policy)
 - [Manimun GitLab](https://mau.dev/andreijiroh-dev/nixops-config)
 - [Tangled](https://tangled.org/andreijiroh.dev/nixops-config)
 
@@ -29,9 +29,10 @@ Along with the following mirrors:
 
 I already ported my GitHub Copilot instructions into the standard `AGENTS.md` file so
 your AI tools can easily speedrun things in different shell sessions with Antigravity CLI
-(and friends) up and running. While this is untested, I symlinked the old file location for
+(and friends) up and running. ~~While this is untested, I symlinked the old file location for
 compatibility so you're good to go if you are contributing patches or just forking around and
-finding out for your own NixOS + home-manager setups.
+finding out for your own NixOS + home-manager setups.~~ Your agent should be able to use the
+new `AGENTS.md` file as-is but feel free to symlink as needed.
 
 Since I am also a Zed user, I also tucked in some project-wide settings and you can even use
 Zed Agent if you need to (I am on the free year of Zed Pro for university/college students since
