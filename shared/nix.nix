@@ -27,6 +27,13 @@
         nix4vscode.overlays.default
         agenix-rekey.overlays.default
         llm-agents.overlays.shared-nixpkgs
+        (final: prev: {
+          llm-agents = prev.llm-agents // {
+            agent-deck = prev.llm-agents.agent-deck.overrideAttrs (_old: {
+              doCheck = false;
+            });
+          };
+        })
       ];
     };
 
