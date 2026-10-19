@@ -2,7 +2,7 @@
 
 stdenv.mkDerivation {
   pname = "coolify-compose";
-  version = "0.1.0";
+  version = "0.1.1";
 
   src = ../scripts/coolify-compose;
 
@@ -17,7 +17,7 @@ stdenv.mkDerivation {
   '';
 
   meta = with lib; {
-    description = "A wrapper script for docker-compose tailored for Coolify deployments.";
+    description = "A wrapper script for docker-compose tailored for managing Coolify deployments.";
     license = licenses.mpl20;
     platforms = platforms.all;
     maintainers = with maintainers; [ ajhalili2006 ];
