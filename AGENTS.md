@@ -1,4 +1,4 @@
-This repository contains NixOS and Home Manager configurations for various machines. The goal is to manage system and user configurations declaratively using Nix.
+This repository contains NixOS and Home Manager configurations for various machines as well as custom Nix packages. The goal is to manage system and user configurations and package programs and shell scripts declaratively using Nix.
 
 ### Project Structure
 
@@ -17,9 +17,12 @@ The repository is structured as a Nix flake.
     - `shared/options`: custom NixOS options under the `nixops-config` namespace for custom tooling
     - `shared/shells/`: Shell configurations (Bash, custom prompts).
     - `shared/vscode/`: VS Code related settings like extensions, binary fixes for Remote SSH/Tunnel and others.
-- `pkgs/`: Custom packages defined in this flake (e.g., `coolify-compose`, `detect-vscode-for-git`).
+- `pkgs/`: Custom packages defined in this flake.
+  - [`coolify-compose`](./pkgs/coolify-compose.nix) - A wrapper script for docker-compose tailored for managing Coolify deployments.
+  - [`detect-vscode-for-git`](./pkgs/detect-vscode-for-git.nix) - A script to detect VS Code Desktop/Remote Tunnels/SSH connections and setting it as the Git editor.
+  - [`ssh-agent-loader`](./pkgs/ssh-agent-loader.nix) - Reliably detects and switch between supported SSH agent implementations (i.e. 1Password Desktop's SSH agent integration, keychain and yubikey-agent).
 - `scripts/`: Helper scripts for deployment and maintenance.
-- `secrets/`: agenix-managed encrypted secrets, used during NixOS config rebuilds. Uses the [`agenix-rekey`](https://github.com/oddlama/agenix-rekey) extension to avoid the headaches of managing `secrets.nix` manually and doing the rekeying dance. DO NOT TOUCH THIS DIRECTORY!
+- `secrets/`: agenix-managed encrypted secrets, used during NixOS config rebuilds. Uses the [`agenix-rekey`](https://github.com/oddlama/agenix-rekey) extension to avoid the headaches of managing `secrets.nix` manually and doing the rekeying dance. DO NOT TOUCH THIS DIRECTORY WITHOUT ASKING FOR CONFIRMATION!
 - `misc/`: Miscellaneous configurations and library scripts that may imported or referenced in Nix files (e.g., [starship configuration](https://starship.rs/config/), bash helper functions, age-formatted pubkeys, etc.).
 
 ### Key Concepts
@@ -62,8 +65,8 @@ This will update the `flake.lock` file with the latest versions of the dependenc
 
 - `flake.nix`: The central point of the configuration.
 - `shared/meta.nix`: Imports a base set of shared modules.
-- `shared/home-manager/main.nix`: The main entry point for user-specific configurations managed by Home Manager.
-- `shared/home-manager/nogui.nix`: A headless Home Manager configuration (used in `plain` configs).
+- `shared/home-manager/main.nix`: The main entry point for user-specific configurations managed by Home Manager and the default for all hosts.
+- `shared/home-manager/desktop.nix`: The desktop-specific Home Manager configuration, used for configuring desktop-specific settings and installing desktop-specific packages.
 - `hosts/<hostname>/configuration.nix`: The main configuration file for a specific host.
 - `hosts/<hostname>/hardware-configuration.nix`: The 
 - `hosts/<hostname>/users/<username>.nix`: User-specific configurations for a given host, leveraging Home Manager. See `hosts/stellapent-cier/users/gildedguy.nix` for an example.
