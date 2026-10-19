@@ -74,11 +74,17 @@
           PATH="$HOME/.local/bin:$PATH"
       fi
 
-      # source our ssh-agent-loader first
-      FF_SKIP_AUTO_SSH_AGENT_LOADER=true . ${pkgs.ssh-agent-loader}/bin/ssh-agent-loader
+      # Only load keys / prompt in interactive sessions (prevents hanging scp/sftp and non-interactive desktop login scripts)
+      if [[ $- == *i* ]]; then
+        # source our ssh-agent-loader first
+        FF_SKIP_AUTO_SSH_AGENT_LOADER=true . ${pkgs.ssh-agent-loader}/bin/ssh-agent-loader
 
-      # try to use keychain in this situation
-      SSH_AGENT_LOADER_SLIENT=1 ssh-agent-loader keychain
+        # try to use keychain in this situation
+        SSH_AGENT_LOADER_SLIENT=1 ssh-agent-loader keychain
+
+        # Alternatively, invoke Keychain v3.x directly with systemd user session integration:
+        # eval "$(keychain add --systemd --eval ~/.ssh/keys)"
+      fi
 
       #if [ -n $BASH_VERSION ]; then
       #  . $HOME/.bashrc
@@ -88,7 +94,7 @@
 
       # detect if we are inside VS Code
       source ${pkgs.detect-vscode-for-git}/bin/detect-vscode-for-git
-      
+
     '';
     initExtra = ''
       # hackaround for GPG on CLI mode
