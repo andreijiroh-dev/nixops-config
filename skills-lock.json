@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "skills": {
+    "devenv-project": {
+      "source": "olafkfreund/nix-skills",
+      "sourceType": "github",
+      "skillPath": "skills/devenv-project/SKILL.md",
+      "computedHash": "1ccbcb49e2e1e0a0ca407749837cefef00713a7b7521e3bc95faa41180e73e56"
+    },
+    "home-manager": {
+      "source": "olafkfreund/nix-skills",
+      "sourceType": "github",
+      "skillPath": "skills/home-manager/SKILL.md",
+      "computedHash": "34858d5d920ac722d0cae25807bc185efcb10023763ab39dbce9daeed5a51437"
+    },
+    "microvm-nix": {
+      "source": "olafkfreund/nix-skills",
+      "sourceType": "github",
+      "skillPath": "skills/microvm-nix/SKILL.md",
+      "computedHash": "b3573822aaae32e40715829d64299c3e32aa28e351744193260ecbf7ffcaea48"
+    },
+    "nix-darwin": {
+      "source": "olafkfreund/nix-skills",
+      "sourceType": "github",
+      "skillPath": "skills/nix-darwin/SKILL.md",
+      "computedHash": "f90190e6780df4dd6a8b76e402bb175b43919b9ee8cc03e56dbeba0be9adf1db"
+    },
+    "nix-language": {
+      "source": "olafkfreund/nix-skills",
+      "sourceType": "github",
+      "skillPath": "skills/nix-language/SKILL.md",
+      "computedHash": "cb0723b863eabef267d5d285ec04a1a35cddfa29690d10263bf04e965808e686"
+    },
+    "nix-workflow": {
+      "source": "olafkfreund/nix-skills",
+      "sourceType": "github",
+      "skillPath": "skills/nix-workflow/SKILL.md",
+      "computedHash": "1b917e187799838f2ed45df6bb636176bb1a66ce6e84f32ca7beb632171232bc"
+    },
+    "nixos": {
+      "source": "marceloeatworld/nixos-ai-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "c373c7f0efc36e623213cbf7dce4bcf512a69fa568d4b9816b8ad3bbaaac993f"
+    },
+    "nixos-coding-agents": {
+      "source": "olafkfreund/nix-skills",
+      "sourceType": "github",
+      "skillPath": "skills/nixos-coding-agents/SKILL.md",
+      "computedHash": "cb77e8afbb1d6cb158ff394736128c88fb69e0d4e109b3bba0d949718e0015ed"
+    },
+    "nixos-operations": {
+      "source": "olafkfreund/nix-skills",
+      "sourceType": "github",
+      "skillPath": "skills/nixos-operations/SKILL.md",
+      "computedHash": "6f46caa22c3707d09d7d9dceee12d973421e3db5552503354fbebca474d16383"
+    },
+    "nixos-wiki": {
+      "source": "olafkfreund/nix-skills",
+      "sourceType": "github",
+      "skillPath": "skills/nixos-wiki/SKILL.md",
+      "computedHash": "723931ea0fdbd6167d8c999314f96bdff422d08d7b5f2a2d7775ee7b299f48ea"
+    },
+    "nixpkgs-development": {
+      "source": "olafkfreund/nix-skills",
+      "sourceType": "github",
+      "skillPath": "skills/nixpkgs-development/SKILL.md",
+      "computedHash": "5141cf4237de1e69e88bd4780007fa5dac8f9e80787b4b2e424affc538591307"
+    }
+  }
+}
