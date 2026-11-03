@@ -538,7 +538,7 @@
                 overlays = [
                   self.overlays.default
                   nix4vscode.overlays.default
-                  llm-agents.outputs.shared-nixpkgs
+                  llm-agents.overlays.shared-nixpkgs
                 ];
                 config = {
                   allowUnfree = true;

@@ -17,21 +17,19 @@
     ];
   };
 
-  # use systemd for boot stage 1
+  # systemd is enabled by default for boot stage 1 since NixOS 26.05
   boot.initrd = {
     systemd = {
-      enable = true;
       extraBin = {
         bash = lib.mkForce "${pkgs.bash}/bin/bash";
         utils = lib.mkForce "${pkgs.busybox}/bin/busybox";
         umount = lib.mkForce "${pkgs.util-linux}/bin/umount";
         nano = "${pkgs.nano}/bin/nano";
       };
-
     };
     network.ssh = {
       enable = true;
-      authorizedKeys = with ./ssh-keys.nix; [
+      authorizedKeys = with import ./ssh-keys.nix; [
         personal.y2022
         personal.passwordless
         personal.rp.gildedguy

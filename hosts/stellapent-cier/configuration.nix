@@ -81,14 +81,6 @@ in
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  #hardware.pulseaudio = {
-  #  enable = true;
-  #  package = pkgs.pulseaudioFull;
-  #};
-  #hardware.pulseaudio.extraConfig = "
-  #  load-module module-switch-on-connect
-  #";
-
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

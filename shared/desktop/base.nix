@@ -19,7 +19,7 @@
       thunderbird
 
       # office apps
-      libreoffice-qt6-fresh
+      libreoffice-qt6
       hunspell
       hunspellDicts.en_US
 
